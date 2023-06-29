@@ -10,10 +10,6 @@ const dbProvider = {
     const password = configService.get<string>('DB_PASSWORD');
     const database = configService.get<string>('DB_DATABASE');
     const port = configService.get<string>('DB_PORT');
-    console.log(host);
-    console.log(user);
-    console.log(database);
-    console.log(port);
 
     const pool = await mysql.createPool({
       host,
@@ -24,7 +20,6 @@ const dbProvider = {
       waitForConnections: true,
       connectionLimit: 10,
       enableKeepAlive: true,
-      keepAliveInitialDelay: 0,
     });
     return pool;
   },
