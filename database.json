@@ -1,0 +1,21 @@
+{
+  "dev": {
+    "host": {
+      "ENV": "DB_HOST"
+    },
+    "user": {
+      "ENV": "DB_USER"
+    },
+    "password": {
+      "ENV": "DB_PASS"
+    },
+    "port": {
+      "ENV": "DB_PORT"
+    },
+    "database": {
+      "ENV": "DB_DATABASE"
+    },
+    "driver": "mysql2",
+    "multipleStatements": true
+  }
+}
