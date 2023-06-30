@@ -10,7 +10,7 @@ FROM node:18-alpine as production
 WORKDIR /app
 COPY package.json ./
 COPY database.json ./
-COPY migrations ./
+COPY migrations ./migrations
 RUN npm install --omit=dev
 COPY --from=build /app/dist/ ./dist/
 EXPOSE 7000
