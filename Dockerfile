@@ -9,6 +9,7 @@ RUN npm run build
 FROM node:18-alpine as production
 WORKDIR /app
 COPY package.json ./
+COPY database.json ./
 RUN npm install --omit=dev
 COPY --from=build /app/dist/ ./dist/
 EXPOSE 7000
