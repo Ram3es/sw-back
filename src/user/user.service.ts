@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
+import { User } from './types';
 
 @Injectable()
 export class UserService {
@@ -7,6 +8,14 @@ export class UserService {
   async findAll() {
     const [data] = await this.conn.query('SELECT * FROM user');
     console.log(data);
+    return data;
+  }
+
+  async findBySteamId(steamId: string): Promise<User> {
+    const [data] = await this.conn.query(
+      `SELECT * FROM user WHERE steam_id = ?`,
+      [steamId],
+    );
     return data;
   }
 }
