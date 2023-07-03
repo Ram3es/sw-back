@@ -5,7 +5,29 @@ import { DbModule } from './db/db.module';
 import { validate } from './env.validation';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { LoggerModule } from 'nestjs-pino';
+import * as pino from 'pino';
+import pretty from 'pino-pretty';
+import * as fs from 'fs';
 
+const LOGDIR = './logs';
+
+// check if log directory exists
+if (!fs.existsSync(LOGDIR)) {
+  // create the log directory
+  fs.mkdirSync(LOGDIR);
+}
+const multi = [
+  pretty({
+    colorize: true,
+    colorizeObjects: true,
+    ignore: 'pid,hostname',
+  }),
+  pino.destination({
+    dest: `${LOGDIR}/app.log`,
+  }),
+];
 @Module({
   imports: [
     DbModule,
@@ -13,7 +35,19 @@ import { UserModule } from './user/user.module';
       isGlobal: true,
       validate,
     }),
+    LoggerModule.forRoot({
+      pinoHttp: {
+        level: 'debug',
+        autoLogging: {
+          ignore: function (req) {
+            return req.statusCode < 400;
+          },
+        },
+        stream: pino.multistream(multi),
+      },
+    }),
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
