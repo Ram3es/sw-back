@@ -30,8 +30,12 @@
     "db-migrate-mysql": "^2.2.0",
     "express-session": "^1.17.3",
     "mysql2": "^3.4.2",
+    "nestjs-pino": "^3.3.0",
     "passport": "^0.6.0",
     "passport-steam": "^1.0.18",
+    "pino": "^8.14.1",
+    "pino-http": "^8.3.3",
+    "pino-pretty": "^10.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },
