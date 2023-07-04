@@ -10,6 +10,7 @@ import { LoggerModule } from 'nestjs-pino';
 import * as pino from 'pino';
 import pretty from 'pino-pretty';
 import * as fs from 'fs';
+import { PaymentsModule } from './payments/payments.module';
 
 const LOGDIR = './logs';
 
@@ -48,6 +49,7 @@ const multi = [
     }),
     UserModule,
     AuthModule,
+    PaymentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
