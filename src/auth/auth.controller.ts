@@ -1,5 +1,5 @@
-import { Controller, Get, Query, Req, UseGuards } from '@nestjs/common';
-import { SteamAuthGuard } from './steam..guard';
+import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
+import { SteamAuthGuard } from './steam.guard';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -14,8 +14,9 @@ export class AuthController {
 
   @UseGuards(SteamAuthGuard)
   @Get('steam/verify')
-  async steamLoginCallback(@Query() query, @Req() request: Request) {
+  async steamLoginCallback(@Res() res, @Req() req: Request) {
     console.log('steam login SUCCESS');
-    this.authService.steamLogin({ query, request });
+    await this.authService.steamLogin(req);
+    res.redirect('/');
   }
 }

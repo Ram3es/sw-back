@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { DBUser, User } from './types';
-import { PinoLogger, InjectPinoLogger } from 'nestjs-pino';
+import { PinoLogger } from 'nestjs-pino';
 
 @Injectable()
 export class UserService {
@@ -9,10 +9,10 @@ export class UserService {
     private readonly logger: PinoLogger,
   ) {}
 
-  async findAll() {
+  async findAll(): Promise<User[]> {
     const [data] = await this.conn.query('SELECT * FROM users');
     this.logger.info('foo');
-    return data;
+    return data.map((user: DBUser) => this.mapDbToUser(user));
   }
 
   async findBySteamId(steamId: string): Promise<User> {
@@ -20,10 +20,11 @@ export class UserService {
       `SELECT * FROM users WHERE steam_id = ?`,
       [steamId],
     );
-    return data;
+    return data.length ? this.mapDbToUser(data[0]) : null;
   }
 
   async create(user: User): Promise<void> {
+    console.log('create', user);
     const { steam_id, steam_username, profile_url, avatar_url } =
       this.mapUserToDb(user);
     await this.conn.query(
@@ -33,6 +34,7 @@ export class UserService {
   }
 
   async update(user: User): Promise<void> {
+    console.log('update', user);
     const { steam_id, steam_username, avatar_url, profile_url } =
       this.mapUserToDb(user);
     await this.conn.query(
@@ -42,6 +44,7 @@ export class UserService {
   }
 
   private mapUserToDb(user: User): DBUser {
+    console.log('mapUserToDb', user);
     const {
       steamId,
       steamUsername,
@@ -63,6 +66,7 @@ export class UserService {
   }
 
   private mapDbToUser(user: DBUser): User {
+    console.log('mapDbToUser', user);
     const {
       steam_id,
       steam_username,

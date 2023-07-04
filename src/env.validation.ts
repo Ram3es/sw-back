@@ -29,6 +29,14 @@ class EnvironmentVariables {
   @IsString()
   @IsNotEmpty()
   APP_URL: string;
+
+  @IsString()
+  @IsNotEmpty()
+  SESSION_SECRET: string;
+
+  @IsString()
+  @IsNotEmpty()
+  SESSION_NAME: string;
 }
 
 export function validate(config: Record<string, unknown>) {

@@ -3,9 +3,9 @@ export interface User {
   steamUsername: string;
   avatarUrl: string;
   profileUrl: string;
-  payoutOk: number;
-  banned: number;
-  balance: number;
+  payoutOk?: number;
+  banned?: number;
+  balance?: number;
 }
 export interface DBUser {
   steam_id: string;
