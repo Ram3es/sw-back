@@ -11,6 +11,8 @@ import * as pino from 'pino';
 import pretty from 'pino-pretty';
 import * as fs from 'fs';
 import { PaymentsModule } from './payments/payments.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthenticatedGuard } from './auth/authenticated.guard';
 
 const LOGDIR = './logs';
 
@@ -52,6 +54,12 @@ const multi = [
     PaymentsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthenticatedGuard,
+    },
+  ],
 })
 export class AppModule {}
