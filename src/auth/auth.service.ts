@@ -36,9 +36,4 @@ export class AuthService {
       });
     }
   }
-
-  async logout(req) {
-    
-    this.logger.info(`Logout ${req.user.steamId}`);
-  }
 }

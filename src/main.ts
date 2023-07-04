@@ -1,13 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger, LoggerErrorInterceptor, PinoLogger } from 'nestjs-pino';
+import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
 import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
 import * as passport from 'passport';
 import * as MySQLStore from 'express-mysql-session';
-const mySQLStore = MySQLStore(session);
 
-import { SteamAuthGuard } from './auth/steam.guard';
+const mySQLStore = MySQLStore(session);
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -50,7 +49,6 @@ async function bootstrap() {
   );
   app.use(passport.initialize());
   app.use(passport.session());
-  // app.useGlobalGuards(new SteamAuthGuard());
   app.enableCors();
   app.enableShutdownHooks();
   await app.listen(3000);
