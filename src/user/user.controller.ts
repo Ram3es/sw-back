@@ -10,7 +10,6 @@ export class UserController {
   @UseGuards(AuthenticatedGuard)
   @Get('me')
   me(@Session() session: Record<string, any>, @Req() req: any) {
-    console.log('me', session);
     return req?.user;
   }
 }

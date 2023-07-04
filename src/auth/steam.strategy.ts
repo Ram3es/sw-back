@@ -15,16 +15,8 @@ export class SteamStrategy extends PassportStrategy(Strategy, 'steam') {
       async (identifier, profile, done) => {
         profile.identifier = identifier;
         const user = await this.userService.findBySteamId(profile.id);
-        console.log('SteamStrategy user', user);
-        console.log('SteamStrategy', profile);
-        console.log('SteamStrategy', identifier);
         return done(null, user);
       },
     );
-  }
-  verify(req, user) {
-    console.log('SteamStrategy str', user);
-    console.log('SteamStrategy str', req);
-    return true;
   }
 }

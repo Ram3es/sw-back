@@ -9,12 +9,10 @@ export class AuthSerializer extends PassportSerializer {
     super();
   }
   serializeUser(user, done) {
-    console.log('serializeUser', user);
     done(null, user);
   }
 
   deserializeUser(obj, done) {
-    console.log('deserializeUser', obj);
     done(null, obj);
   }
 }

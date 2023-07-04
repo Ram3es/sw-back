@@ -10,15 +10,8 @@ export class AuthService {
   ) {}
 
   async steamLogin(req) {
-    console.log('steamLogin', req.user);
     const { steamId, steamUsername, avatarUrl, profileUrl } = req.user;
-    this.logger.debug(
-      'steamLogin',
-      steamId,
-      steamUsername,
-      profileUrl,
-      avatarUrl,
-    );
+    this.logger.info(`Login SUCCESS: ${steamId} ${steamUsername}`);
 
     // check if user exists
     const user = await this.userService.findBySteamId(steamId);
@@ -42,5 +35,10 @@ export class AuthService {
         avatarUrl,
       });
     }
+  }
+
+  async logout(req) {
+    
+    this.logger.info(`Logout ${req.user.steamId}`);
   }
 }
