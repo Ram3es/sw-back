@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
+import { ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
 import * as passport from 'passport';
@@ -51,6 +52,8 @@ async function bootstrap() {
   app.use(passport.session());
   app.enableCors();
   app.enableShutdownHooks();
-  await app.listen(3000);
+  app.setGlobalPrefix('api/v1');
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(7000);
 }
 bootstrap();

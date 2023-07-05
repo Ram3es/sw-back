@@ -10,6 +10,7 @@ import { LoggerModule } from 'nestjs-pino';
 import * as pino from 'pino';
 import pretty from 'pino-pretty';
 import * as fs from 'fs';
+import { PaymentsModule } from './payments/payments.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthenticatedGuard } from './auth/authenticated.guard';
 
@@ -50,6 +51,7 @@ const multi = [
     }),
     UserModule,
     AuthModule,
+    PaymentsModule,
   ],
   controllers: [AppController],
   providers: [
