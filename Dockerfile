@@ -3,7 +3,7 @@ FROM node:18-alpine as build
 WORKDIR /app
 COPY . ./
 RUN npm i --location=global @nestjs/cli
-RUN npm install --omit=dev
+RUN npm install
 RUN npm run build
 
 FROM node:18-alpine as production
