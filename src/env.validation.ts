@@ -21,6 +21,22 @@ class EnvironmentVariables {
   @IsNumber()
   @IsNotEmpty()
   DB_PORT: number;
+
+  @IsString()
+  @IsNotEmpty()
+  STEAM_API_KEY: string;
+
+  @IsString()
+  @IsNotEmpty()
+  APP_URL: string;
+
+  @IsString()
+  @IsNotEmpty()
+  SESSION_SECRET: string;
+
+  @IsString()
+  @IsNotEmpty()
+  SESSION_NAME: string;
 }
 
 export function validate(config: Record<string, unknown>) {

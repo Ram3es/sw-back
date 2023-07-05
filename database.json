@@ -1,6 +1,9 @@
 {
   "defaultEnv": "dev",
   "dev": {
+    "port": {
+        "ENV": "DB_PORT"
+    },
     "host": {
       "ENV": "DB_HOST"
     },
