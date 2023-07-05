@@ -10,7 +10,11 @@ export class AuthService {
   ) {}
 
   async steamLogin(req) {
-    const { steamId, steamUsername, avatarUrl, profileUrl } = req.user;
+    const steamId = String(req?.user?._json?.steamid);
+    const steamUsername = String(req?.user?._json?.personaname);
+    const avatarUrl = req?.user?._json?.avatar;
+    const profileUrl = req?.user?._json?.profileurl;
+
     this.logger.info(`Login SUCCESS: ${steamId} ${steamUsername}`);
 
     // check if user exists

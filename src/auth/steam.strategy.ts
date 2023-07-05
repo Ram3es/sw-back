@@ -13,9 +13,10 @@ export class SteamStrategy extends PassportStrategy(Strategy, 'steam') {
         apiKey: process.env.STEAM_API_KEY,
       },
       async (identifier, profile, done) => {
-        profile.identifier = identifier;
-        const user = await this.userService.findBySteamId(profile.id);
-        return done(null, user);
+        process.nextTick(() => {
+          profile.identifier = identifier;
+          return done(null, profile);
+        });
       },
     );
   }
