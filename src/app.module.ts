@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DbModule } from './db/db.module';
@@ -14,7 +14,6 @@ import { PaymentsModule } from './payments/payments.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthenticatedGuard } from './auth/authenticated.guard';
 import { InventoryModule } from './inventory/inventory.module';
-import orginalUrl from './middlewares/original-url.middleware';
 
 const LOGDIR = './logs';
 
