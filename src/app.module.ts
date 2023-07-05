@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DbModule } from './db/db.module';
@@ -14,6 +14,8 @@ import { PaymentsModule } from './payments/payments.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthenticatedGuard } from './auth/authenticated.guard';
 import { InventoryModule } from './inventory/inventory.module';
+import { originalUrl } from './middlewares/originalurl.middleware';
+import { AuthController } from './auth/auth.controller';
 
 const LOGDIR = './logs';
 
@@ -64,4 +66,8 @@ const multi = [
     },
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(originalUrl).forRoutes(AuthController);
+  }
+}
