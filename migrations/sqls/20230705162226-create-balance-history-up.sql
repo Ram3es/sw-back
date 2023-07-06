@@ -4,6 +4,8 @@ CREATE TABLE `balance_history` (
   `prev_balance` DECIMAL(10, 2) NOT NULL,
   `new_balance` DECIMAL(10, 2) NOT NULL,
   `operation` VARCHAR(255) NOT NULL,
+  `extra` VARCHAR(255),
   `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );

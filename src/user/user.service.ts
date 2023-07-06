@@ -41,6 +41,26 @@ export class UserService {
     );
   }
 
+  async getUserBalanceHistory(user_id: number) {
+    try {
+      const [history] = await this.conn.query(
+        `SELECT
+          prev_balance,
+          new_balance,
+          new_balance-prev_balance AS 'difference',
+          operation,
+          extra,
+          date
+        FROM balance_history
+        WHERE user_id = ?;`,
+        [user_id],
+      );
+      return history;
+    } catch (error) {
+      this.logger.error(error);
+    }
+  }
+
   private mapUserToDb(user: User): DBUser {
     const {
       steamId,

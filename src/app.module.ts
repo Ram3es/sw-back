@@ -13,7 +13,7 @@ import * as fs from 'fs';
 import { PaymentsModule } from './payments/payments.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthenticatedGuard } from './auth/authenticated.guard';
-import { BalanceModule } from './balance/balance.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 const LOGDIR = './logs';
 
@@ -53,7 +53,7 @@ const multi = [
     UserModule,
     AuthModule,
     PaymentsModule,
-    BalanceModule,
+    TransactionsModule,
   ],
   controllers: [AppController],
   providers: [
