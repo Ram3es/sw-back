@@ -16,6 +16,7 @@ import { AuthenticatedGuard } from './auth/authenticated.guard';
 import { InventoryModule } from './inventory/inventory.module';
 import { originalUrl } from './middlewares/originalurl.middleware';
 import { AuthController } from './auth/auth.controller';
+import { continueUrl } from './middlewares/continue.middleware';
 
 const LOGDIR = './logs';
 
@@ -69,5 +70,6 @@ const multi = [
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(originalUrl).forRoutes(AuthController);
+    consumer.apply(continueUrl).forRoutes('auth/steam');
   }
 }

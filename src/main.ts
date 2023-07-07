@@ -17,7 +17,7 @@ async function bootstrap() {
   logger.log(
     `STARTING APP... MODE: ${
       process.env.NODE_ENV === 'production' ? 'production' : 'development'
-    } ${1}`,
+    } ${2}`,
   );
 
   // init mysql table sessions as session store
@@ -42,10 +42,10 @@ async function bootstrap() {
       resave: true,
       saveUninitialized: false,
       store: sessionStore,
-      proxy: true,
+      proxy: process.env.NODE_ENV === 'production',
       cookie: {
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'none',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : false,
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 2, // 2 days cookies
       },

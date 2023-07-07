@@ -2,6 +2,7 @@ import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { SteamAuthGuard } from './steam.guard';
 import { AuthService } from './auth.service';
 import { Public } from './public.decorator';
+import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -17,8 +18,11 @@ export class AuthController {
   @UseGuards(SteamAuthGuard)
   @Get('steam/verify')
   async steamLoginCallback(@Res() res, @Req() req: Request) {
+    const continueUrl = req?.session?.continueUrl;
+    console.log('continueUrl', continueUrl);
     await this.authService.steamLogin(req);
-    res.redirect('/');
+    delete req.session.continueUrl;
+    res.redirect(continueUrl || '/');
   }
 
   @Public()
