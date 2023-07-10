@@ -2,15 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
 import { ValidationPipe } from '@nestjs/common';
-import * as cookieParser from 'cookie-parser';
-import * as session from 'express-session';
-import * as passport from 'passport';
-import * as MySQLStore from 'express-mysql-session';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import passport from 'passport';
+import MySQLStore from 'express-mysql-session';
 
 const mySQLStore = MySQLStore(session);
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   const logger = app.get(Logger);
   app.useLogger(logger);
