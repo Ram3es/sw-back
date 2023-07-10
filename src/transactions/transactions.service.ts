@@ -1,6 +1,7 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Pool } from 'mysql2/promise';
 import { PinoLogger } from 'nestjs-pino';
+import * as Dinero from 'dinero.js';
 
 @Injectable()
 export class TransactionsService {
@@ -18,10 +19,17 @@ export class TransactionsService {
       );
       const { balance } = rows[0];
 
-      const new_balance = Number(balance) + Number(payoutAmount);
+      const currentBalance = Dinero({ amount: balance });
+      const payout = Dinero({ amount: payoutAmount });
+
+      const newBalance = currentBalance.subtract(payout);
+
+      if (newBalance.isNegative()) {
+        throw new Error('Funds insufficient.');
+      }
 
       await connection.query(`UPDATE users SET balance = ? WHERE id = ?`, [
-        new_balance,
+        newBalance.getAmount(),
         user_id,
       ]);
 
@@ -30,7 +38,7 @@ export class TransactionsService {
           INSERT INTO balance_history (user_id, prev_balance, new_balance, operation, extra)
           VALUES (?, ?, ?, ?, ?)
         `,
-        [user_id, balance, new_balance, 'payout', 'some extra info'],
+        [user_id, balance, newBalance.getAmount(), 'payout', 'some extra info'],
       );
 
       const [entity] = await connection.query(
@@ -45,6 +53,7 @@ export class TransactionsService {
       this.logger.error(error);
       await connection.query('ROLLBACK');
       connection.release();
+      throw new BadRequestException(error.message, error);
     }
   }
 }
