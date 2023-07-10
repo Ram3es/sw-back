@@ -13,6 +13,7 @@ import * as fs from 'fs';
 import { PaymentsModule } from './payments/payments.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthenticatedGuard } from './auth/authenticated.guard';
+import { TransactionsModule } from './transactions/transactions.module';
 import { InventoryModule } from './inventory/inventory.module';
 import { originalUrl } from './middlewares/originalurl.middleware';
 import { AuthController } from './auth/auth.controller';
@@ -56,6 +57,7 @@ const multi = [
     UserModule,
     AuthModule,
     PaymentsModule,
+    TransactionsModule,
     InventoryModule,
   ],
   controllers: [AppController],

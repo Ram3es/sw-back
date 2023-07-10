@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PinoLogger } from 'nestjs-pino';
 import { PayoutDTO } from './dto/payments.dto';
+import { TransactionsService } from 'src/transactions/transactions.service';
 
 const ENDPOINTS = new Map();
 ENDPOINTS.set('methods', {
@@ -20,6 +21,7 @@ export class PaymentsService {
     private readonly logger: PinoLogger,
     private readonly httpService: HttpService,
     private configService: ConfigService,
+    private readonly transactions: TransactionsService,
   ) {}
   async getPaymentMethods() {
     try {
@@ -31,12 +33,18 @@ export class PaymentsService {
   }
 
   async makePayout(payload: PayoutDTO) {
-    try {
-      const res = await this.paymentsAPIrequest('payout', payload);
-      return res;
-    } catch (error) {
-      this.logger.info(error);
-    }
+    const { userId, amount } = payload;
+    const payout = await this.transactions.payoutUserTransaction(
+      Number(userId),
+      amount,
+    );
+    return payout;
+    // try {
+    //   const res = await this.paymentsAPIrequest('payout', payload);
+    //   return res;
+    // } catch (error) {
+    //   this.logger.info(error);
+    // }
   }
 
   private async paymentsAPIrequest(endpoint: string, payload?: object) {
