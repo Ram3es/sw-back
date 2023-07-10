@@ -32,6 +32,10 @@ class EnvironmentVariables {
 
   @IsString()
   @IsNotEmpty()
+  FRONTEND_URL: string;
+
+  @IsString()
+  @IsNotEmpty()
   SESSION_SECRET: string;
 
   @IsString()

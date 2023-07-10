@@ -6,11 +6,12 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
 import MySQLStore from 'express-mysql-session';
+import { truncate } from 'fs';
 
 const mySQLStore = MySQLStore(session);
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
 
   const logger = app.get(Logger);
   app.useLogger(logger);
@@ -53,7 +54,10 @@ async function bootstrap() {
   );
   app.use(passport.initialize());
   app.use(passport.session());
-  app.enableCors();
+  app.enableCors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  });
   app.enableShutdownHooks();
   app.setGlobalPrefix('api/v1');
   app.useGlobalPipes(new ValidationPipe());
