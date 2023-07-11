@@ -28,11 +28,11 @@ class EnvironmentVariables {
 
   @IsString()
   @IsNotEmpty()
-  STEAMAPIS_KEY: string;
+  APP_URL: string;
 
   @IsString()
   @IsNotEmpty()
-  APP_URL: string;
+  FRONTEND_URL: string;
 
   @IsString()
   @IsNotEmpty()
