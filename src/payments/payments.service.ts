@@ -32,7 +32,7 @@ export class PaymentsService {
     }
   }
 
-  async makePayout(payload: PayoutDTO) {
+  async makePayout(payload: { userId: number; amount: number }) {
     const { userId, amount } = payload;
     const payout = await this.transactions.payoutUserTransaction(
       Number(userId),
