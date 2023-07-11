@@ -1,4 +1,4 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, Query, Req } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
 import { Request } from 'express';
 import { ESteamAppId } from 'src/constants/inxex';
@@ -7,9 +7,11 @@ export class InventoryController {
   constructor(private readonly inventoryService: InventoryService) {}
 
   @Get()
-  async getInventory(@Req() req: Request) {
+  async getInventory(@Req() req: Request, @Query('appid') appid) {
     const user = req?.user;
-    const appid = (req?.query?.appid as string) || ESteamAppId.CSGO;
-    return await this.inventoryService.getInventory(user.id, appid);
+    return await this.inventoryService.getInventory(
+      user.id,
+      appid || ESteamAppId.CSGO,
+    );
   }
 }
