@@ -2,6 +2,7 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Pool } from 'mysql2/promise';
 import { PinoLogger } from 'nestjs-pino';
 import Dinero from 'dinero.js';
+import { PAYOUT_LIMITS } from 'src/constants/inxex';
 
 @Injectable()
 export class TransactionsService {
@@ -13,6 +14,21 @@ export class TransactionsService {
     const connection = await this.conn.getConnection();
     try {
       await connection.query('START TRANSACTION');
+      const [todayPayouts] = await connection.query(
+        `SELECT SUM(prev_balance-new_balance) as 'total'
+         FROM balance_history
+         WHERE date >= CURDATE()`,
+      );
+      const limitForToday = PAYOUT_LIMITS.DAILY - todayPayouts[0].total;
+
+      if (payoutAmount > limitForToday) {
+        throw new Error(
+          `payout is too big. today limit - ${Dinero({
+            amount: limitForToday,
+          }).toFormat()}`,
+        );
+      }
+
       const [rows] = await connection.query(
         `SELECT balance FROM users WHERE id = ?`,
         [user_id],
@@ -42,7 +58,7 @@ export class TransactionsService {
       );
 
       const [entity] = await connection.query(
-        `SELECT * FROM balance_history WHERE id = ?`,
+        `SELECT prev_balance, new_balance, operation FROM balance_history WHERE id = ?`,
         [insertId],
       );
 
