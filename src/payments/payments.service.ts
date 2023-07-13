@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { PinoLogger } from 'nestjs-pino';
 import { PayoutDTO } from './dto/payments.dto';
 import { TransactionsService } from 'src/transactions/transactions.service';
+import * as transactions from './mocks/transactions.json';
 
 const ENDPOINTS = new Map();
 ENDPOINTS.set('methods', {
@@ -45,6 +46,10 @@ export class PaymentsService {
     // } catch (error) {
     //   this.logger.info(error);
     // }
+  }
+
+  getTransactions() {
+    return transactions;
   }
 
   private async paymentsAPIrequest(endpoint: string, payload?: object) {

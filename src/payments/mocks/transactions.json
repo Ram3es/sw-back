@@ -1,0 +1,278 @@
+[
+  {
+    "id": "dc883e4b-9a5e-425b-b62c-617a86643630",
+    "amount": 47,
+    "currency": "USD",
+    "created": "2023-05-27T16:01:08.000Z",
+    "userId": null,
+    "shop": null,
+    "expired": true,
+    "state": "HISTORY_TRANSACTION_STATE_FINISHED",
+    "externalIdentifier": null,
+    "itemName": null,
+    "tradeId": "536029ce-8c4e-44e7-ad94-xxxxxxxxxxxx",
+    "tradeValue": 47,
+    "walletFundsImpact": 47,
+    "tradeComplete": true,
+    "purchaseComplete": true,
+    "type": "DEPOSIT",
+    "payoutMethodName": null,
+    "payoutEmail": null,
+    "fee": null,
+    "netAmount": null,
+    "rejectionReason": null,
+    "comment": null,
+    "user": {
+      "id": "1b7c38eb-4045-4c3a-8f74-b1bc9fd9764d",
+      "email": "redacted@redacted.com",
+      "profile": {
+        "displayName": "akxoxox",
+        "__typename": "UserProfile"
+      },
+      "__typename": "User"
+    },
+    "funds": [
+      {
+        "from": 1,
+        "amount": 47,
+        "currency": "USD",
+        "__typename": "TransactionFund"
+      }
+    ],
+    "transactionParameters": null,
+    "errorCode": null,
+    "from": null,
+    "to": null,
+    "__typename": "HistoryTransaction"
+  },
+  {
+    "id": "4ee0ee44-683c-4331-ada0-c7edc544102b",
+    "amount": 47,
+    "currency": "USD",
+    "created": "2023-05-27T15:01:08.000Z",
+    "userId": null,
+    "shop": null,
+    "expired": true,
+    "state": "HISTORY_TRANSACTION_STATE_FINISHED",
+    "externalIdentifier": null,
+    "itemName": null,
+    "tradeId": "536029ce-8c4e-44e7-ad94-xxxxxxxxxxxx",
+    "tradeValue": 47,
+    "walletFundsImpact": 47,
+    "tradeComplete": true,
+    "purchaseComplete": true,
+    "type": "DEPOSIT",
+    "payoutMethodName": null,
+    "payoutEmail": null,
+    "fee": null,
+    "netAmount": null,
+    "rejectionReason": null,
+    "comment": null,
+    "user": {
+      "id": "1b7c38eb-4045-4c3a-8f74-b1bc9fd9764d",
+      "email": "redacted@redacted.com",
+      "profile": {
+        "displayName": "akxoxox",
+        "__typename": "UserProfile"
+      },
+      "__typename": "User"
+    },
+    "funds": [
+      {
+        "from": 1,
+        "amount": 47,
+        "currency": "USD",
+        "__typename": "TransactionFund"
+      }
+    ],
+    "transactionParameters": null,
+    "errorCode": null,
+    "from": null,
+    "to": null,
+    "__typename": "HistoryTransaction"
+  },
+  {
+    "id": "542129ab-755c-4735-9aea-9043b53e2d14",
+    "amount": 47,
+    "currency": "USD",
+    "created": "2023-05-26T14:01:08.000Z",
+    "userId": null,
+    "shop": null,
+    "expired": true,
+    "state": "HISTORY_TRANSACTION_STATE_FINISHED",
+    "externalIdentifier": null,
+    "itemName": null,
+    "tradeId": "536029ce-8c4e-44e7-ad94-xxxxxxxxxxxx",
+    "tradeValue": 47,
+    "walletFundsImpact": 47,
+    "tradeComplete": true,
+    "purchaseComplete": true,
+    "type": "DEPOSIT",
+    "payoutMethodName": null,
+    "payoutEmail": null,
+    "fee": null,
+    "netAmount": null,
+    "rejectionReason": null,
+    "comment": null,
+    "user": {
+      "id": "1b7c38eb-4045-4c3a-8f74-b1bc9fd9764d",
+      "email": "redacted@redacted.com",
+      "profile": {
+        "displayName": "akxoxox",
+        "__typename": "UserProfile"
+      },
+      "__typename": "User"
+    },
+    "funds": [
+      {
+        "from": 1,
+        "amount": 47,
+        "currency": "USD",
+        "__typename": "TransactionFund"
+      }
+    ],
+    "transactionParameters": null,
+    "errorCode": null,
+    "from": null,
+    "to": null,
+    "__typename": "HistoryTransaction"
+  },
+  {
+    "id": "6a37aef0-ab94-4f79-bdf7-8e8ca5b944a3",
+    "amount": 47,
+    "currency": "USD",
+    "created": "2023-04-27T16:01:08.000Z",
+    "userId": null,
+    "shop": null,
+    "expired": true,
+    "state": "HISTORY_TRANSACTION_STATE_FINISHED",
+    "externalIdentifier": null,
+    "itemName": null,
+    "tradeId": "536029ce-8c4e-44e7-ad94-xxxxxxxxxxxx",
+    "tradeValue": 47,
+    "walletFundsImpact": 47,
+    "tradeComplete": true,
+    "purchaseComplete": true,
+    "type": "DEPOSIT",
+    "payoutMethodName": null,
+    "payoutEmail": null,
+    "fee": null,
+    "netAmount": null,
+    "rejectionReason": null,
+    "comment": null,
+    "user": {
+      "id": "1b7c38eb-4045-4c3a-8f74-b1bc9fd9764d",
+      "email": "redacted@redacted.com",
+      "profile": {
+        "displayName": "akxoxox",
+        "__typename": "UserProfile"
+      },
+      "__typename": "User"
+    },
+    "funds": [
+      {
+        "from": 1,
+        "amount": 47,
+        "currency": "USD",
+        "__typename": "TransactionFund"
+      }
+    ],
+    "transactionParameters": null,
+    "errorCode": null,
+    "from": null,
+    "to": null,
+    "__typename": "HistoryTransaction"
+  },
+  {
+    "id": "572cee2b-6d41-46ca-bf36-3c06669d87ba",
+    "amount": 47,
+    "currency": "USD",
+    "created": "2023-04-27T15:01:08.000Z",
+    "userId": null,
+    "shop": null,
+    "expired": true,
+    "state": "HISTORY_TRANSACTION_STATE_FINISHED",
+    "externalIdentifier": null,
+    "itemName": null,
+    "tradeId": "536029ce-8c4e-44e7-ad94-xxxxxxxxxxxx",
+    "tradeValue": 47,
+    "walletFundsImpact": 47,
+    "tradeComplete": true,
+    "purchaseComplete": true,
+    "type": "DEPOSIT",
+    "payoutMethodName": null,
+    "payoutEmail": null,
+    "fee": null,
+    "netAmount": null,
+    "rejectionReason": null,
+    "comment": null,
+    "user": {
+      "id": "1b7c38eb-4045-4c3a-8f74-b1bc9fd9764d",
+      "email": "redacted@redacted.com",
+      "profile": {
+        "displayName": "akxoxox",
+        "__typename": "UserProfile"
+      },
+      "__typename": "User"
+    },
+    "funds": [
+      {
+        "from": 1,
+        "amount": 47,
+        "currency": "USD",
+        "__typename": "TransactionFund"
+      }
+    ],
+    "transactionParameters": null,
+    "errorCode": null,
+    "from": null,
+    "to": null,
+    "__typename": "HistoryTransaction"
+  },
+  {
+    "id": "0730dd9a-7df2-4ab0-b00c-062bceadf968",
+    "amount": 47,
+    "currency": "USD",
+    "created": "2023-04-26T14:01:08.000Z",
+    "userId": null,
+    "shop": null,
+    "expired": true,
+    "state": "HISTORY_TRANSACTION_STATE_FINISHED",
+    "externalIdentifier": null,
+    "itemName": null,
+    "tradeId": "536029ce-8c4e-44e7-ad94-xxxxxxxxxxxx",
+    "tradeValue": 47,
+    "walletFundsImpact": 47,
+    "tradeComplete": true,
+    "purchaseComplete": true,
+    "type": "DEPOSIT",
+    "payoutMethodName": null,
+    "payoutEmail": null,
+    "fee": null,
+    "netAmount": null,
+    "rejectionReason": null,
+    "comment": null,
+    "user": {
+      "id": "1b7c38eb-4045-4c3a-8f74-b1bc9fd9764d",
+      "email": "redacted@redacted.com",
+      "profile": {
+        "displayName": "akxoxox",
+        "__typename": "UserProfile"
+      },
+      "__typename": "User"
+    },
+    "funds": [
+      {
+        "from": 1,
+        "amount": 47,
+        "currency": "USD",
+        "__typename": "TransactionFund"
+      }
+    ],
+    "transactionParameters": null,
+    "errorCode": null,
+    "from": null,
+    "to": null,
+    "__typename": "HistoryTransaction"
+  }
+]

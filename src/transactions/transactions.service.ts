@@ -14,11 +14,18 @@ export class TransactionsService {
     const connection = await this.conn.getConnection();
     try {
       await connection.query('START TRANSACTION');
+      const [rows] = await connection.query(
+        `SELECT balance FROM users WHERE id = ?`,
+        [user_id],
+      );
+      const { balance } = rows[0];
+
       const [todayPayouts] = await connection.query(
         `SELECT SUM(prev_balance-new_balance) as 'total'
          FROM balance_history
          WHERE date >= CURDATE()`,
       );
+
       const limitForToday = PAYOUT_LIMITS.DAILY - todayPayouts[0].total;
 
       if (payoutAmount > limitForToday) {
@@ -29,25 +36,21 @@ export class TransactionsService {
         );
       }
 
-      const [rows] = await connection.query(
-        `SELECT balance FROM users WHERE id = ?`,
-        [user_id],
-      );
-      const { balance } = rows[0];
-
+      const currentDailyLimit = Dinero({ amount: limitForToday });
       const currentBalance = Dinero({ amount: balance });
       const payout = Dinero({ amount: payoutAmount });
 
       const newBalance = currentBalance.subtract(payout);
+      const newDailyLimit = currentDailyLimit.subtract(payout);
 
       if (newBalance.isNegative()) {
         throw new Error('Funds insufficient.');
       }
 
-      await connection.query(`UPDATE users SET balance = ? WHERE id = ?`, [
-        newBalance.getAmount(),
-        user_id,
-      ]);
+      await connection.query(
+        `UPDATE users SET balance = ?, daily_limit = ? WHERE id = ?`,
+        [newBalance.getAmount(), newDailyLimit.getAmount(), user_id],
+      );
 
       const [{ insertId }]: any = await connection.query(
         `
@@ -64,6 +67,7 @@ export class TransactionsService {
 
       await connection.query('COMMIT');
       connection.release();
+      entity[0].daily_limit = newDailyLimit.getAmount();
       return entity[0];
     } catch (error) {
       this.logger.error(error);
