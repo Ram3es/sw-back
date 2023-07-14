@@ -37,10 +37,10 @@ export class PaymentsService {
     }
   }
 
-  async makePayout(payload: { userId: number; amount: number }) {
-    const { userId, amount } = payload;
+  async makePayout(payload: { steamId: string; amount: number }) {
+    const { steamId, amount } = payload;
     const payout = await this.transactions.payoutUserTransaction(
-      Number(userId),
+      steamId,
       amount,
     );
     return payout;

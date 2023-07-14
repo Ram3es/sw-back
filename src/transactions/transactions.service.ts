@@ -10,15 +10,15 @@ export class TransactionsService {
     @Inject('DB_CONNECTION') private conn: Pool,
     private readonly logger: PinoLogger,
   ) {}
-  async payoutUserTransaction(user_id: number, payoutAmount: number) {
+  async payoutUserTransaction(steamId: string, payoutAmount: number) {
     const connection = await this.conn.getConnection();
     try {
       await connection.query('START TRANSACTION');
       const [rows] = await connection.query(
-        `SELECT balance FROM users WHERE id = ?`,
-        [user_id],
+        `SELECT balance, id FROM users WHERE steam_id = ?`,
+        [steamId],
       );
-      const { balance } = rows[0];
+      const { balance, id: userId } = rows[0];
 
       const [todayPayouts] = await connection.query(
         `SELECT SUM(prev_balance-new_balance) as 'total'
@@ -50,7 +50,7 @@ export class TransactionsService {
 
       await connection.query(
         `UPDATE users SET balance = ?, daily_limit = ? WHERE id = ?`,
-        [newBalance.getAmount(), newDailyLimit.getAmount(), user_id],
+        [newBalance.getAmount(), newDailyLimit.getAmount(), userId],
       );
 
       const [{ insertId }]: any = await connection.query(
@@ -58,7 +58,7 @@ export class TransactionsService {
           INSERT INTO balance_history (user_id, prev_balance, new_balance, operation, extra)
           VALUES (?, ?, ?, ?, ?)
         `,
-        [user_id, balance, newBalance.getAmount(), 'payout', 'some extra info'],
+        [userId, balance, newBalance.getAmount(), 'payout', 'some extra info'],
       );
 
       const [entity] = await connection.query(
