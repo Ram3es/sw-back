@@ -1,4 +1,5 @@
 export interface User {
+  id?: number;
   steamId: string;
   steamUsername: string;
   avatarUrl: string;
@@ -8,6 +9,7 @@ export interface User {
   balance?: number;
 }
 export interface DBUser {
+  id?: number;
   steam_id: string;
   steam_username: string;
   avatar_url: string;

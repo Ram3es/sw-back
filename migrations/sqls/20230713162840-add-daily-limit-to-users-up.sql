@@ -1,2 +1,0 @@
-ALTER TABLE users
-ADD COLUMN daily_limit INT DEFAULT 100000;

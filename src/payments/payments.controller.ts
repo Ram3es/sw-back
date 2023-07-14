@@ -41,7 +41,7 @@ export class PaymentsController {
     const user = req?.user;
     const { amount } = body;
     if (!user) throw new UnauthorizedException();
-    return this.paymentsService.makePayout({ userId: 1, amount });
+    return this.paymentsService.makePayout({ steamId: user.id, amount });
   }
 
   @Get('transactions')
