@@ -7,6 +7,9 @@ CREATE TABLE `users` (
   `payout_ok` INT NOT NULL DEFAULT 1,
   `banned` INT NOT NULL DEFAULT 0,
   `balance` INT NOT NULL DEFAULT 0,
+  `transactions_total` INT NOT NULL DEFAULT 0,
+  `trade_url` VARCHAR(255),
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_steam_id` (`steam_id`)
+  UNIQUE KEY `unique_steam_id` (`steam_id`),
+  INDEX `idx_steam_id` (`steam_id`)
 );

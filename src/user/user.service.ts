@@ -84,6 +84,7 @@ export class UserService {
 
   private mapDbToUser(user: DBUser): User {
     const {
+      id,
       steam_id,
       steam_username,
       avatar_url,
@@ -93,6 +94,7 @@ export class UserService {
       balance,
     } = user;
     return {
+      id,
       steamId: steam_id,
       steamUsername: steam_username,
       avatarUrl: avatar_url,
