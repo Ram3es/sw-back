@@ -56,12 +56,18 @@ export class PaymentsService {
     return transactions;
   }
 
-  async getDailyLimitsByUser(user_id: number) {
+  async getDailyLimitsByUser(steamId: string) {
+    const [rows] = await this.conn.query(
+      `SELECT id FROM users WHERE steam_id = ?`,
+      [steamId],
+    );
+    const { id: userId } = rows[0];
+
     const [todayPayouts] = await this.conn.query(
       `SELECT SUM(prev_balance-new_balance) as 'total'
        FROM balance_history
        WHERE user_id = ? AND date > now() - interval 1 day`,
-      [user_id],
+      [userId],
     );
     const limitForToday = PAYOUT_LIMITS.DAILY - todayPayouts[0].total;
     return Dinero({ amount: limitForToday }).getAmount();

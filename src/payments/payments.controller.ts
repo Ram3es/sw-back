@@ -8,7 +8,6 @@ import {
 } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { PayoutDTO } from './dto/payments.dto';
-import { Public } from 'src/auth/public.decorator';
 import { Request } from 'express';
 
 @Controller('payments')
@@ -41,7 +40,7 @@ export class PaymentsController {
     const user = req?.user;
     const { amount } = body;
     if (!user) throw new UnauthorizedException();
-    return this.paymentsService.makePayout({ steamId: user.id, amount });
+    return this.paymentsService.makePayout({ steamId: '12345', amount });
   }
 
   @Get('transactions')
@@ -49,10 +48,10 @@ export class PaymentsController {
     return this.paymentsService.getTransactions();
   }
 
-  @Public()
   @Get('limits')
-  async getDailyLimits() {
-    const amount = await this.paymentsService.getDailyLimitsByUser(1);
+  async getDailyLimits(@Req() req: Request) {
+    const user = req?.user;
+    const amount = await this.paymentsService.getDailyLimitsByUser(user.id);
     return { amount };
   }
 }
