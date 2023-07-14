@@ -15,7 +15,6 @@ import { Request } from 'express';
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
-  @Public()
   @Get('payment-methods')
   getPaymentMethods() {
     return {
@@ -37,12 +36,16 @@ export class PaymentsController {
     // return this.paymentsService.getPaymentMethods();
   }
 
-  @Public()
   @Post('payout')
   makePayout(@Req() req: Request, @Body() body: PayoutDTO) {
     const user = req?.user;
     const { amount } = body;
     if (!user) throw new UnauthorizedException();
-    return this.paymentsService.makePayout({ userId: Number(user.id), amount });
+    return this.paymentsService.makePayout({ userId: 1, amount });
+  }
+
+  @Get('transactions')
+  getPaymentsTransactions() {
+    return this.paymentsService.getTransactions();
   }
 }
