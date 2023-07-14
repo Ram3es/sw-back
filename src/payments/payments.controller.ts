@@ -48,4 +48,11 @@ export class PaymentsController {
   getPaymentsTransactions() {
     return this.paymentsService.getTransactions();
   }
+
+  @Public()
+  @Get('limits')
+  async getDailyLimits() {
+    const amount = await this.paymentsService.getDailyLimitsByUser(1);
+    return { amount };
+  }
 }

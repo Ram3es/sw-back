@@ -23,7 +23,8 @@ export class TransactionsService {
       const [todayPayouts] = await connection.query(
         `SELECT SUM(prev_balance-new_balance) as 'total'
          FROM balance_history
-         WHERE date >= CURDATE()`,
+         WHERE user_id = ? AND date > now() - interval 1 day`,
+        [user_id],
       );
 
       const limitForToday = PAYOUT_LIMITS.DAILY - todayPayouts[0].total;
