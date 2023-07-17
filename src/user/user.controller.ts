@@ -8,7 +8,6 @@ export class UserController {
   @Get('me')
   async me(@Session() session: SessionData, @Req() req: any) {
     const steamId = String(req?.user?._json?.steamid);
-    console.log('steamId', req?.user);
     const user = await this.userService.findBySteamId(steamId);
     return user;
   }
