@@ -3,6 +3,7 @@ import { SteamAuthGuard } from './steam.guard';
 import { AuthService } from './auth.service';
 import { Public } from './public.decorator';
 import { Request } from 'express';
+import { DEFAULT_LOGIN_REDIRECT } from 'src/constants/inxex';
 
 @Controller('auth')
 export class AuthController {
@@ -18,11 +19,10 @@ export class AuthController {
   @UseGuards(SteamAuthGuard)
   @Get('steam/verify')
   async steamLoginCallback(@Res() res, @Req() req: Request) {
-    const continueUrl = req?.session?.continueUrl;
-    console.log('continueUrl', continueUrl);
+    const continueUrl = req?.query?.continue;
     await this.authService.steamLogin(req);
     delete req.session.continueUrl;
-    res.redirect(continueUrl || '/');
+    res.redirect(continueUrl || DEFAULT_LOGIN_REDIRECT);
   }
 
   @Public()
