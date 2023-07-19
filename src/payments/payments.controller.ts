@@ -31,6 +31,20 @@ export class PaymentsController {
         min: 100,
         enabled: true,
       },
+      crypto: {
+        fixedFee: 0.021,
+        fee: 25,
+        max: 100000,
+        min: 100,
+        enabled: true,
+      },
+      webmoney: {
+        fixedFee: 0.021,
+        fee: 25,
+        max: 100000,
+        min: 100,
+        enabled: true,
+      },
     };
     // return this.paymentsService.getPaymentMethods();
   }
