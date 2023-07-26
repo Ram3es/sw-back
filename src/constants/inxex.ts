@@ -10,4 +10,4 @@ export enum PAYOUT_LIMITS {
   MAX = 100000,
 }
 
-export const DEFAULT_LOGIN_REDIRECT = '/panel/market';
+export const DEFAULT_LOGIN_REDIRECT = '/market';
