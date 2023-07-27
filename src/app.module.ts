@@ -18,6 +18,7 @@ import { InventoryModule } from './inventory/inventory.module';
 import { originalUrl } from './middlewares/originalurl.middleware';
 import { AuthController } from './auth/auth.controller';
 import { continueUrl } from './middlewares/continue.middleware';
+import { MarketModule } from './market/market.module';
 
 const LOGDIR = './logs';
 
@@ -59,6 +60,7 @@ const multi = [
     PaymentsModule,
     TransactionsModule,
     InventoryModule,
+    MarketModule,
   ],
   controllers: [AppController],
   providers: [
