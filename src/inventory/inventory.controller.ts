@@ -1,7 +1,7 @@
 import { Controller, Get, Query, Req } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
 import { Request } from 'express';
-import { ESteamAppId } from 'src/constants/inxex';
+import { ESteamAppId } from 'src/constants';
 @Controller('inventory')
 export class InventoryController {
   constructor(private readonly inventoryService: InventoryService) {}

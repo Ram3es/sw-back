@@ -3,7 +3,7 @@ import { SteamAuthGuard } from './steam.guard';
 import { AuthService } from './auth.service';
 import { Public } from './public.decorator';
 import { Request } from 'express';
-import { DEFAULT_LOGIN_REDIRECT } from 'src/constants/inxex';
+import { DEFAULT_LOGIN_REDIRECT } from 'src/constants';
 
 @Controller('auth')
 export class AuthController {
