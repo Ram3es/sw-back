@@ -2,7 +2,7 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Pool } from 'mysql2/promise';
 import { PinoLogger } from 'nestjs-pino';
 import Dinero from 'dinero.js';
-import { PAYOUT_LIMITS } from 'src/constants/inxex';
+import { PAYOUT_LIMITS } from 'src/constants';
 
 @Injectable()
 export class TransactionsService {

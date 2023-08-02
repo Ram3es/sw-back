@@ -5,7 +5,7 @@ import { PinoLogger } from 'nestjs-pino';
 import { TransactionsService } from 'src/transactions/transactions.service';
 import transactions from './mocks/transactions.json';
 import { Pool } from 'mysql2/promise';
-import { PAYOUT_LIMITS } from 'src/constants/inxex';
+import { PAYOUT_LIMITS } from 'src/constants';
 import Dinero from 'dinero.js';
 
 const ENDPOINTS = new Map();

@@ -7,7 +7,7 @@ import {
   Min,
   Max,
 } from 'class-validator';
-import { PAYOUT_LIMITS } from 'src/constants/inxex';
+import { PAYOUT_LIMITS } from 'src/constants';
 
 export class PayoutDTO {
   @IsString()

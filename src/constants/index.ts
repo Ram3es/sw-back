@@ -11,3 +11,5 @@ export enum PAYOUT_LIMITS {
 }
 
 export const DEFAULT_LOGIN_REDIRECT = '/market';
+
+export const PAGE_LIMIT = 24;
