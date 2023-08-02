@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -9,6 +10,7 @@ import {
 import { PaymentsService } from './payments.service';
 import { PayoutDTO } from './dto/payments.dto';
 import { Request } from 'express';
+import coupones from './mocks/coupones.js';
 
 @Controller('payments')
 export class PaymentsController {
@@ -47,6 +49,17 @@ export class PaymentsController {
       },
     };
     // return this.paymentsService.getPaymentMethods();
+  }
+
+  @Post('couponValidation')
+  validateCoupone(@Req() req: Request, @Body() body) {
+    const user = req?.user;
+    if (!user) throw new UnauthorizedException();
+    const { coupon = null } = body;
+    if (!coupon || !coupones.includes(coupon)) {
+      throw new BadRequestException({ message: 'Coupon not valid.' });
+    }
+    return { message: 'Coupone valid' };
   }
 
   @Post('payout')
