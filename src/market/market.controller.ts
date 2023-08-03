@@ -5,13 +5,10 @@ import {
   Query,
   Req,
   Post,
-  ValidationPipe,
-  UsePipes,
-  ParseArrayPipe,
+  BadRequestException,
 } from '@nestjs/common';
 import { MarketService } from './market.service';
 import { Request } from 'express';
-import { BuyItemDTO } from './dto/buy-items.dto';
 import { WithdrawDTO } from './dto/withdraw.dto';
 import { ESteamAppId } from 'src/constants';
 
@@ -20,19 +17,37 @@ export class MarketController {
   constructor(private readonly marketService: MarketService) {}
 
   @Get('inventory')
-  getOnSiteInventory(@Req() req: Request, @Query('appid') appid) {
+  async getOnSiteInventory(@Req() req: Request, @Query() query) {
     const user = req?.user;
-    return this.marketService.getOnSiteInventory(user._json.steamid, appid);
+    const {
+      appid,
+      gameId,
+      itemName,
+      category,
+      minPrice,
+      maxPrice,
+      minWear,
+      maxWear,
+      otherTags,
+    } = query;
+    const inventory = await this.marketService.getOnSiteInventory(
+      user._json.steamid,
+      appid,
+    );
+    return inventory
+      .sort((a, b) => Number(b.tradable) - Number(a.tradable))
+      .sort((a, b) => a.withdrawn - b.withdrawn);
   }
 
   @Post('buy')
-  @UsePipes(new ValidationPipe({ transform: true }))
-  buyItems(
-    @Req() req: Request,
-    @Body(new ParseArrayPipe({ items: BuyItemDTO })) body,
-  ) {
+  buyItems(@Req() req: Request, @Body() { assetIds }: WithdrawDTO) {
     const user = req?.user;
-    return this.marketService.addItemsToInventory(user._json.steamid, body);
+    if (!assetIds.length) {
+      throw new BadRequestException([
+        'each value in assetIds must be a string',
+      ]);
+    }
+    return this.marketService.addItemsToInventory(user._json.steamid, assetIds);
   }
 
   @Post('withdraw')

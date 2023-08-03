@@ -1,10 +1,10 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, BadRequestException } from '@nestjs/common';
 import { Pool } from 'mysql2/promise';
 import { PinoLogger } from 'nestjs-pino';
-import { BuyItemDTO } from './dto/buy-items.dto';
 import { MarketOffer } from './types';
 import { mockOffers, mockSortBy } from './mocks/offers.mock';
 import { PAGE_LIMIT } from 'src/constants';
+import steamItems from '../inventory/mocks/steam-items.json';
 
 @Injectable()
 export class MarketService {
@@ -17,31 +17,51 @@ export class MarketService {
     try {
       const [inventory] = await this.conn.query(
         `
-          SELECT steam_id, name, assetid, classid, image, appid, price, withdrawn, created_at, updated_at FROM user_item
+          SELECT assetid, withdrawn, created_at, updated_at FROM user_item
           WHERE steam_id = ?
         `,
         [steamId],
       );
-      return inventory;
+
+      const items = inventory
+        // @ts-expect-error need to fix
+        .map((entity) => {
+          const item = steamItems.find(
+            (item) => item.assetid === entity.assetid,
+          );
+          if (!item) return;
+          return { ...item, ...entity };
+        })
+        .filter((item) => item);
+
+      return appid ? items.filter((item) => item.appid === appid) : items;
     } catch (error) {
       this.logger.error(error);
     }
   }
 
-  async addItemsToInventory(steamId: string, items: BuyItemDTO[]) {
-    try {
-      for await (const item of items) {
-        const { name, assetid, classid, image, price, appid } = item;
-        await this.conn.query(
-          `
-          INSERT INTO user_item (steam_id, appid, name, assetid, classid, image, price)
-          VALUES (?, ?, ?, ?, ?, ?, ?)
-        `,
-          [steamId, appid, name, assetid, classid, image, price],
-        );
+  async addItemsToInventory(steamId: string, items: string[]) {
+    for await (const assetid of items) {
+      const item = steamItems.find((item) => item.assetid === assetid);
+      if (!item) {
+        throw new BadRequestException([
+          `there is no item with assetid: ${assetid}`,
+        ]);
       }
+    }
+
+    const values = items.map((item) => `(${steamId}, ${item})`);
+
+    try {
+      await this.conn.query(
+        `
+        INSERT INTO user_item (steam_id, assetid)
+        VALUES ${values.join(',')}
+      `,
+      );
     } catch (error) {
       this.logger.warn(error);
+      throw new BadRequestException();
     }
   }
 
