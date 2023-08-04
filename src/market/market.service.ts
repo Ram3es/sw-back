@@ -51,7 +51,7 @@ export class MarketService {
       }
     }
 
-    const values = items.map((item) => `(${steamId}, ${item})`);
+    const values = items.map((item) => `(${steamId}, '${item}')`);
 
     try {
       await this.conn.query(
