@@ -25,7 +25,7 @@ export class MarketService {
       const items = inventory
         // @ts-expect-error need to fix
         .map((entity) => {
-          const item = mockGetAllOffers(ESteamAppId.RUST).find(
+          const item = mockGetAllOffers(ESteamAppId.CSGO).find(
             (item) => item.inventoryItemId === entity.assetid,
           );
           if (!item) return;
@@ -41,7 +41,7 @@ export class MarketService {
 
   async addItemsToInventory(steamId: string, items: string[]) {
     for await (const assetid of items) {
-      const item = mockGetAllOffers(ESteamAppId.RUST).find(
+      const item = mockGetAllOffers(ESteamAppId.CSGO).find(
         (item) => item.inventoryItemId === assetid,
       );
       if (!item) {
