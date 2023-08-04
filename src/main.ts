@@ -45,7 +45,7 @@ async function bootstrap() {
       store: sessionStore,
       proxy: process.env.NODE_ENV === 'production',
       cookie: {
-        secure: false,
+        secure: process.env.NODE_ENV === 'production',
         sameSite: process.env.NODE_ENV === 'production' ? 'strict' : false,
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 2, // 2 days cookies
