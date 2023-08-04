@@ -7,4 +7,8 @@ export const mockOffers = (appid: string, page: number, limit: number) => {
     .splice((page - 1) * limit, limit);
 };
 
+export const mockGetAllOffers = (appid: string) => {
+  return offers.filter((item) => item.appid === Number(appid));
+};
+
 export const mockSortBy = () => sortByOptions;

@@ -21,6 +21,7 @@ export class AuthController {
   async steamLoginCallback(@Res() res, @Req() req: Request) {
     const continueUrl = req?.query?.continue;
     await this.authService.steamLogin(req);
+    console.log('continueUrl', continueUrl);
     delete req.session.continueUrl;
     res.redirect(continueUrl || DEFAULT_LOGIN_REDIRECT);
   }

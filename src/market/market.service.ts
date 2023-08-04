@@ -2,9 +2,8 @@ import { Injectable, Inject, BadRequestException } from '@nestjs/common';
 import { Pool } from 'mysql2/promise';
 import { PinoLogger } from 'nestjs-pino';
 import { MarketOffer } from './types';
-import { mockOffers, mockSortBy } from './mocks/offers.mock';
-import { PAGE_LIMIT } from 'src/constants';
-import steamItems from '../inventory/mocks/steam-items.json';
+import { mockOffers, mockSortBy, mockGetAllOffers } from './mocks/offers.mock';
+import { ESteamAppId, PAGE_LIMIT } from 'src/constants';
 
 @Injectable()
 export class MarketService {
@@ -26,8 +25,8 @@ export class MarketService {
       const items = inventory
         // @ts-expect-error need to fix
         .map((entity) => {
-          const item = steamItems.find(
-            (item) => item.assetid === entity.assetid,
+          const item = mockGetAllOffers(ESteamAppId.RUST).find(
+            (item) => item.inventoryItemId === entity.assetid,
           );
           if (!item) return;
           return { ...item, ...entity };
@@ -42,7 +41,9 @@ export class MarketService {
 
   async addItemsToInventory(steamId: string, items: string[]) {
     for await (const assetid of items) {
-      const item = steamItems.find((item) => item.assetid === assetid);
+      const item = mockGetAllOffers(ESteamAppId.RUST).find(
+        (item) => item.inventoryItemId === assetid,
+      );
       if (!item) {
         throw new BadRequestException([
           `there is no item with assetid: ${assetid}`,
