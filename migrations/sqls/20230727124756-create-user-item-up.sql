@@ -5,6 +5,8 @@ CREATE TABLE `user_item` (
   `withdrawn` BOOLEAN NOT NULL DEFAULT 0,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `transaction_id` VARCHAR(255),
   PRIMARY KEY (`id`),
+  UNIQUE (`steam_id`, `assetid`),
   FOREIGN KEY (steam_id) REFERENCES users(steam_id)
 );

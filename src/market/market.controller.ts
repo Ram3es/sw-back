@@ -65,4 +65,10 @@ export class MarketController {
       page || 1,
     );
   }
+
+  @Get('withdraw/transactions')
+  async getTransactions(@Req() req: Request) {
+    const user = req?.user;
+    return await this.marketService.getTransactions(user._json.steamid);
+  }
 }

@@ -4,6 +4,7 @@ import { PinoLogger } from 'nestjs-pino';
 import { MarketOffer } from './types';
 import { mockOffers, mockSortBy, mockGetAllOffers } from './mocks/offers.mock';
 import { ESteamAppId, PAGE_LIMIT } from 'src/constants';
+import { randomUUID, generateKeySync } from 'node:crypto';
 
 @Injectable()
 export class MarketService {
@@ -62,20 +63,25 @@ export class MarketService {
       );
     } catch (error) {
       this.logger.warn(error);
-      throw new BadRequestException();
+      const err =
+        error.errno && error.errno === 1062
+          ? new BadRequestException('Duplicate entry')
+          : new BadRequestException();
+      throw err;
     }
   }
 
   async withdrawItems(steamId: string, items) {
     try {
+      const transaction_id = randomUUID();
       for await (const item of items) {
         await this.conn.query(
           `
           UPDATE user_item
-          SET withdrawn = 1
+          SET withdrawn = 1, transaction_id = ?
           WHERE steam_id = ? AND assetid = ?
         `,
-          [steamId, item],
+          [transaction_id, steamId, item],
         );
       }
     } catch (error) {
@@ -102,5 +108,61 @@ export class MarketService {
       sortBy: sortBy || 'HotDeals',
       offers: offers,
     };
+  }
+
+  async getTransactions(steam_id: string) {
+    const [withdraws]: any = await this.conn.query(
+      `SELECT assetid, withdrawn, created_at, updated_at, transaction_id
+       FROM user_item WHERE steam_id = ? AND withdrawn = 1`,
+      [steam_id],
+    );
+
+    const withdrawsByTransactionId: [key: [any]] = this.groupBy(
+      withdraws,
+      'transaction_id',
+    );
+    const transactions = [];
+
+    for (const [transaction, transaction_items] of Object.entries(
+      withdrawsByTransactionId,
+    )) {
+      const security_token = generateKeySync('hmac', { length: 128 })
+        .export()
+        .toString('hex');
+
+      const items = transaction_items
+        .map((entity) => {
+          const item = mockGetAllOffers(ESteamAppId.CSGO).find(
+            (item) => item.inventoryItemId === entity.assetid,
+          );
+          if (!item) return;
+          return { ...item, ...entity };
+        })
+        .filter((item) => item);
+
+      const now = new Date();
+      const expired_at = new Date().setHours(now.getHours() + 24);
+
+      transactions.push({
+        items,
+        bot_name: 'bip-bop im bot',
+        created_at: now,
+        security_token,
+        accepted: true,
+        expired_at: new Date(expired_at),
+        browser_confiramation_url: 'https://skinwallet.itsua.co/' + transaction,
+        steam_confiramation_url: 'https://steam.com/' + transaction,
+      });
+    }
+    return transactions;
+  }
+
+  private groupBy(arr, key) {
+    return arr.reduce(
+      (acc, item) => (
+        (acc[item[key]] = [...(acc[item[key]] || []), item]), acc
+      ),
+      {},
+    );
   }
 }
