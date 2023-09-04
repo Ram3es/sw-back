@@ -23,7 +23,9 @@ export class AuthController {
     await this.authService.steamLogin(req);
     console.log('continueUrl', continueUrl);
     delete req.session.continueUrl;
-    res.redirect(continueUrl || DEFAULT_LOGIN_REDIRECT);
+    res.redirect(
+      process.env.FRONTEND_URL || continueUrl || DEFAULT_LOGIN_REDIRECT,
+    );
   }
 
   @Public()
