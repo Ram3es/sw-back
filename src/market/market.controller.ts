@@ -11,6 +11,7 @@ import { MarketService } from './market.service';
 import { Request } from 'express';
 import { WithdrawDTO } from './dto/withdraw.dto';
 import { ESteamAppId } from 'src/constants';
+import { Public } from 'src/auth/public.decorator';
 
 @Controller('market')
 export class MarketController {
@@ -56,6 +57,7 @@ export class MarketController {
     return this.marketService.withdrawItems(user._json.steamid, assetIds);
   }
 
+  @Public()
   @Get('/offers')
   async getOffers(@Query() query) {
     const { appid, sortBy, page } = query;
