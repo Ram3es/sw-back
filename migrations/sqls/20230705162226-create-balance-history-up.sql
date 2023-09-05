@@ -8,5 +8,5 @@ CREATE TABLE `balance_history` (
   `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`userId`) REFERENCES users(`id`)
+  FOREIGN KEY (`userId`) REFERENCES `users`(`id`)
 );

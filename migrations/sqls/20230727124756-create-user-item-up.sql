@@ -8,5 +8,5 @@ CREATE TABLE `user_items` (
   `transactionId` VARCHAR(255),
   PRIMARY KEY (`id`),
   UNIQUE (`assetId`),
-  FOREIGN KEY (`userId`) REFERENCES `users`(`userId`)
+  FOREIGN KEY (`userId`) REFERENCES `users`(`id`)
 );
