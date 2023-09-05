@@ -1,7 +1,7 @@
 export interface SteamItem {
   id: string;
   name: string;
-  assetid: string;
+  assetId: string;
   classid: string;
   image: string;
   appid: string;

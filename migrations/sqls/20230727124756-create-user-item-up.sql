@@ -1,12 +1,12 @@
-CREATE TABLE `user_item` (
+CREATE TABLE `user_items` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `steam_id` VARCHAR(255) NOT NULL,
-  `assetid` VARCHAR(255) NOT NULL,
+  `userId` INT NOT NULL,
+  `assetId` VARCHAR(255) NOT NULL,
   `withdrawn` BOOLEAN NOT NULL DEFAULT 0,
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `transaction_id` VARCHAR(255),
+  `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `transactionId` VARCHAR(255),
   PRIMARY KEY (`id`),
-  UNIQUE (`steam_id`, `assetid`),
-  FOREIGN KEY (steam_id) REFERENCES users(steam_id)
+  UNIQUE (`assetId`),
+  FOREIGN KEY (`userId`) REFERENCES `users`(`userId`)
 );
