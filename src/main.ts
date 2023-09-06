@@ -6,7 +6,6 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
 import MySQLStore from 'express-mysql-session';
-import { truncate } from 'fs';
 
 const mySQLStore = MySQLStore(session);
 
