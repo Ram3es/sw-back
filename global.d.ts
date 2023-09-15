@@ -1,9 +1,5 @@
 declare global {
-  declare module 'express-session' {
-    interface SessionData {
-      continueUrl?: string;
-    }
-  }
+  declare module 'express-session' {}
 
   declare module 'express' {
     interface Request extends Express.Request {

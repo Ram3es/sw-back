@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 
 export class CreatePaymentAccountDTO {
   @IsString()
