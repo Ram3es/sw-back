@@ -10,6 +10,6 @@ export enum PAYOUT_LIMITS {
   MAX = 100000,
 }
 
-export const DEFAULT_LOGIN_REDIRECT = '/sign-in';
+export const DEFAULT_LOGIN_REDIRECT = '/success-auth';
 
 export const PAGE_LIMIT = 24;

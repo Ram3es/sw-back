@@ -17,8 +17,8 @@ export class MarketService {
     try {
       const [inventory] = await this.conn.query(
         `
-          SELECT assetid, withdrawn, created_at, updated_at FROM user_item
-          WHERE steam_id = ?
+          SELECT assetId, withdrawn, createdAt, updatedAt FROM user_items
+          WHERE steamId = ?
         `,
         [steamId],
       );
@@ -27,7 +27,7 @@ export class MarketService {
         // @ts-expect-error need to fix
         .map((entity) => {
           const item = mockGetAllOffers(ESteamAppId.CSGO).find(
-            (item) => item.inventoryItemId === entity.assetid,
+            (item) => item.inventoryItemId === entity.assetId,
           );
           if (!item) return;
           return { ...item, ...entity };
@@ -41,13 +41,13 @@ export class MarketService {
   }
 
   async addItemsToInventory(steamId: string, items: string[]) {
-    for await (const assetid of items) {
+    for await (const assetId of items) {
       const item = mockGetAllOffers(ESteamAppId.CSGO).find(
-        (item) => item.inventoryItemId === assetid,
+        (item) => item.inventoryItemId === assetId,
       );
       if (!item) {
         throw new BadRequestException([
-          `there is no item with assetid: ${assetid}`,
+          `there is no item with assetId: ${assetId}`,
         ]);
       }
     }
@@ -57,7 +57,7 @@ export class MarketService {
     try {
       await this.conn.query(
         `
-        INSERT INTO user_item (steam_id, assetid)
+        INSERT INTO user_items (steamId, assetId)
         VALUES ${values.join(',')}
       `,
       );
@@ -73,15 +73,15 @@ export class MarketService {
 
   async withdrawItems(steamId: string, items) {
     try {
-      const transaction_id = randomUUID();
+      const transactionId = randomUUID();
       for await (const item of items) {
         await this.conn.query(
           `
-          UPDATE user_item
-          SET withdrawn = 1, transaction_id = ?
-          WHERE steam_id = ? AND assetid = ?
+          UPDATE user_items
+          SET withdrawn = 1, transactionId = ?
+          WHERE steamId = ? AND assetId = ?
         `,
-          [transaction_id, steamId, item],
+          [transactionId, steamId, item],
         );
       }
     } catch (error) {
@@ -110,16 +110,16 @@ export class MarketService {
     };
   }
 
-  async getTransactions(steam_id: string) {
+  async getTransactions(steamId: string) {
     const [withdraws]: any = await this.conn.query(
-      `SELECT assetid, withdrawn, created_at, updated_at, transaction_id
-       FROM user_item WHERE steam_id = ? AND withdrawn = 1`,
-      [steam_id],
+      `SELECT assetId, withdrawn, createdAt, updatedAt, transactionId
+       FROM user_items WHERE steamId = ? AND withdrawn = 1`,
+      [steamId],
     );
 
     const withdrawsByTransactionId: [key: [any]] = this.groupBy(
       withdraws,
-      'transaction_id',
+      'transactionId',
     );
     const transactions = [];
 
@@ -133,7 +133,7 @@ export class MarketService {
       const items = transaction_items
         .map((entity) => {
           const item = mockGetAllOffers(ESteamAppId.CSGO).find(
-            (item) => item.inventoryItemId === entity.assetid,
+            (item) => item.inventoryItemId === entity.assetId,
           );
           if (!item) return;
           return { ...item, ...entity };
@@ -146,7 +146,7 @@ export class MarketService {
       transactions.push({
         items,
         bot_name: 'bip-bop im bot',
-        created_at: now,
+        createdAt: now,
         security_token,
         accepted: true,
         expired_at: new Date(expired_at),

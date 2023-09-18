@@ -15,15 +15,15 @@ export class TransactionsService {
     try {
       await connection.query('START TRANSACTION');
       const [rows] = await connection.query(
-        `SELECT balance, transactions_total, id FROM users WHERE steam_id = ?`,
+        `SELECT balance, transactionsTotal, id FROM users WHERE steamId = ?`,
         [steamId],
       );
-      const { balance, transactions_total, id: userId } = rows[0];
+      const { balance, transactionsTotal, id: userId } = rows[0];
 
       const [todayPayouts] = await connection.query(
-        `SELECT SUM(prev_balance-new_balance) as 'total'
+        `SELECT SUM(prevBalance-newBalance) as 'total'
          FROM balance_history
-         WHERE user_id = ? AND date > now() - interval 1 day`,
+         WHERE userId = ? AND date > now() - interval 1 day`,
         [userId],
       );
 
@@ -37,7 +37,7 @@ export class TransactionsService {
         );
       }
 
-      const currentTransactionsTotal = Dinero({ amount: transactions_total });
+      const currentTransactionsTotal = Dinero({ amount: transactionsTotal });
       const currentDailyLimit = Dinero({ amount: limitForToday });
       const currentBalance = Dinero({ amount: balance });
       const payout = Dinero({ amount: payoutAmount });
@@ -51,20 +51,20 @@ export class TransactionsService {
       }
 
       await connection.query(
-        `UPDATE users SET balance = ?, transactions_total = ? WHERE id = ?`,
+        `UPDATE users SET balance = ?, transactionsTotal = ? WHERE id = ?`,
         [newBalance.getAmount(), newTransactionsTotal.getAmount(), userId],
       );
 
       const [{ insertId }]: any = await connection.query(
         `
-          INSERT INTO balance_history (user_id, prev_balance, new_balance, operation, extra)
+          INSERT INTO balance_history (userId, prevBalance, newBalance, operation, extra)
           VALUES (?, ?, ?, ?, ?)
         `,
         [userId, balance, newBalance.getAmount(), 'payout', 'some extra info'],
       );
 
       const [entity] = await connection.query(
-        `SELECT prev_balance, new_balance, operation FROM balance_history WHERE id = ?`,
+        `SELECT prevBalance, newBalance, operation FROM balance_history WHERE id = ?`,
         [insertId],
       );
 
