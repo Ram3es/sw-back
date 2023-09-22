@@ -37,7 +37,7 @@ export class CreateBillingAddressDTO {
 
   @IsString()
   @IsNotEmpty()
-  @IsPostalCode()
+  @IsPostalCode('any')
   zip: string;
 
   @IsString()

@@ -91,7 +91,7 @@ export class UserService {
       return null;
     }
 
-    const user: UserWithIяncludes = rows.map((row: any) => {
+    const user: UserWithIncludes = rows.map((row: any) => {
       return {
         id: row.id,
         steamId: row.steamId,
