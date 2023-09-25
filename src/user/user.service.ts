@@ -72,6 +72,7 @@ export class UserService {
       `
       SELECT
         u.*,
+        ba.id AS billingId,
         ba.firstName AS billingFirstName,
         ba.lastName AS billingLastName,
         ba.streetAddress AS billingStreetAddress,
@@ -107,6 +108,7 @@ export class UserService {
         active: row.active,
         email: row.email,
         billingAddress: {
+          id: row.billingId,
           firstName: row.billingFirstName,
           lastName: row.billingLastName,
           streetAddress: row.billingStreetAddress,
@@ -322,6 +324,7 @@ export class UserService {
         `,
         [data[0].insertId],
       );
+      console.log(billingAddressData, ' ===========================>>>>>>>>>')
       return billingAddressData[0];
     } catch (error) {
       throw new HttpException(error, 500);
