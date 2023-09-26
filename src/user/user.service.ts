@@ -170,11 +170,7 @@ export class UserService {
 
       return user[0];
     } catch (error) {
-      console.log(error)
-      throw new HttpException(
-        'wrong something',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new HttpException(error, 500);
     }
   }
 
@@ -324,7 +320,6 @@ export class UserService {
         `,
         [data[0].insertId],
       );
-      console.log(billingAddressData, ' ===========================>>>>>>>>>')
       return billingAddressData[0];
     } catch (error) {
       throw new HttpException(error, 500);
