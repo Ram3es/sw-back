@@ -20,7 +20,7 @@ export class UserController {
   }
 
   @Get('')
-  getUserDataWithIncludes(@Req() req: Request) {
+  async getUserDataWithIncludes(@Req() req: Request) {
     const steamId = String(req?.user?._json?.steamid);
     return this.userService.getUserDataWithIncludes(steamId);
   }

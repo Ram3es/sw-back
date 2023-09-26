@@ -1,4 +1,4 @@
-import { Injectable, Inject, HttpException } from '@nestjs/common';
+import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import {
   CreateUser,
   User,
@@ -72,6 +72,7 @@ export class UserService {
       `
       SELECT
         u.*,
+        ba.id AS billingId,
         ba.firstName AS billingFirstName,
         ba.lastName AS billingLastName,
         ba.streetAddress AS billingStreetAddress,
@@ -87,11 +88,11 @@ export class UserService {
       [steamId],
     );
     const [userRow] = rows;
-    if (!userRow) {
+    if (!rows.length) {
       return null;
     }
 
-    const user: UserWithIncludes = userRow.map((row: any) => {
+    const user: UserWithIncludes = rows.map((row: any) => {
       return {
         id: row.id,
         steamId: row.steamId,
@@ -107,6 +108,7 @@ export class UserService {
         active: row.active,
         email: row.email,
         billingAddress: {
+          id: row.billingId,
           firstName: row.billingFirstName,
           lastName: row.billingLastName,
           streetAddress: row.billingStreetAddress,
@@ -117,7 +119,7 @@ export class UserService {
           country: row.billingCountry,
         },
       };
-    });
+    })[0];
     const [cryptoWallets] = await this.conn.query(
       `
       SELECT * FROM user_crypto_wallets WHERE userId = ?
@@ -165,6 +167,7 @@ export class UserService {
         `,
         [steamId],
       );
+
       return user[0];
     } catch (error) {
       throw new HttpException(error, 500);
