@@ -15,7 +15,6 @@ export class UpdateUserDTO {
 
   @IsNumber()
   @IsNotEmpty()
-  @IsPositive()
   @IsOptional()
   notifications: number;
 

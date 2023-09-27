@@ -1,5 +1,5 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsPositive } from 'class-validator';
 import { CreateBillingAddressDTO } from './create-billing-address.dto';
 
 export class UpdateBillingAddressDTO extends PartialType(
@@ -8,5 +8,6 @@ export class UpdateBillingAddressDTO extends PartialType(
   @IsNumber()
   @IsNotEmpty()
   @IsPositive()
-  id: number;
+  @IsOptional()
+  id?: number;
 }
