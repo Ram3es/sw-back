@@ -18,7 +18,7 @@ export class MarketService {
       const [inventory] = await this.conn.query(
         `
           SELECT assetId, withdrawn, createdAt, updatedAt FROM user_items
-          WHERE steamId = ?
+          WHERE userId = ?
         `,
         [steamId],
       );
@@ -57,7 +57,7 @@ export class MarketService {
     try {
       await this.conn.query(
         `
-        INSERT INTO user_items (steamId, assetId)
+        INSERT INTO user_items (userId, assetId)
         VALUES ${values.join(',')}
       `,
       );
@@ -79,7 +79,7 @@ export class MarketService {
           `
           UPDATE user_items
           SET withdrawn = 1, transactionId = ?
-          WHERE steamId = ? AND assetId = ?
+          WHERE userId = ? AND assetId = ?
         `,
           [transactionId, steamId, item],
         );
@@ -113,7 +113,7 @@ export class MarketService {
   async getTransactions(steamId: string) {
     const [withdraws]: any = await this.conn.query(
       `SELECT assetId, withdrawn, createdAt, updatedAt, transactionId
-       FROM user_items WHERE steamId = ? AND withdrawn = 1`,
+       FROM user_items WHERE userId = ? AND withdrawn = 1`,
       [steamId],
     );
 
