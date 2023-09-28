@@ -1,6 +1,6 @@
 CREATE TABLE `user_items` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `userId` INT NOT NULL,
+  `userId` VARCHAR(255) NOT NULL,
   `assetId` VARCHAR(255) NOT NULL,
   `withdrawn` BOOLEAN NOT NULL DEFAULT 0,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -8,5 +8,5 @@ CREATE TABLE `user_items` (
   `transactionId` VARCHAR(255),
   PRIMARY KEY (`id`),
   UNIQUE (`assetId`),
-  FOREIGN KEY (`userId`) REFERENCES `users`(`id`)
+  FOREIGN KEY (`userId`) REFERENCES `users`(`steamId`)
 );

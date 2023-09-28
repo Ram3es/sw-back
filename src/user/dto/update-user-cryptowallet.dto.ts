@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateUserCryptoWalletDTO } from './create-user-cryptowallet.dto';
-import { IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsPositive } from 'class-validator';
 
 export class UpdateUserCryptWalletDTO extends PartialType(
   CreateUserCryptoWalletDTO,
@@ -8,5 +8,6 @@ export class UpdateUserCryptWalletDTO extends PartialType(
   @IsNumber()
   @IsNotEmpty()
   @IsPositive()
-  id: number;
+  @IsOptional()
+  id?: number;
 }
