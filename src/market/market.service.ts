@@ -2,7 +2,12 @@ import { Injectable, Inject, BadRequestException } from '@nestjs/common';
 import { Pool } from 'mysql2/promise';
 import { PinoLogger } from 'nestjs-pino';
 import { MarketOffer, OfferFilters } from './types';
-import { mockOffers, mockSortBy, mockGetAllOffers } from './mocks/offers.mock';
+import {
+  mockOffers,
+  mockSortBy,
+  mockGetAllOffers,
+  mockOffersHistory,
+} from './mocks/offers.mock';
 import { ESteamAppId, PAGE_LIMIT } from 'src/constants';
 import { randomUUID, generateKeySync } from 'node:crypto';
 
@@ -103,7 +108,7 @@ export class MarketService {
     const TOTAL_PLACEHOLDER = 1248;
     const offers = mockOffers(appid, page, PAGE_LIMIT);
 
-    const filterdOffers = offers.filter((offer) => { 
+    const filterdOffers = offers.filter((offer) => {
       if (filters.pattern) {
         const pattern = new RegExp(filters.pattern, 'i');
         if (!pattern.test(offer.name)) return false;
@@ -186,6 +191,31 @@ export class MarketService {
       });
     }
     return transactions;
+  }
+
+  getOffer(offerId: string) {
+    const offer = mockGetAllOffers(null).find(
+      (item) => item.inventoryItemId === offerId,
+    );
+    if (!offer) {
+      throw new BadRequestException([`there is no offer with id: ${offerId}`]);
+    }
+    return offer;
+  }
+
+  getSimilarOffers(appid, parameters) {
+    const offers = mockGetAllOffers(appid);
+    console.log('parameters', parameters);
+
+    // temporaryry for test slice 10 offers and return in random order
+    const similarOffers = offers.slice(0, 10).sort(() => Math.random() - 0.5);
+    return { similarOffers };
+  }
+
+  getOffersHistory(offerId: string) {
+    // temporaryry for test return mock data
+
+    return { offershHistory: mockOffersHistory() };
   }
 
   private groupBy(arr, key) {

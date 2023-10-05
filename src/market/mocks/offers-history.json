@@ -1,0 +1,182 @@
+[
+  {
+    "soldAt": 1687076186,
+    "soldFor": {
+      "amount": 5283,
+      "currency": "USD"
+    },
+    "wear": 0.42675313353538513,
+    "paintSeed": 885
+  },
+  {
+    "soldAt": 1686434715,
+    "soldFor": {
+      "amount": 5209,
+      "currency": "USD"
+    },
+    "wear": 0.43475431203842163,
+    "paintSeed": 416
+  },
+  {
+    "soldAt": 1678900745,
+    "soldFor": {
+      "amount": 4241,
+      "currency": "USD"
+    },
+    "wear": 0.4413193464279175,
+    "paintSeed": 998
+  },
+  {
+    "soldAt": 1676453512,
+    "soldFor": {
+      "amount": 3902,
+      "currency": "USD"
+    },
+    "wear": 0.4135245382785797,
+    "paintSeed": 844
+  },
+  {
+    "soldAt": 1669734918,
+    "soldFor": {
+      "amount": 3520,
+      "currency": "USD"
+    },
+    "wear": 0.4314001202583313,
+    "paintSeed": 151
+  },
+  {
+    "soldAt": 1665357844,
+    "soldFor": {
+      "amount": 3659,
+      "currency": "USD"
+    },
+    "wear": 0.4076489508152008,
+    "paintSeed": 546
+  },
+  {
+    "soldAt": 1661914050,
+    "soldFor": {
+      "amount": 3532,
+      "currency": "USD"
+    },
+    "wear": 0.44890522956848145,
+    "paintSeed": 398
+  },
+  {
+    "soldAt": 1660649565,
+    "soldFor": {
+      "amount": 3445,
+      "currency": "USD"
+    },
+    "wear": 0.4004131853580475,
+    "paintSeed": 994
+  },
+  {
+    "soldAt": 1659799792,
+    "soldFor": {
+      "amount": 3478,
+      "currency": "USD"
+    },
+    "wear": 0.43299826979637146,
+    "paintSeed": 32
+  },
+  {
+    "soldAt": 1656515124,
+    "soldFor": {
+      "amount": 4550,
+      "currency": "USD"
+    },
+    "wear": 0.4302659332752228,
+    "paintSeed": 301
+  },
+  {
+    "soldAt": 1656191379,
+    "soldFor": {
+      "amount": 3586,
+      "currency": "USD"
+    },
+    "wear": 0.4059160351753235,
+    "paintSeed": 732
+  },
+  {
+    "soldAt": 1655128093,
+    "soldFor": {
+      "amount": 3702,
+      "currency": "USD"
+    },
+    "wear": 0.4391927719116211,
+    "paintSeed": 621
+  },
+  {
+    "soldAt": 1652944768,
+    "soldFor": {
+      "amount": 3686,
+      "currency": "USD"
+    },
+    "wear": 0.44251978397369385,
+    "paintSeed": 912
+  },
+  {
+    "soldAt": 1649166508,
+    "soldFor": {
+      "amount": 3723,
+      "currency": "USD"
+    },
+    "wear": 0.40877479314804077,
+    "paintSeed": 840
+  },
+  {
+    "soldAt": 1645282089,
+    "soldFor": {
+      "amount": 4210,
+      "currency": "USD"
+    },
+    "wear": 0.41713663935661316,
+    "paintSeed": 119
+  },
+  {
+    "soldAt": 1642864371,
+    "soldFor": {
+      "amount": 4176,
+      "currency": "USD"
+    },
+    "wear": 0.40422892570495605,
+    "paintSeed": 345
+  },
+  {
+    "soldAt": 1642684859,
+    "soldFor": {
+      "amount": 4138,
+      "currency": "USD"
+    },
+    "wear": 0.39076438546180725,
+    "paintSeed": 57
+  },
+  {
+    "soldAt": 1639679756,
+    "soldFor": {
+      "amount": 4067,
+      "currency": "USD"
+    },
+    "wear": 0.444500207901001,
+    "paintSeed": 719
+  },
+  {
+    "soldAt": 1639666118,
+    "soldFor": {
+      "amount": 3904,
+      "currency": "USD"
+    },
+    "wear": 0.4273951053619385,
+    "paintSeed": 570
+  },
+  {
+    "soldAt": 1639302934,
+    "soldFor": {
+      "amount": 4031,
+      "currency": "USD"
+    },
+    "wear": 0.4473695755004883,
+    "paintSeed": 768
+  }
+]

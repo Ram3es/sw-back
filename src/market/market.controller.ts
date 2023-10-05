@@ -12,6 +12,7 @@ import { Request } from 'express';
 import { WithdrawDTO } from './dto/withdraw.dto';
 import { ESteamAppId } from 'src/constants';
 import { Public } from 'src/auth/public.decorator';
+import { P } from 'pino';
 
 @Controller('market')
 export class MarketController {
@@ -92,9 +93,34 @@ export class MarketController {
     );
   }
 
+  @Public()
+  @Get('offer')
+  async getOffer(@Query() query) {
+    const { offerId } = query;
+    return await this.marketService.getOffer(offerId);
+  }
+
   @Get('withdraw/transactions')
   async getTransactions(@Req() req: Request) {
     const user = req?.user;
     return await this.marketService.getTransactions(user._json.steamid);
+  }
+
+  @Public()
+  @Get('get-sales-history-of-offer-product')
+  async getSalesHistoryOfOfferProduct(@Query() query) {
+    const { offerId } = query;
+    return await this.marketService.getOffersHistory(offerId);
+  }
+
+  @Public()
+  @Get('similar-offers')
+  async getSimilarOffers(@Query() query) {
+    const { appid, subcategory, category, searchName } = query;
+    return await this.marketService.getSimilarOffers(appid, {
+      subcategory,
+      category,
+      searchName,
+    });
   }
 }
