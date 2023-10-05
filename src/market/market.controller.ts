@@ -60,11 +60,35 @@ export class MarketController {
   @Public()
   @Get('/offers')
   async getOffers(@Query() query) {
-    const { appid, sortBy, page } = query;
+    const {
+      appid,
+      sortBy,
+      page,
+      pattern,
+      priceFrom,
+      priceTo,
+      wearFrom,
+      wearTo,
+      tradableIn,
+      quality,
+      rarity,
+    } = query;
+    const filters = {
+      pattern,
+      priceFrom,
+      priceTo,
+      wearFrom,
+      wearTo,
+      tradableIn,
+      quality,
+      rarity,
+    };
+
     return await this.marketService.getOffers(
       appid || ESteamAppId.CSGO,
       sortBy,
       page || 1,
+      filters,
     );
   }
 

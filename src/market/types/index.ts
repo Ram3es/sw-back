@@ -14,3 +14,14 @@ export interface Price {
   amount: number;
   currency: string;
 }
+
+export interface OfferFilters {
+  pattern: string;
+  priceFrom: number;
+  priceTo: number;
+  wearFrom: number;
+  wearTo: number;
+  tradableIn: number;
+  quality: string;
+  rarity: string;
+}

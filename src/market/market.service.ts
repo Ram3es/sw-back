@@ -1,7 +1,7 @@
 import { Injectable, Inject, BadRequestException } from '@nestjs/common';
 import { Pool } from 'mysql2/promise';
 import { PinoLogger } from 'nestjs-pino';
-import { MarketOffer } from './types';
+import { MarketOffer, OfferFilters } from './types';
 import { mockOffers, mockSortBy, mockGetAllOffers } from './mocks/offers.mock';
 import { ESteamAppId, PAGE_LIMIT } from 'src/constants';
 import { randomUUID, generateKeySync } from 'node:crypto';
@@ -93,6 +93,7 @@ export class MarketService {
     appid: string,
     sortBy: string,
     page: number,
+    filters: OfferFilters,
   ): Promise<{
     total: number;
     offers: MarketOffer[];
@@ -100,13 +101,43 @@ export class MarketService {
     sortByOptions: { name: string; label: string }[];
   }> {
     const TOTAL_PLACEHOLDER = 1248;
-
     const offers = mockOffers(appid, page, PAGE_LIMIT);
+
+    const filterdOffers = offers.filter((offer) => { 
+      if (filters.pattern) {
+        const pattern = new RegExp(filters.pattern, 'i');
+        if (!pattern.test(offer.name)) return false;
+      }
+      if (filters.priceFrom) {
+        if (offer.price.amount < filters.priceFrom) return false;
+      }
+      if (filters.priceTo) {
+        if (offer.price.amount > filters.priceTo) return false;
+      }
+      if (filters.wearFrom) {
+        if (offer.wearFloat < filters.wearFrom) return false;
+      }
+      if (filters.wearTo) {
+        if (offer.wearFloat > filters.wearTo) return false;
+      }
+      if (filters.tradableIn) {
+        if (offer.tradableIn < filters.tradableIn) return false;
+      }
+      if (filters.quality) {
+        const qualityArray = filters.quality.split(',');
+        if (!qualityArray.includes(offer.quality)) return false;
+      }
+      if (filters.rarity) {
+        const rarityArray = filters.rarity.split(',');
+        if (!rarityArray.includes(offer.rarity)) return false;
+      }
+      return true;
+    });
     return {
       total: TOTAL_PLACEHOLDER,
       sortByOptions: mockSortBy(),
       sortBy: sortBy || 'HotDeals',
-      offers: offers,
+      offers: filterdOffers,
     };
   }
 

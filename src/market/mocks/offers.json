@@ -14,7 +14,9 @@
     "wearFloat": 0.021231306716799736,
     "rarity": "Mil-Spec Grade",
     "typeName": "Pistol",
-    "name": "CZ75-Auto | Emerald"
+    "name": "CZ75-Auto | Emerald",
+    "tradableIn": -43222813179,
+    "quality": "StatTrak™"
   },
   {
     "appid": 730,
@@ -31,7 +33,9 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "CS:GO Weapon Case 2"
+    "name": "CS:GO Weapon Case 2",
+    "tradableIn": -43222813179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -48,7 +52,9 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "CS:GO Weapon Case 2"
+    "name": "CS:GO Weapon Case 2",
+    "tradableIn": -43222813179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -65,7 +71,9 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "CS:GO Weapon Case 2"
+    "name": "CS:GO Weapon Case 2",
+    "tradableIn": -43222813179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -82,7 +90,9 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "CS:GO Weapon Case 2"
+    "name": "CS:GO Weapon Case 2",
+    "tradableIn": -43222813179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -99,7 +109,9 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "CS:GO Weapon Case 2"
+    "name": "CS:GO Weapon Case 2",
+    "tradableIn": -43222813179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -116,7 +128,9 @@
     "wearFloat": 0.43031424283981323,
     "rarity": "Classified",
     "typeName": "SMG",
-    "name": "MP9 | Hydra"
+    "name": "MP9 | Hydra",
+    "tradableIn": -43222813179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -133,7 +147,9 @@
     "wearFloat": 0.43825024366378784,
     "rarity": "Classified",
     "typeName": "SMG",
-    "name": "MP9 | Hydra"
+    "name": "MP9 | Hydra",
+    "tradableIn": -232813179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -150,7 +166,9 @@
     "wearFloat": 0.43371400237083435,
     "rarity": "Classified",
     "typeName": "SMG",
-    "name": "MP9 | Hydra"
+    "name": "MP9 | Hydra",
+    "tradableIn": -43343179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -167,7 +185,9 @@
     "wearFloat": 0.4236738979816437,
     "rarity": "Classified",
     "typeName": "SMG",
-    "name": "MP9 | Hydra"
+    "name": "MP9 | Hydra",
+    "tradableIn": -43228133179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -184,7 +204,9 @@
     "wearFloat": 0.03461900353431702,
     "rarity": "Mil-Spec Grade",
     "typeName": "Pistol",
-    "name": "CZ75-Auto | Emerald"
+    "name": "CZ75-Auto | Emerald",
+    "tradableIn": -43222813179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -201,7 +223,9 @@
     "wearFloat": 0.42382973432540894,
     "rarity": "Restricted",
     "typeName": "Pistol",
-    "name": "Five-SeveN | Case Hardened"
+    "name": "Five-SeveN | Case Hardened",
+    "tradableIn": -43222813179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -218,7 +242,9 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "Huntsman Weapon Case"
+    "name": "Huntsman Weapon Case",
+    "tradableIn": -43222813179,
+    "quality": "Normal"
   },
   {
     "appid": 730,
@@ -235,7 +261,9 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "Huntsman Weapon Case"
+    "name": "Huntsman Weapon Case",
+    "tradableIn": -43222813179,
+    "quality": "Some"
   },
   {
     "appid": 730,
@@ -252,7 +280,8 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "Huntsman Weapon Case"
+    "name": "Huntsman Weapon Case",
+    "tradableIn": -43222813179
   },
   {
     "appid": 730,
@@ -269,7 +298,8 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "Huntsman Weapon Case"
+    "name": "Huntsman Weapon Case",
+    "tradableIn": -43222813179
   },
   {
     "appid": 730,
@@ -286,7 +316,8 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "Huntsman Weapon Case"
+    "name": "Huntsman Weapon Case",
+    "tradableIn": -43222813179
   },
   {
     "appid": 730,
@@ -303,7 +334,8 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "Huntsman Weapon Case"
+    "name": "Huntsman Weapon Case",
+    "tradableIn": -43222813179
   },
   {
     "appid": 730,
@@ -320,7 +352,8 @@
     "wearFloat": null,
     "rarity": null,
     "typeName": "Container",
-    "name": "Huntsman Weapon Case"
+    "name": "Huntsman Weapon Case",
+    "tradableIn": -43222813179
   },
   {
     "appid": 730,
