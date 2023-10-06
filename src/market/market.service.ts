@@ -7,6 +7,7 @@ import {
   mockSortBy,
   mockGetAllOffers,
   mockOffersHistory,
+  mockFilters,
 } from './mocks/offers.mock';
 import { ESteamAppId, PAGE_LIMIT } from 'src/constants';
 import { randomUUID, generateKeySync } from 'node:crypto';
@@ -104,6 +105,7 @@ export class MarketService {
     offers: MarketOffer[];
     sortBy: string;
     sortByOptions: { name: string; label: string }[];
+    defaultFilters: any[];
   }> {
     const TOTAL_PLACEHOLDER = 1248;
     const offers = mockOffers(appid, page, PAGE_LIMIT);
@@ -138,11 +140,13 @@ export class MarketService {
       }
       return true;
     });
+    const filtersData = mockFilters();
     return {
       total: TOTAL_PLACEHOLDER,
       sortByOptions: mockSortBy(),
       sortBy: sortBy || 'HotDeals',
       offers: filterdOffers,
+      defaultFilters: filtersData,
     };
   }
 
