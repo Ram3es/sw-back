@@ -1,0 +1,376 @@
+[
+  {
+    "label": "Price",
+    "name": "priceRange",
+    "type": "price-range",
+    "value": {
+      "from": {
+        "amount": 3,
+        "currency": "USD"
+      },
+      "to": {
+        "amount": 397062,
+        "currency": "USD"
+      }
+    },
+    "options": {
+      "from": {
+        "amount": 3,
+        "currency": "USD"
+      },
+      "to": {
+        "amount": 397062,
+        "currency": "USD"
+      }
+    },
+    "diagramData": [
+      {
+        "columnNumber": 0,
+        "count": 200
+      },
+      {
+        "columnNumber": 1,
+        "count": 3
+      },
+      {
+        "columnNumber": 2,
+        "count": 3
+      },
+      {
+        "columnNumber": 3,
+        "count": 0
+      },
+      {
+        "columnNumber": 4,
+        "count": 0
+      },
+      {
+        "columnNumber": 5,
+        "count": 1
+      },
+      {
+        "columnNumber": 6,
+        "count": 0
+      },
+      {
+        "columnNumber": 7,
+        "count": 0
+      },
+      {
+        "columnNumber": 8,
+        "count": 0
+      },
+      {
+        "columnNumber": 9,
+        "count": 0
+      },
+      {
+        "columnNumber": 10,
+        "count": 0
+      },
+      {
+        "columnNumber": 11,
+        "count": 1
+      },
+      {
+        "columnNumber": 12,
+        "count": 0
+      },
+      {
+        "columnNumber": 13,
+        "count": 0
+      },
+      {
+        "columnNumber": 14,
+        "count": 0
+      },
+      {
+        "columnNumber": 15,
+        "count": 0
+      },
+      {
+        "columnNumber": 16,
+        "count": 0
+      },
+      {
+        "columnNumber": 17,
+        "count": 0
+      },
+      {
+        "columnNumber": 18,
+        "count": 0
+      },
+      {
+        "columnNumber": 19,
+        "count": 1
+      }
+    ]
+  },
+  {
+    "label": "Trade lock",
+    "name": "tradableIn",
+    "type": "tradable-in",
+    "value": 8,
+    "options": 8,
+    "diagramData": [
+      {
+        "columnNumber": 0,
+        "count": 55289
+      },
+      {
+        "columnNumber": 1,
+        "count": 0
+      },
+      {
+        "columnNumber": 2,
+        "count": 0
+      },
+      {
+        "columnNumber": 3,
+        "count": 0
+      },
+      {
+        "columnNumber": 4,
+        "count": 0
+      },
+      {
+        "columnNumber": 5,
+        "count": 0
+      },
+      {
+        "columnNumber": 6,
+        "count": 0
+      },
+      {
+        "columnNumber": 7,
+        "count": 0
+      },
+      {
+        "columnNumber": 8,
+        "count": 0
+      }
+    ]
+  },
+  {
+    "label": "Exterior",
+    "type": "multiple-choice-filter",
+    "name": "exterior",
+    "value": [],
+    "options": [
+      {
+        "label": "Factory New",
+        "value": "WearCategory0",
+        "count": 2904,
+        "warning": null
+      },
+      {
+        "label": "Minimal Wear",
+        "value": "WearCategory1",
+        "count": 5058,
+        "warning": null
+      },
+      {
+        "label": "Field-Tested",
+        "value": "WearCategory2",
+        "count": 10971,
+        "warning": null
+      },
+      {
+        "label": "Well-Worn",
+        "value": "WearCategory3",
+        "count": 2002,
+        "warning": null
+      },
+      {
+        "label": "Battle-Scarred",
+        "value": "WearCategory4",
+        "count": 2239,
+        "warning": null
+      }
+    ]
+  },
+  {
+    "label": "Quality",
+    "type": "multiple-choice-filter",
+    "name": "rarity",
+    "value": [],
+    "options": [
+      {
+        "label": "Covert",
+        "value": "Rarity_Ancient_Weapon",
+        "count": 108,
+        "warning": null
+      },
+      {
+        "label": "Extraordinary",
+        "value": "Rarity_Ancient",
+        "count": 6,
+        "warning": null
+      },
+      {
+        "label": "Master",
+        "value": "Rarity_Ancient_Character",
+        "count": 8,
+        "warning": null
+      },
+      {
+        "label": "Classified",
+        "value": "Rarity_Legendary_Weapon",
+        "count": 1244,
+        "warning": null
+      },
+      {
+        "label": "Exotic",
+        "value": "Rarity_Legendary",
+        "count": 34,
+        "warning": null
+      },
+      {
+        "label": "Superior",
+        "value": "Rarity_Legendary_Character",
+        "count": 79,
+        "warning": null
+      },
+      {
+        "label": "Restricted",
+        "value": "Rarity_Mythical_Weapon",
+        "count": 9068,
+        "warning": null
+      },
+      {
+        "label": "Remarkable",
+        "value": "Rarity_Mythical",
+        "count": 182,
+        "warning": null
+      },
+      {
+        "label": "Exceptional",
+        "value": "Rarity_Mythical_Character",
+        "count": 169,
+        "warning": null
+      },
+      {
+        "label": "Mil-Spec Grade",
+        "value": "Rarity_Rare_Weapon",
+        "count": 7146,
+        "warning": null
+      },
+      {
+        "label": "High Grade",
+        "value": "Rarity_Rare",
+        "count": 12095,
+        "warning": null
+      },
+      {
+        "label": "Distinguished",
+        "value": "Rarity_Rare_Character",
+        "count": 134,
+        "warning": null
+      },
+      {
+        "label": "Industrial Grade",
+        "value": "Rarity_Uncommon_Weapon",
+        "count": 1363,
+        "warning": null
+      },
+      {
+        "label": "Consumer Grade",
+        "value": "Rarity_Common_Weapon",
+        "count": 4242,
+        "warning": null
+      },
+      {
+        "label": "Base Grade",
+        "value": "Rarity_Common",
+        "count": 19411,
+        "warning": null
+      }
+    ]
+  },
+  {
+    "label": "Extras",
+    "type": "multiple-choice-filter",
+    "name": "quality",
+    "value": [],
+    "options": [
+      {
+        "label": "StatTrak™",
+        "value": "stattrak",
+        "count": 4095,
+        "warning": null
+      },
+      {
+        "label": "Knives and gloves",
+        "value": "unusual",
+        "count": 17,
+        "warning": null
+      },
+      {
+        "label": "Souvenir",
+        "value": "tournament",
+        "count": 95,
+        "warning": null
+      }
+    ]
+  },
+  {
+    "label": "Collection",
+    "type": "multiple-choice-filter",
+    "name": "collection",
+    "value": [],
+    "options": [
+      {
+        "label": "Operation Broken Fang",
+        "value": "set_community_27",
+        "count": 96,
+        "warning": null
+      },
+      {
+        "label": "Control",
+        "value": "set_op10_ct",
+        "count": 55,
+        "warning": null
+      },
+      {
+        "label": "Broken Fang Agents",
+        "value": "set_op10_characters",
+        "count": 30,
+        "warning": null
+      },
+      {
+        "label": "Havoc",
+        "value": "set_op10_t",
+        "count": 26,
+        "warning": null
+      },
+      {
+        "label": "Ancient",
+        "value": "set_op10_ancient",
+        "count": 5,
+        "warning": null
+      }
+    ]
+  },
+  {
+    "label": "Phase",
+    "type": "multiple-choice-filter",
+    "name": "phase",
+    "value": [],
+    "options": [
+      {
+        "label": "Phase 1",
+        "value": "Phase 1",
+        "count": 1,
+        "warning": null
+      }
+    ]
+  },
+  {
+    "label": "Pattern",
+    "name": "pattern",
+    "type": "pattern",
+    "value": null,
+    "min": 0,
+    "max": 1000
+  }
+]

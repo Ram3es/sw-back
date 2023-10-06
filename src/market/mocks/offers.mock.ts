@@ -1,6 +1,7 @@
 import offers from './offers.json';
 import sortByOptions from './sortBy.json';
 import offersHistory from './offers-history.json';
+import filters from './filters.json';
 
 export const mockOffers = (appid: string, page: number, limit: number) => {
   return offers
@@ -16,3 +17,5 @@ export const mockGetAllOffers = (appid: string) => {
 export const mockSortBy = () => sortByOptions;
 
 export const mockOffersHistory = () => offersHistory;
+
+export const mockFilters = () => filters;
