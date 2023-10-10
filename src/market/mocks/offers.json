@@ -31,7 +31,7 @@
       "currency": "USD"
     },
     "wearFloat": null,
-    "rarity": null,
+    "rarity": "Rarity_Ancient_Weapon",
     "typeName": "Container",
     "name": "CS:GO Weapon Case 2",
     "tradableIn": -43222813179,
