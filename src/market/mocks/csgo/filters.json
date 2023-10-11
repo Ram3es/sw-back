@@ -2,27 +2,8 @@
   {
     "label": "Price",
     "name": "priceRange",
-    "type": "price-range",
-    "value": {
-      "from": {
-        "amount": 3,
-        "currency": "USD"
-      },
-      "to": {
-        "amount": 397062,
-        "currency": "USD"
-      }
-    },
-    "options": {
-      "from": {
-        "amount": 3,
-        "currency": "USD"
-      },
-      "to": {
-        "amount": 397062,
-        "currency": "USD"
-      }
-    },
+    "type": "range",
+    "value":  [3 , 200],
     "diagramData": [
       {
         "columnNumber": 0,
@@ -30,39 +11,39 @@
       },
       {
         "columnNumber": 1,
-        "count": 3
+        "count": 30
       },
       {
         "columnNumber": 2,
-        "count": 3
+        "count": 30
       },
       {
         "columnNumber": 3,
-        "count": 0
+        "count": 70
       },
       {
         "columnNumber": 4,
-        "count": 0
+        "count": 60
       },
       {
         "columnNumber": 5,
-        "count": 1
+        "count": 10
       },
       {
         "columnNumber": 6,
-        "count": 0
+        "count": 2
       },
       {
         "columnNumber": 7,
-        "count": 0
+        "count": 40
       },
       {
         "columnNumber": 8,
-        "count": 0
+        "count": 110
       },
       {
         "columnNumber": 9,
-        "count": 0
+        "count": 90
       },
       {
         "columnNumber": 10,
@@ -70,7 +51,7 @@
       },
       {
         "columnNumber": 11,
-        "count": 1
+        "count": 10
       },
       {
         "columnNumber": 12,
@@ -78,7 +59,7 @@
       },
       {
         "columnNumber": 13,
-        "count": 0
+        "count": 190
       },
       {
         "columnNumber": 14,
@@ -94,7 +75,7 @@
       },
       {
         "columnNumber": 17,
-        "count": 0
+        "count": 130
       },
       {
         "columnNumber": 18,
@@ -102,52 +83,100 @@
       },
       {
         "columnNumber": 19,
-        "count": 1
+        "count": 2
       }
-    ]
+    ],
+    "options": {
+      "from": {
+        "amount": 3,
+        "currency": "USD"
+      },
+      "to": {
+        "amount": 397062,
+        "currency": "USD"
+      }
+    }
+  },
+  {
+    "label": "Wear",
+    "name": "wear",
+    "type": "range",
+    "value": [0 , 1000],
+    "diagramData": [
+      {
+        "columnNumber": 0,
+        "count": 100
+      },
+      {
+        "columnNumber": 1,
+        "count": 70
+      },
+      {
+        "columnNumber": 2,
+        "count": 30
+      },
+      {
+        "columnNumber": 3,
+        "count": 40
+      },
+      {
+        "columnNumber": 4,
+        "count": 60
+      }
+    ],
+    "options": {
+      "from": {
+        "amount": 3,
+        "currency": "USD"
+      },
+      "to": {
+        "amount": 397062,
+        "currency": "USD"
+      }
+    }
   },
   {
     "label": "Trade lock",
     "name": "tradableIn",
-    "type": "tradable-in",
+    "type": "range",
     "value": 8,
     "options": 8,
     "diagramData": [
       {
         "columnNumber": 0,
-        "count": 55289
+        "count": 200
       },
       {
         "columnNumber": 1,
-        "count": 0
+        "count": 120
       },
       {
         "columnNumber": 2,
-        "count": 0
+        "count": 40
       },
       {
         "columnNumber": 3,
-        "count": 0
+        "count": 160
       },
       {
         "columnNumber": 4,
-        "count": 0
+        "count":80
       },
       {
         "columnNumber": 5,
-        "count": 0
+        "count": 20
       },
       {
         "columnNumber": 6,
-        "count": 0
+        "count": 90
       },
       {
         "columnNumber": 7,
-        "count": 0
+        "count": 50
       },
       {
         "columnNumber": 8,
-        "count": 0
+        "count": 140
       }
     ]
   },
@@ -186,6 +215,24 @@
         "value": "WearCategory4",
         "count": 2239,
         "warning": null
+      }
+    ]
+  },
+  {
+    "label": "Offers",
+    "type" : "radio",
+    "name" : "variant",
+    "value": "all",
+    "options" : [
+      {
+        "id": "all",
+        "name": "All",
+        "count": 174
+      },
+      {
+        "id": "hotdeals",
+        "name": "Hot deals",
+        "count": 42
       }
     ]
   },
@@ -288,7 +335,7 @@
     ]
   },
   {
-    "label": "Extras",
+    "label": "Other",
     "type": "multiple-choice-filter",
     "name": "quality",
     "value": [],
@@ -373,4 +420,5 @@
     "min": 0,
     "max": 1000
   }
+ 
 ]
