@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Cheapest",
+    "label": "Price: Low to High"
+  },
+  {
+    "name": "Expensive",
+    "label": "Price: High to Low"
+  },
+  {
+    "name": "Newest",
+    "label": "Newly Listed"
+  },
+  {
+    "name": "HotDeals",
+    "label": "Hot Offers"
+  }
+]

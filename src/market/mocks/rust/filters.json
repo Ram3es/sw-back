@@ -1,0 +1,223 @@
+[
+  {
+    "label": "Price",
+    "name": "priceRange",
+    "type": "price-range",
+    "value": {
+      "from": {
+        "amount": 11,
+        "currency": "USD"
+      },
+      "to": {
+        "amount": 12500,
+        "currency": "USD"
+      }
+    },
+    "options": {
+      "from": {
+        "amount": 11,
+        "currency": "USD"
+      },
+      "to": {
+        "amount": 12500,
+        "currency": "USD"
+      }
+    },
+    "diagramData": [
+      {
+        "columnNumber": 0,
+        "count": 195
+      },
+      {
+        "columnNumber": 1,
+        "count": 0
+      },
+      {
+        "columnNumber": 2,
+        "count": 1
+      },
+      {
+        "columnNumber": 3,
+        "count": 0
+      },
+      {
+        "columnNumber": 4,
+        "count": 0
+      },
+      {
+        "columnNumber": 5,
+        "count": 0
+      },
+      {
+        "columnNumber": 6,
+        "count": 0
+      },
+      {
+        "columnNumber": 7,
+        "count": 0
+      },
+      {
+        "columnNumber": 8,
+        "count": 0
+      },
+      {
+        "columnNumber": 9,
+        "count": 1
+      },
+      {
+        "columnNumber": 10,
+        "count": 2
+      },
+      {
+        "columnNumber": 11,
+        "count": 0
+      },
+      {
+        "columnNumber": 12,
+        "count": 0
+      },
+      {
+        "columnNumber": 13,
+        "count": 0
+      },
+      {
+        "columnNumber": 14,
+        "count": 0
+      },
+      {
+        "columnNumber": 15,
+        "count": 1
+      },
+      {
+        "columnNumber": 16,
+        "count": 0
+      },
+      {
+        "columnNumber": 17,
+        "count": 0
+      },
+      {
+        "columnNumber": 18,
+        "count": 0
+      },
+      {
+        "columnNumber": 19,
+        "count": 1
+      }
+    ]
+  },
+  {
+    "label": "Exterior",
+    "type": "multiple-choice-filter",
+    "name": "exterior",
+    "value": [],
+    "options": [
+      {
+        "label": "Factory New",
+        "value": "TFUI_InvTooltip_FactoryNew",
+        "count": 4,
+        "warning": null
+      },
+      {
+        "label": "Field-Tested",
+        "value": "TFUI_InvTooltip_FieldTested",
+        "count": 27,
+        "warning": null
+      },
+      {
+        "label": "Minimal Wear",
+        "value": "TFUI_InvTooltip_MinimalWear",
+        "count": 4,
+        "warning": null
+      },
+      {
+        "label": "Battle Scarred",
+        "value": "TFUI_InvTooltip_BattleScared",
+        "count": 1,
+        "warning": null
+      },
+      {
+        "label": "Well-Worn",
+        "value": "TFUI_InvTooltip_WellWorn",
+        "count": 3,
+        "warning": null
+      }
+    ]
+  },
+  {
+    "label": "Grade",
+    "type": "multiple-choice-filter",
+    "name": "rarity",
+    "value": [],
+    "options": [
+      {
+        "label": "Assassin",
+        "value": "Rarity_Legendary",
+        "count": 2,
+        "warning": null
+      },
+      {
+        "label": "Commando",
+        "value": "Rarity_Mythical",
+        "count": 8,
+        "warning": null
+      },
+      {
+        "label": "Mercenary",
+        "value": "Rarity_Rare",
+        "count": 21,
+        "warning": null
+      },
+      {
+        "label": "Freelance",
+        "value": "Rarity_Uncommon",
+        "count": 1,
+        "warning": null
+      },
+      {
+        "label": "Civilian",
+        "value": "Rarity_Common",
+        "count": 29,
+        "warning": null
+      }
+    ]
+  },
+  {
+    "label": "Quality",
+    "type": "multiple-choice-filter",
+    "name": "quality",
+    "value": [],
+    "options": [
+      {
+        "label": "Genuine",
+        "value": "rarity1",
+        "count": 2,
+        "warning": null
+      },
+      {
+        "label": "Decorated Weapon",
+        "value": "paintkitweapon",
+        "count": 37,
+        "warning": null
+      },
+      {
+        "label": "Unique",
+        "value": "Unique",
+        "count": 139,
+        "warning": null
+      },
+      {
+        "label": "Strange",
+        "value": "strange",
+        "count": 21,
+        "warning": null
+      },
+      {
+        "label": "Unusual",
+        "value": "rarity4",
+        "count": 2,
+        "warning": null
+      }
+    ]
+  }
+]

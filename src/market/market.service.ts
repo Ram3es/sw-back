@@ -140,10 +140,10 @@ export class MarketService {
       }
       return true;
     });
-    const filtersData = mockFilters();
+    const filtersData = mockFilters(appid);
     return {
       total: TOTAL_PLACEHOLDER,
-      sortByOptions: mockSortBy(),
+      sortByOptions: mockSortBy(appid),
       sortBy: sortBy || 'HotDeals',
       offers: filterdOffers,
       defaultFilters: filtersData,
