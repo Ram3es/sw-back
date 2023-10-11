@@ -3,7 +3,7 @@
     "label": "Price",
     "name": "priceRange",
     "type": "range",
-    "value":  [3 , 200],
+    "value":  [311 , 10071],
     "diagramData": [
       {
         "columnNumber": 0,
@@ -89,7 +89,7 @@
     "options": {
       "from": {
         "amount": 3,
-        "currency": "USD"
+        "currency": "USD" 
       },
       "to": {
         "amount": 397062,

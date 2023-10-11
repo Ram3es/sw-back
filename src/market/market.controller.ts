@@ -73,6 +73,7 @@ export class MarketController {
       tradableIn,
       quality,
       rarity,
+      variant
     } = query;
     const filters = {
       pattern,
@@ -83,6 +84,7 @@ export class MarketController {
       tradableIn,
       quality,
       rarity,
+      variant
     };
 
     return await this.marketService.getOffers(
