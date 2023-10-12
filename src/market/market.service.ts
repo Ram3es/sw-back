@@ -8,6 +8,7 @@ import {
   mockGetAllOffers,
   mockOffersHistory,
   mockFilters,
+  findOfferById,
 } from './mocks/offers.mock';
 import { ESteamAppId, PAGE_LIMIT } from 'src/constants';
 import { randomUUID, generateKeySync } from 'node:crypto';
@@ -198,9 +199,7 @@ export class MarketService {
   }
 
   getOffer(offerId: string) {
-    const offer = mockGetAllOffers(null).find(
-      (item) => item.inventoryItemId === offerId,
-    );
+    const offer = findOfferById(offerId);
     if (!offer) {
       throw new BadRequestException([`there is no offer with id: ${offerId}`]);
     }
