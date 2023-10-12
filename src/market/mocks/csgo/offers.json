@@ -1,6 +1,6 @@
 [
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpotaDyfgZf0v33dDBH_t26kL-HnvD8J_WElT8Gu5Eg27iVotv00Azg80ZtMDimIo-ceg45YAuCrFbtyenv1sW6ot2Xntd6B4y4",
     "inventoryItemId": "8c4bc95a-65a9-4062-a4ef-5e1ac591f9a2",
     "price": {
@@ -19,7 +19,7 @@
     "quality": "StatTrak™"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsRVx4MwFo5PT8elUwgKKZJmtEvo_kxITZk6StNe-Fz2pTu8Aj3eqVpIqgjVfjrRI9fSmtc1Nw-Kh3",
     "inventoryItemId": "09c7f519-fdf3-4096-8e17-964592616414",
     "price": {
@@ -38,7 +38,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsRVx4MwFo5PT8elUwgKKZJmtEvo_kxITZk6StNe-Fz2pTu8Aj3eqVpIqgjVfjrRI9fSmtc1Nw-Kh3",
     "inventoryItemId": "adbcb5cd-9e56-4e63-985f-6adf1b989eda",
     "price": {
@@ -57,7 +57,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsRVx4MwFo5PT8elUwgKKZJmtEvo_kxITZk6StNe-Fz2pTu8Aj3eqVpIqgjVfjrRI9fSmtc1Nw-Kh3",
     "inventoryItemId": "c2a5a75b-8d58-4693-b2a1-fe195a02c54e",
     "price": {
@@ -76,7 +76,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsRVx4MwFo5PT8elUwgKKZJmtEvo_kxITZk6StNe-Fz2pTu8Aj3eqVpIqgjVfjrRI9fSmtc1Nw-Kh3",
     "inventoryItemId": "6f40113f-bbb7-4abe-bd4d-1dd5dd7b957d",
     "price": {
@@ -95,7 +95,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsRVx4MwFo5PT8elUwgKKZJmtEvo_kxITZk6StNe-Fz2pTu8Aj3eqVpIqgjVfjrRI9fSmtc1Nw-Kh3",
     "inventoryItemId": "0e2fb016-c992-446a-9f11-2240d86bc557",
     "price": {
@@ -114,7 +114,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou6r8FAR17P7YKAJK9diklb-GkvP9JraflTlQvJNyjOjCoN2h2VXjqhJuajvwIYeQdgBsYwrQ-Fm3yOfmhJLquYOJlyVthImqOg",
     "inventoryItemId": "7938d273-01e0-471c-abf8-72497e6b57cc",
     "price": {
@@ -133,7 +133,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou6r8FAR17P7YKAJK9diklb-GkvP9JraflTlQvJNyjOjCoN2h2VXjqhJuajvwIYeQdgBsYwrQ-Fm3yOfmhJLquYOJlyVthImqOg",
     "inventoryItemId": "5837cf49-339b-4345-bbf6-892fb19c5d7d",
     "price": {
@@ -152,7 +152,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou6r8FAR17P7YKAJK9diklb-GkvP9JraflTlQvJNyjOjCoN2h2VXjqhJuajvwIYeQdgBsYwrQ-Fm3yOfmhJLquYOJlyVthImqOg",
     "inventoryItemId": "1287de43-ae28-415a-a8ed-71fb15d099be",
     "price": {
@@ -171,7 +171,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou6r8FAR17P7YKAJK9diklb-GkvP9JraflTlQvJNyjOjCoN2h2VXjqhJuajvwIYeQdgBsYwrQ-Fm3yOfmhJLquYOJlyVthImqOg",
     "inventoryItemId": "a89c3d5d-9d88-45af-857e-4e42d3d3afa3",
     "price": {
@@ -190,7 +190,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpotaDyfgZf0v33dDBH_t26kL-HnvD8J_WElT8Gu5Eg27iVotv00Azg80ZtMDimIo-ceg45YAuCrFbtyenv1sW6ot2Xntd6B4y4",
     "inventoryItemId": "59e2e6ab-b60a-4dfe-95eb-043840806da6",
     "price": {
@@ -209,7 +209,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposLOzLhRlxfbGTjxT09O_mIWPqPrxN7LEmyUDv5dy3LvFrNTxjFDk8ks6ZW-nLYHAdQQ3NVHWqALtle3rgZe5tZuY1zI97SvsKUSF",
     "inventoryItemId": "6154b1bb-e393-4c0f-915a-1b80e647e9b0",
     "price": {
@@ -228,7 +228,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
     "inventoryItemId": "09d29760-4aad-4fb8-8238-b5fde4d6bff5",
     "price": {
@@ -247,7 +247,7 @@
     "quality": "Normal"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
     "inventoryItemId": "5cc1d21c-a07b-4ba9-911f-6743a38459e3",
     "price": {
@@ -266,7 +266,7 @@
     "quality": "Some"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
     "inventoryItemId": "792f2850-01fd-48cb-bc1a-426fe93a6890",
     "price": {
@@ -284,7 +284,7 @@
     "tradableIn": -43222813179
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
     "inventoryItemId": "f3ed05b4-fe89-489e-be34-da77acfcee37",
     "price": {
@@ -302,7 +302,7 @@
     "tradableIn": -43222813179
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
     "inventoryItemId": "9004a8ba-d73c-40ce-b6d9-7677fabcac5e",
     "price": {
@@ -320,7 +320,7 @@
     "tradableIn": -43222813179
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
     "inventoryItemId": "788da726-efe2-415f-9f91-b2ed4c8c7de6",
     "price": {
@@ -338,7 +338,7 @@
     "tradableIn": -43222813179
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
     "inventoryItemId": "c5fa3d62-3d04-474d-a74c-1c2af4574a8f",
     "price": {
@@ -356,7 +356,7 @@
     "tradableIn": -43222813179
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
     "inventoryItemId": "fd8aebcb-26c3-4400-aa0d-950b25740751",
     "price": {
@@ -373,7 +373,7 @@
     "name": "Huntsman Weapon Case"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
     "inventoryItemId": "8ca6a5f7-260f-49fa-a1a6-161c965153d7",
     "price": {
@@ -390,7 +390,7 @@
     "name": "Huntsman Weapon Case"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
     "inventoryItemId": "b9ccee98-2e0b-4a35-825a-54580d5996e7",
     "price": {
@@ -407,7 +407,7 @@
     "name": "Huntsman Weapon Case"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf1fLEcjVL49KJh4-0mf7zO6_um25V4dB8xLCY8dqs2VWw-Utoaj3yctLHJwQ2Y1mD_Fntw-i5h5O8tJWanyZi7iA8pSGKzpFJ2V4",
     "inventoryItemId": "e04b1a0d-0f89-4fa1-ae31-511969edf522",
     "price": {
@@ -424,7 +424,7 @@
     "name": "★ Falchion Knife | Night"
   },
   {
-    "appid": 730,
+    "appId": 730,
     "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXQ9QVcJY8gulReQ0DfQOqohZ-CBhJnLANopbm3LgZtnfafd21Hu4jhwdTSla_yNumDlWoAu8Yi2b-U9I302lew_UVtZGmlLYCLMlhpkEGwms8",
     "inventoryItemId": "be5cc4cf-85c2-4e93-b8c3-8b9622cd9c0e",
     "price": {
@@ -441,7 +441,7 @@
     "name": "Sticker | ScreaM | Cologne 2015"
   },
   {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsRVx4MwFo5PT8elUwgKKZJmtEvo_kxITZk6StNe-Fz2pTu8Aj3eqVpIqgjVfjrRI9fSmtc1Nw-Kh3",
       "inventoryItemId": "09c7f519-fdf3-4096-8e17-964592616414",
       "price": {
@@ -458,7 +458,7 @@
       "name": "CS:GO Weapon Case 2"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsRVx4MwFo5PT8elUwgKKZJmtEvo_kxITZk6StNe-Fz2pTu8Aj3eqVpIqgjVfjrRI9fSmtc1Nw-Kh3",
       "inventoryItemId": "adbcb5cd-9e56-4e63-985f-6adf1b989eda",
       "price": {
@@ -475,7 +475,7 @@
       "name": "CS:GO Weapon Case 2"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsRVx4MwFo5PT8elUwgKKZJmtEvo_kxITZk6StNe-Fz2pTu8Aj3eqVpIqgjVfjrRI9fSmtc1Nw-Kh3",
       "inventoryItemId": "c2a5a75b-8d58-4693-b2a1-fe195a02c54e",
       "price": {
@@ -492,7 +492,7 @@
       "name": "CS:GO Weapon Case 2"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsRVx4MwFo5PT8elUwgKKZJmtEvo_kxITZk6StNe-Fz2pTu8Aj3eqVpIqgjVfjrRI9fSmtc1Nw-Kh3",
       "inventoryItemId": "6f40113f-bbb7-4abe-bd4d-1dd5dd7b957d",
       "price": {
@@ -509,7 +509,7 @@
       "name": "CS:GO Weapon Case 2"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsRVx4MwFo5PT8elUwgKKZJmtEvo_kxITZk6StNe-Fz2pTu8Aj3eqVpIqgjVfjrRI9fSmtc1Nw-Kh3",
       "inventoryItemId": "0e2fb016-c992-446a-9f11-2240d86bc557",
       "price": {
@@ -526,7 +526,7 @@
       "name": "CS:GO Weapon Case 2"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou6r8FAR17P7YKAJK9diklb-GkvP9JraflTlQvJNyjOjCoN2h2VXjqhJuajvwIYeQdgBsYwrQ-Fm3yOfmhJLquYOJlyVthImqOg",
       "inventoryItemId": "7938d273-01e0-471c-abf8-72497e6b57cc",
       "price": {
@@ -543,7 +543,7 @@
       "name": "MP9 | Hydra"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou6r8FAR17P7YKAJK9diklb-GkvP9JraflTlQvJNyjOjCoN2h2VXjqhJuajvwIYeQdgBsYwrQ-Fm3yOfmhJLquYOJlyVthImqOg",
       "inventoryItemId": "5837cf49-339b-4345-bbf6-892fb19c5d7d",
       "price": {
@@ -560,7 +560,7 @@
       "name": "MP9 | Hydra"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou6r8FAR17P7YKAJK9diklb-GkvP9JraflTlQvJNyjOjCoN2h2VXjqhJuajvwIYeQdgBsYwrQ-Fm3yOfmhJLquYOJlyVthImqOg",
       "inventoryItemId": "1287de43-ae28-415a-a8ed-71fb15d099be",
       "price": {
@@ -577,7 +577,7 @@
       "name": "MP9 | Hydra"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou6r8FAR17P7YKAJK9diklb-GkvP9JraflTlQvJNyjOjCoN2h2VXjqhJuajvwIYeQdgBsYwrQ-Fm3yOfmhJLquYOJlyVthImqOg",
       "inventoryItemId": "a89c3d5d-9d88-45af-857e-4e42d3d3afa3",
       "price": {
@@ -594,7 +594,7 @@
       "name": "MP9 | Hydra"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpotaDyfgZf0v33dDBH_t26kL-HnvD8J_WElT8Gu5Eg27iVotv00Azg80ZtMDimIo-ceg45YAuCrFbtyenv1sW6ot2Xntd6B4y4",
       "inventoryItemId": "59e2e6ab-b60a-4dfe-95eb-043840806da6",
       "price": {
@@ -611,7 +611,7 @@
       "name": "CZ75-Auto | Emerald"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposLOzLhRlxfbGTjxT09O_mIWPqPrxN7LEmyUDv5dy3LvFrNTxjFDk8ks6ZW-nLYHAdQQ3NVHWqALtle3rgZe5tZuY1zI97SvsKUSF",
       "inventoryItemId": "6154b1bb-e393-4c0f-915a-1b80e647e9b0",
       "price": {
@@ -628,7 +628,7 @@
       "name": "Five-SeveN | Case Hardened"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
       "inventoryItemId": "09d29760-4aad-4fb8-8238-b5fde4d6bff5",
       "price": {
@@ -645,7 +645,7 @@
       "name": "Huntsman Weapon Case"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
       "inventoryItemId": "5cc1d21c-a07b-4ba9-911f-6743a38459e3",
       "price": {
@@ -662,7 +662,7 @@
       "name": "Huntsman Weapon Case"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
       "inventoryItemId": "792f2850-01fd-48cb-bc1a-426fe93a6890",
       "price": {
@@ -679,7 +679,7 @@
       "name": "Huntsman Weapon Case"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
       "inventoryItemId": "f3ed05b4-fe89-489e-be34-da77acfcee37",
       "price": {
@@ -696,7 +696,7 @@
       "name": "Huntsman Weapon Case"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
       "inventoryItemId": "9004a8ba-d73c-40ce-b6d9-7677fabcac5e",
       "price": {
@@ -713,7 +713,7 @@
       "name": "Huntsman Weapon Case"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
       "inventoryItemId": "788da726-efe2-415f-9f91-b2ed4c8c7de6",
       "price": {
@@ -730,7 +730,7 @@
       "name": "Huntsman Weapon Case"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
       "inventoryItemId": "c5fa3d62-3d04-474d-a74c-1c2af4574a8f",
       "price": {
@@ -747,7 +747,7 @@
       "name": "Huntsman Weapon Case"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
       "inventoryItemId": "fd8aebcb-26c3-4400-aa0d-950b25740751",
       "price": {
@@ -764,7 +764,7 @@
       "name": "Huntsman Weapon Case"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
       "inventoryItemId": "8ca6a5f7-260f-49fa-a1a6-161c965153d7",
       "price": {
@@ -781,7 +781,7 @@
       "name": "Huntsman Weapon Case"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQu0PaQIm9DtY6wzYaIxKWtN7iJwW8G6Z0h2LqWoY6s2Qy2-0Q_Nzv7IJjVLFGZqUbjlQ",
       "inventoryItemId": "b9ccee98-2e0b-4a35-825a-54580d5996e7",
       "price": {
@@ -798,7 +798,7 @@
       "name": "Huntsman Weapon Case"
     },
     {
-      "appid": 730,
+      "appId": 730,
       "imageUrl": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf1fLEcjVL49KJh4-0mf7zO6_um25V4dB8xLCY8dqs2VWw-Utoaj3yctLHJwQ2Y1mD_Fntw-i5h5O8tJWanyZi7iA8pSGKzpFJ2V4",
       "inventoryItemId": "e04b1a0d-0f89-4fa1-ae31-511969edf522",
       "price": {
