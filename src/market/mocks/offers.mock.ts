@@ -18,6 +18,11 @@ export const mockGetAllOffers = (appid: string) => {
   return mock as any[];
 };
 
+export const findOfferById = (id: string) => {
+  const mock = [...offers, ...rustOffers];
+  return mock.find((offer) => offer.inventoryItemId === id);
+};
+
 export const mockSortBy = (appid: string) => {
   return appid === ESteamAppId.RUST
     ? [...rustSortByOptions]
