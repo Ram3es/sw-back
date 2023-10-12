@@ -8,21 +8,24 @@ import offersHistory from './csgo/offers-history.json';
 import { ESteamAppId } from 'src/constants';
 
 export const mockOffers = (appid: string, page: number, limit: number) => {
-  const mock = appid === ESteamAppId.RUST ? rustOffers : offers;
+  const mock = appid === ESteamAppId.RUST ? [...rustOffers] : [...offers];
+  console.log('mock', mock);
   return mock.splice((page - 1) * limit, limit) as any[]; // temporary fix for mocks
 };
 
 export const mockGetAllOffers = (appid: string) => {
-  if (!appid) return offers;
-  return offers.filter((item) => item.appid === Number(appid));
+  const mock = appid === ESteamAppId.RUST ? [...rustOffers] : [...offers];
+  return mock as any[];
 };
 
 export const mockSortBy = (appid: string) => {
-  return appid === ESteamAppId.RUST ? rustSortByOptions : sortByOptions;
+  return appid === ESteamAppId.RUST
+    ? [...rustSortByOptions]
+    : [...sortByOptions];
 };
 
-export const mockOffersHistory = () => offersHistory;
+export const mockOffersHistory = () => [...offersHistory];
 
 export const mockFilters = (appid: string) => {
-  return appid === ESteamAppId.RUST ? rustFilters : filters;
+  return appid === ESteamAppId.RUST ? [...rustFilters] : [...filters];
 };
