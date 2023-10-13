@@ -2,17 +2,8 @@
   {
     "label": "Price",
     "name": "priceRange",
-    "type": "price-range",
-    "value": {
-      "from": {
-        "amount": 11,
-        "currency": "USD"
-      },
-      "to": {
-        "amount": 12500,
-        "currency": "USD"
-      }
-    },
+    "type": "range",
+    "value": [56,427],
     "options": {
       "from": {
         "amount": 11,

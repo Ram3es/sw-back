@@ -62,7 +62,7 @@ export class MarketController {
   @Get('/offers')
   async getOffers(@Query() query) {
     const {
-      appid,
+      appId,
       sortBy,
       page,
       pattern,
@@ -73,6 +73,7 @@ export class MarketController {
       tradableIn,
       quality,
       rarity,
+      variant,
     } = query;
     const filters = {
       pattern,
@@ -83,10 +84,11 @@ export class MarketController {
       tradableIn,
       quality,
       rarity,
+      variant,
     };
 
     return await this.marketService.getOffers(
-      appid || ESteamAppId.CSGO,
+      appId || ESteamAppId.CSGO,
       sortBy,
       page || 1,
       filters,
