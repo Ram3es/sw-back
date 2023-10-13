@@ -163,7 +163,7 @@
       "amount": 546,
       "currency": "USD"
     },
-    "wearFloat": 0.43371400237083435,
+    "wearFloat": 0.121231306716799736,
     "rarity": "Classified",
     "typeName": "SMG",
     "name": "MP9 | Hydra",
@@ -187,7 +187,7 @@
     "typeName": "SMG",
     "name": "MP9 | Hydra",
     "tradableIn": -43228133179,
-    "quality": "Normal"
+    "quality": "tournament"
   },
   {
     "appId": 730,
@@ -201,12 +201,12 @@
       "amount": 2480,
       "currency": "USD"
     },
-    "wearFloat": 0.03461900353431702,
+    "wearFloat": 0.471231716799736,
     "rarity": "Mil-Spec Grade",
     "typeName": "Pistol",
     "name": "CZ75-Auto | Emerald",
     "tradableIn": -43222813179,
-    "quality": "Normal"
+    "quality": "stattrak"
   },
   {
     "appId": 730,
@@ -225,7 +225,7 @@
     "typeName": "Pistol",
     "name": "Five-SeveN | Case Hardened",
     "tradableIn": -43222813179,
-    "quality": "Normal"
+    "quality": "stattrak"
   },
   {
     "appId": 730,
@@ -240,11 +240,11 @@
       "currency": "USD"
     },
     "wearFloat": null,
-    "rarity": null,
+    "rarity": "Rarity_Ancient",
     "typeName": "Container",
     "name": "Huntsman Weapon Case",
     "tradableIn": -43222813179,
-    "quality": "Normal"
+    "quality": "stattrak"
   },
   {
     "appId": 730,
@@ -259,11 +259,11 @@
       "currency": "USD"
     },
     "wearFloat": null,
-    "rarity": null,
+    "rarity": "Rarity_Ancient",
     "typeName": "Container",
     "name": "Huntsman Weapon Case",
     "tradableIn": -43222813179,
-    "quality": "Some"
+    "quality": "stattrak"
   },
   {
     "appId": 730,
@@ -278,7 +278,7 @@
       "currency": "USD"
     },
     "wearFloat": null,
-    "rarity": null,
+    "rarity": "Rarity_Ancient_Character",
     "typeName": "Container",
     "name": "Huntsman Weapon Case",
     "tradableIn": -43222813179
@@ -296,7 +296,7 @@
       "currency": "USD"
     },
     "wearFloat": null,
-    "rarity": null,
+    "rarity": "Rarity_Ancient_Character",
     "typeName": "Container",
     "name": "Huntsman Weapon Case",
     "tradableIn": -43222813179
@@ -368,7 +368,7 @@
       "currency": "USD"
     },
     "wearFloat": null,
-    "rarity": null,
+    "rarity": "Rarity_Legendary_Weapon",
     "typeName": "Container",
     "name": "Huntsman Weapon Case"
   },
@@ -385,7 +385,7 @@
       "currency": "USD"
     },
     "wearFloat": null,
-    "rarity": null,
+    "rarity": "Rarity_Legendary_Weapon",
     "typeName": "Container",
     "name": "Huntsman Weapon Case"
   },
