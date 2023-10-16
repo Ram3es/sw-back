@@ -110,7 +110,6 @@ export class MarketService {
   }> {
     const TOTAL_PLACEHOLDER = 1248;
     const offers = mockOffers(appid, page, PAGE_LIMIT, sortBy);
-    console.log('offers', offers);
     const filterdOffers = offers.filter((offer) => {
       if (filters.pattern) {
         const pattern = new RegExp(filters.pattern, 'i');
@@ -141,6 +140,7 @@ export class MarketService {
       }
       return true;
     });
+    console.log('filterdOffers', filterdOffers.map((offer) => offer.name));
     const filtersData = mockFilters(appid);
     return {
       total: TOTAL_PLACEHOLDER,
