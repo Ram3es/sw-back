@@ -7,10 +7,25 @@ import rustFilters from './rust/filters.json';
 import offersHistory from './csgo/offers-history.json';
 import { ESteamAppId } from 'src/constants';
 
-export const mockOffers = (appid: string, page: number, limit: number) => {
+export const mockOffers = (
+  appid: string,
+  page: number,
+  limit: number,
+  sortBy: string,
+) => {
   const mock = appid === ESteamAppId.RUST ? [...rustOffers] : [...offers];
-  console.log('mock', mock);
-  return mock.splice((page - 1) * limit, limit) as any[]; // temporary fix for mocks
+  const sortedMock = mock.sort((a, b) => {
+    // can be sorted by Expensive, Cheapest, HotDeals, Newest, HighestWear, LowestWear
+    if (sortBy === 'Expensive') return b.price.amount - a.price.amount;
+    if (sortBy === 'Cheapest') return a.price.amount - b.price.amount;
+    if (sortBy === 'HotDeals') return b.hotDeals
+    if (sortBy === 'HighestWear') return b.wearFloat - a.wearFloat;
+    if (sortBy === 'LowestWear') return a.wearFloat - b.wearFloat;
+
+    return 0;
+  });
+  console.log('sortedMock', sortedMock);
+  return sortedMock.splice((page - 1) * limit, limit) as any[]; // temporary fix for mocks
 };
 
 export const mockGetAllOffers = (appid: string) => {
