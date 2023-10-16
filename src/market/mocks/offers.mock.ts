@@ -18,7 +18,7 @@ export const mockOffers = (
     // can be sorted by Expensive, Cheapest, HotDeals, Newest, HighestWear, LowestWear
     if (sortBy === 'Expensive') return b.price.amount - a.price.amount;
     if (sortBy === 'Cheapest') return a.price.amount - b.price.amount;
-    if (sortBy === 'HotDeals') return b.hotDeals
+    if (sortBy === 'HotDeals') return b.hotDeals;
     if (sortBy === 'HighestWear') return b.wearFloat - a.wearFloat;
     if (sortBy === 'LowestWear') return a.wearFloat - b.wearFloat;
 

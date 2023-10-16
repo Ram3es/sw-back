@@ -109,7 +109,7 @@ export class MarketService {
     defaultFilters: any[];
   }> {
     const TOTAL_PLACEHOLDER = 1248;
-    const offers = mockOffers(appid, page, PAGE_LIMIT);
+    const offers = mockOffers(appid, page, PAGE_LIMIT, sortBy);
     console.log('offers', offers);
     const filterdOffers = offers.filter((offer) => {
       if (filters.pattern) {
