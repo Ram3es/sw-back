@@ -107,9 +107,10 @@ export class MarketService {
     sortBy: string;
     sortByOptions: { name: string; label: string }[];
     defaultFilters: any[];
+    limit: number;
   }> {
     const TOTAL_PLACEHOLDER = 1248;
-    const offers = mockOffers(appid, page, PAGE_LIMIT, sortBy);
+    const offers = mockOffers(appid);
     const filterdOffers = offers.filter((offer) => {
       if (filters.pattern) {
         const pattern = new RegExp(filters.pattern, 'i');
@@ -140,14 +141,29 @@ export class MarketService {
       }
       return true;
     });
-    console.log('filterdOffers', filterdOffers.map((offer) => offer.name));
+
+    filterdOffers.sort((a, b) => {
+      // can be sorted by Expensive, Cheapest, HotDeals, Newest, HighestWear, LowestWear
+      if (sortBy === 'Expensive') return b.price.amount - a.price.amount;
+      if (sortBy === 'Cheapest') return a.price.amount - b.price.amount;
+      if (sortBy === 'HotDeals') return b.hotDeals;
+      if (sortBy === 'HighestWear') return b.wearFloat - a.wearFloat;
+      if (sortBy == 'LowestWear') return a.wearFloat - b.wearFloat;
+
+      return 0;
+    });
+    const paginatedOffers = filterdOffers.splice(
+      ((page || 1) - 1) * PAGE_LIMIT,
+      PAGE_LIMIT,
+    );
     const filtersData = mockFilters(appid);
     return {
       total: TOTAL_PLACEHOLDER,
       sortByOptions: mockSortBy(appid),
       sortBy: sortBy || 'HotDeals',
-      offers: filterdOffers,
+      offers: paginatedOffers,
       defaultFilters: filtersData,
+      limit: PAGE_LIMIT,
     };
   }
 
