@@ -3,14 +3,23 @@
     "label": "Price",
     "name": "priceRange",
     "type": "range",
-    "value": [56,427],
+    "value": {
+      "from": {
+        "amount":56,
+        "currency": "USD" 
+      },
+      "to": {
+        "amount": 427,
+        "currency": "USD"
+      }
+    },
     "options": {
       "from": {
-        "amount": 11,
+        "amount": 56,
         "currency": "USD"
       },
       "to": {
-        "amount": 12500,
+        "amount": 427,
         "currency": "USD"
       }
     },

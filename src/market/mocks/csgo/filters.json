@@ -3,7 +3,16 @@
     "label": "Price",
     "name": "priceRange",
     "type": "range",
-    "value":  [311 , 10071],
+    "value": {
+      "from": {
+        "amount":311,
+        "currency": "USD" 
+      },
+      "to": {
+        "amount": 10071,
+        "currency": "USD"
+      }
+    },
     "diagramData": [
       {
         "columnNumber": 0,
@@ -88,11 +97,11 @@
     ],
     "options": {
       "from": {
-        "amount": 3,
+        "amount":311,
         "currency": "USD" 
       },
       "to": {
-        "amount": 397062,
+        "amount": 10071,
         "currency": "USD"
       }
     }
@@ -101,7 +110,16 @@
     "label": "Wear",
     "name": "wear",
     "type": "range",
-    "value": [0 , 1000],
+    "value": {
+      "from": {
+        "amount":0,
+        "currency": "USD" 
+      },
+      "to": {
+        "amount": 1000,
+        "currency": "USD"
+      }
+    },
     "diagramData": [
       {
         "columnNumber": 0,
@@ -126,11 +144,11 @@
     ],
     "options": {
       "from": {
-        "amount": 3,
+        "amount": 0,
         "currency": "USD"
       },
       "to": {
-        "amount": 397062,
+        "amount": 1000,
         "currency": "USD"
       }
     }
