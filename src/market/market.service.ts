@@ -101,6 +101,7 @@ export class MarketService {
     sortBy: string,
     page: number,
     filters: OfferFilters,
+    search: string,
   ): Promise<{
     total: number;
     offers: MarketOffer[];
@@ -111,7 +112,12 @@ export class MarketService {
   }> {
     const TOTAL_PLACEHOLDER = 1248;
     const offers = mockOffers(appid);
+    const searchString = search?.toLowerCase().trim();
     const filterdOffers = offers.filter((offer) => {
+      if (searchString) {
+        const name = offer.name.toLowerCase();
+        if (!name.includes(searchString)) return false;
+      }
       if (filters.pattern) {
         const pattern = new RegExp(filters.pattern, 'i');
         if (!pattern.test(offer.name)) return false;

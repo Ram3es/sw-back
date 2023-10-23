@@ -74,6 +74,7 @@ export class MarketController {
       quality,
       rarity,
       variant,
+      search,
     } = query;
     const filters = {
       pattern,
@@ -86,12 +87,12 @@ export class MarketController {
       rarity,
       variant,
     };
-
     return await this.marketService.getOffers(
       appId || ESteamAppId.CSGO,
       sortBy,
       page || 1,
       filters,
+      search,
     );
   }
 
