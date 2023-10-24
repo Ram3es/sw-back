@@ -80,7 +80,8 @@ export class UserService {
         ba.city AS billingCity,
         ba.province AS billingProvince,
         ba.zip AS billingZip,
-        ba.country AS billingCountry
+        ba.country AS billingCountry,
+        ba.birthDate AS billingBirthDate
       FROM users u
       LEFT JOIN user_billing_address ba ON u.id = ba.userId
       WHERE u.steamId = ?
@@ -117,6 +118,7 @@ export class UserService {
           province: row.billingProvince,
           zip: row.billingZip,
           country: row.billingCountry,
+          birthDate: row.billingBirthDate
         },
       };
     })[0];
@@ -293,12 +295,13 @@ export class UserService {
       province,
       zip,
       country,
+      birthDate
     } = body;
     try {
       const data = await this.conn.query(
         `
-          INSERT INTO user_billing_address (userId, firstName, lastName, streetAddress, streetAddress2, city, province, zip, country)
-          SELECT id, ?, ?, ?, ?, ?, ?, ?, ?
+          INSERT INTO user_billing_address (userId, firstName, lastName, streetAddress, streetAddress2, city, province, zip, country, birthDate)
+          SELECT id, ?, ?, ?, ?, ?, ?, ?, ?, ?
           FROM users
           WHERE steamId = ?;
         `,
@@ -311,6 +314,7 @@ export class UserService {
           province,
           zip,
           country,
+          birthDate,
           steamId,
         ],
       );
@@ -340,12 +344,13 @@ export class UserService {
       province,
       zip,
       country,
+      birthDate,
     } = body;
     try {
       await this.conn.query(
         `
           UPDATE user_billing_address
-          SET firstName = ?, lastName = ?, streetAddress = ?, streetAddress2 = ?, city = ?, province = ?, zip = ?, country = ?
+          SET firstName = ?, lastName = ?, streetAddress = ?, streetAddress2 = ?, city = ?, province = ?, zip = ?, country = ?, birthDate = ?
           WHERE userId = (SELECT id FROM users WHERE steamId = ?) and id = ?;
         `,
         [
@@ -357,6 +362,7 @@ export class UserService {
           province,
           zip,
           country,
+          birthDate,
           steamId,
           id,
         ],
