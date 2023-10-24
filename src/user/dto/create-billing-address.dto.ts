@@ -43,4 +43,8 @@ export class CreateBillingAddressDTO {
   @IsString()
   @IsNotEmpty()
   country: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  birthDate: number;
 }
