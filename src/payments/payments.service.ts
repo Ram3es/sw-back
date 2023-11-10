@@ -1,5 +1,10 @@
 import { HttpService } from '@nestjs/axios';
-import { Inject, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PinoLogger } from 'nestjs-pino';
 import { TransactionsService } from 'src/transactions/transactions.service';
@@ -7,6 +12,7 @@ import transactions from './mocks/transactions.json';
 import { Pool } from 'mysql2/promise';
 import { PAYOUT_LIMITS } from 'src/constants';
 import Dinero from 'dinero.js';
+import { RedeemCardDTO } from './dto/redeem-card.dto';
 
 const ENDPOINTS = new Map();
 ENDPOINTS.set('methods', {
@@ -15,6 +21,10 @@ ENDPOINTS.set('methods', {
 });
 ENDPOINTS.set('payout', {
   url: '/api/payments/payout',
+  method: 'POST',
+});
+ENDPOINTS.set('redeem-giftcard', {
+  url: '/api/giftcard/redeem',
   method: 'POST',
 });
 
@@ -49,6 +59,16 @@ export class PaymentsService {
     // } catch (error) {
     //   this.logger.info(error);
     // }
+  }
+
+  async redeemGiftCard(body: RedeemCardDTO) {
+    try {
+      const { data } = await this.paymentsAPIrequest('redeem-giftcard', body);
+      return data;
+    } catch (error) {
+      this.logger.error(error);
+      throw new BadRequestException('invalid redeem card');
+    }
   }
 
   getTransactions() {

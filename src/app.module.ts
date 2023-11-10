@@ -18,6 +18,8 @@ import { InventoryModule } from './inventory/inventory.module';
 import { originalUrl } from './middlewares/originalurl.middleware';
 import { AuthController } from './auth/auth.controller';
 import { MarketModule } from './market/market.module';
+import { WebhookModule } from './webhook/webhook.module';
+import { WalletModule } from './wallet/wallet.module';
 
 const LOGDIR = './logs';
 
@@ -60,6 +62,9 @@ const multi = [
     TransactionsModule,
     InventoryModule,
     MarketModule,
+    WebhookModule,
+    WalletModule,
+
   ],
   controllers: [AppController],
   providers: [

@@ -13,3 +13,17 @@ export enum PAYOUT_LIMITS {
 export const DEFAULT_LOGIN_REDIRECT = '/success-auth';
 
 export const PAGE_LIMIT = 24;
+
+export enum EPaymentOperation {
+  PAYIN = 'payin',
+  PAYOUT = 'payout',
+}
+
+export enum EPaymentStatus {
+  Pending = 'pending',
+  Complete = 'complete'
+}
+
+export enum EPaymentMethod {
+  Redeem = 'redeem',
+}
