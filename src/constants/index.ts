@@ -21,9 +21,13 @@ export enum EPaymentOperation {
 
 export enum EPaymentStatus {
   Pending = 'pending',
-  Complete = 'complete'
+  Processing = 'processing',
+  Complete = 'complete',
 }
 
 export enum EPaymentMethod {
+  Stripe = 'stripe',
+  Coinbase = 'coinbase',
+  Cashapp = 'cashapp',
   Redeem = 'redeem',
 }
