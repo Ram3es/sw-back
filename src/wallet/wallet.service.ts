@@ -1,4 +1,9 @@
-import { HttpException, Inject, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  Inject,
+  Injectable,
+  BadRequestException,
+} from '@nestjs/common';
 import { PaymentsService } from 'src/payments/payments.service';
 import { RedeemDTO } from './dto/redeem.dto';
 import { Pool } from 'mysql2/promise';
@@ -9,6 +14,7 @@ import {
   EPaymentStatus,
 } from 'src/constants';
 import { PinoLogger } from 'nestjs-pino';
+import { PayoutDTO } from './dto/payin.dto';
 
 @Injectable()
 export class WalletService {
@@ -17,6 +23,60 @@ export class WalletService {
     private readonly logger: PinoLogger,
     @Inject('DB_CONNECTION') private conn: Pool,
   ) {}
+
+  async makePayIn(steamId: string, body: PayoutDTO) {
+    const [row] = await this.conn.query(
+      `SELECT id, balance FROM users WHERE steamId = ?`,
+      [steamId],
+    );
+    const { id: userId } = row[0];
+    const payinBodyApi = {
+      ...body,
+      externalUserId: String(userId),
+      checkout: {
+        productName: 'Example Coinbase Payin',
+        productDescription: '$10.00 Example Coinbase Payin',
+        successUrl: 'http://example.com/success',
+        cancelUrl: 'http://example.com/cancel',
+      },
+    };
+    try {
+      const { data } = await this.paymentsService.paymentsAPIrequest(
+        'payin',
+        payinBodyApi,
+      );
+
+      const {
+        id: transactionId,
+        amount,
+        method,
+        status,
+        externalUserId,
+      } = data;
+
+      if (Number(externalUserId) !== userId) {
+        throw new BadRequestException('Bad request');
+      }
+
+      await this.conn.query(
+        `INSERT INTO user_transactions (userId, transactionId, type, amount, status, method)
+         VALUES(?, ?, ?, ?, ?, ?)`,
+        [
+          userId,
+          transactionId,
+          EPaymentOperation.PAYIN,
+          amount,
+          status,
+          method,
+        ],
+      );
+
+      return data;
+    } catch (error) {
+      this.logger.error(error);
+      console.log(error);
+    }
+  }
 
   async reedeemCardTransaction(steamId: string, body: RedeemDTO) {
     const [row] = await this.conn.query(
@@ -27,6 +87,10 @@ export class WalletService {
     const redeemData = { ...body, externalUserId: String(userId || 1) };
     const card = await this.paymentsService.redeemGiftCard(redeemData);
 
+    if (card instanceof Error) {
+      throw new BadRequestException('invalid redeem card');
+    }
+
     if (userId && card) {
       const connection = await this.conn.getConnection();
       try {
@@ -36,23 +100,22 @@ export class WalletService {
           [userId],
         );
 
+        if (lastRow[0] && lastRow[0]?.newBalance !== balance) {
+          throw new HttpException('different amount of balance', 503);
+        }
+
         const currentBalance = Dinero({ amount: balance });
         const debit = Dinero({ amount: card.value });
         const newBalance = currentBalance.add(debit);
 
-        if (lastRow[0] && lastRow[0]?.newBalance !== balance) {
-          throw new HttpException('different amount of balance', 503);
-        }
         await connection.query(
-          `INSERT INTO  balance_history (userId, prevBalance, newBalance, operation, status, method, extra )
-             VALUES (?, ?, ?, ?, ?, ?, ?)`,
+          `INSERT INTO  balance_history (userId, prevBalance, newBalance, operation, extra )
+             VALUES (?, ?, ?, ?, ?)`,
           [
             userId,
             balance,
             newBalance.getAmount(),
             EPaymentOperation.PAYIN,
-            EPaymentStatus.Complete,
-            EPaymentMethod.Redeem,
             card.code,
           ],
         );
@@ -61,9 +124,21 @@ export class WalletService {
           newBalance.getAmount(),
           userId,
         ]);
+        await connection.query(
+          `INSERT INTO user_transactions (userId, transactionId, type, amount, status, method)
+           VALUES (?, ?, ?, ?, ?, ?)`,
+          [
+            userId,
+            card.code,
+            EPaymentOperation.PAYIN,
+            card.value,
+            EPaymentStatus.Complete,
+            EPaymentMethod.Redeem
+          ],
+        );
         await connection.query('COMMIT');
         connection.release();
-        return card
+        return card;
       } catch (error) {
         this.logger.error(error);
         await connection.query('ROLLBACK');
