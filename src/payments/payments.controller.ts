@@ -5,12 +5,16 @@ import {
   Get,
   Post,
   Req,
+  Headers,
   UnauthorizedException,
+  ForbiddenException,
 } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { PayoutDTO } from './dto/payments.dto';
 import { Request } from 'express';
 import coupones from './mocks/coupones.js';
+import { Public } from 'src/auth/public.decorator';
+import { PayInWebhookDTO } from './dto/payin-webhook.dto';
 
 @Controller('payments')
 export class PaymentsController {
@@ -18,37 +22,20 @@ export class PaymentsController {
 
   @Get('payment-methods')
   getPaymentMethods() {
-    return {
-      paypal: {
-        fixedFee: 0.021,
-        fee: 25,
-        max: 100000,
-        min: 100,
-        enabled: true,
-      },
-      venmo: {
-        fixedFee: 0.021,
-        fee: 25,
-        max: 100000,
-        min: 100,
-        enabled: true,
-      },
-      crypto: {
-        fixedFee: 0.021,
-        fee: 25,
-        max: 100000,
-        min: 100,
-        enabled: true,
-      },
-      webmoney: {
-        fixedFee: 0.021,
-        fee: 25,
-        max: 100000,
-        min: 100,
-        enabled: true,
-      },
-    };
-    // return this.paymentsService.getPaymentMethods();
+    return this.paymentsService.getPaymentMethods();
+  }
+
+  @Public()
+  @Post('payin-webhook')
+  handlePayinTransaction(
+    @Headers('des-labs-auth') hash: string,
+    @Body() body: PayInWebhookDTO,
+  ) {
+    const istrustworthyWebhook = this.paymentsService.checkWebhookHash(hash);
+    if (!istrustworthyWebhook) {
+      throw new ForbiddenException('access denied');
+    }
+    this.paymentsService.udatePayInTransaction(body);
   }
 
   @Post('couponValidation')

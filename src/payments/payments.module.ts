@@ -9,6 +9,6 @@ import { DbModule } from 'src/db/db.module';
   imports: [HttpModule, TransactionsModule, DbModule],
   providers: [PaymentsService],
   controllers: [PaymentsController],
-  exports: [],
+  exports: [PaymentsService],
 })
 export class PaymentsModule {}
