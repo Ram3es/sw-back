@@ -54,7 +54,7 @@ export class WalletService {
         externalUserId,
       } = data;
 
-      if (Number(externalUserId) !== userId) {
+      if (Number(externalUserId) == userId) {
         throw new BadRequestException('Bad request');
       }
 
@@ -74,7 +74,7 @@ export class WalletService {
       return data;
     } catch (error) {
       this.logger.error(error);
-      console.log(error);
+      throw new HttpException(error.message, error.status);
     }
   }
 
@@ -133,7 +133,7 @@ export class WalletService {
             EPaymentOperation.PAYIN,
             card.value,
             EPaymentStatus.Complete,
-            EPaymentMethod.Redeem
+            EPaymentMethod.Redeem,
           ],
         );
         await connection.query('COMMIT');

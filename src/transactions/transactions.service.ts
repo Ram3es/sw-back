@@ -7,7 +7,11 @@ import {
 import { Pool } from 'mysql2/promise';
 import { PinoLogger } from 'nestjs-pino';
 import Dinero from 'dinero.js';
-import { EPaymentOperation, EPaymentStatus, PAYOUT_LIMITS } from 'src/constants';
+import {
+  EPaymentOperation,
+  EPaymentStatus,
+  PAYOUT_LIMITS,
+} from 'src/constants';
 import { PayInWebhookDTO } from 'src/payments/dto/payin-webhook.dto';
 
 @Injectable()
@@ -88,6 +92,24 @@ export class TransactionsService {
 
   async payInUserTransaction(body: PayInWebhookDTO) {
     const { id: trxId, exteralUserId: userId, status } = body;
+    try {
+      const [trxRow] = await this.conn.query(
+        `SELECT * FROM user_transactions WHERE transactionId = ? AND userId = ?`,
+        [trxId, userId],
+      );
+      if (Array.isArray(trxRow) && !trxRow.length) {
+        throw new BadRequestException('Unexpected transaction');
+      }
+      if (status === trxRow[0].status) {
+        throw new BadRequestException(
+          `Transaction already has status: ${status}`,
+        );
+      }
+    } catch (error) {
+      this.logger.error(error);
+      throw new BadRequestException(error.message, error.status);
+    }
+
     switch (body.status) {
       case EPaymentStatus.Complete:
         return this.successPayin(body);
@@ -102,12 +124,12 @@ export class TransactionsService {
     try {
       await connection.query('START TRANSACTION');
       const [userRow] = await connection.query(
-        `SELECT balance, transactionsTotal, id FROM users WHERE userId = ?`,
+        `SELECT balance, transactionsTotal, id as userId FROM users WHERE id = ?`,
         [Number(exteralUserId)],
       );
-      const { balance, id: userId } = userRow[0];
+      const { balance, userId } = userRow[0];
 
-      const [historyRow] = await this.conn.query(
+      const [historyRow] = await connection.query(
         `SELECT * FROM balance_history WHERE userId = ? ORDER BY date DESC LIMIT 1`,
         [userId],
       );
@@ -120,7 +142,10 @@ export class TransactionsService {
       const debit = Dinero({ amount });
       const newBalance = currentBalance.add(debit);
 
-      await this.updatePayinTransactionStatus(userId, trxId, status);
+      await connection.query(
+        `UPDATE user_transactions SET status = ? WHERE transactionId = ? AND userId = ?`,
+        [status, trxId, userId],
+      );
 
       await connection.query(
         `INSERT INTO  balance_history (userId, prevBalance, newBalance, operation, extra )
@@ -137,11 +162,13 @@ export class TransactionsService {
         newBalance.getAmount(),
         userId,
       ]);
+      await connection.query('COMMIT');
+      connection.release();
     } catch (error) {
       this.logger.error(error);
       await connection.query('ROLLBACK');
       connection.release();
-      throw new BadRequestException(error.message, error);
+      throw new BadRequestException(error.message, error.status);
     }
   }
 
@@ -151,10 +178,11 @@ export class TransactionsService {
     status: string,
   ) {
     try {
-      await this.conn.query(
+      const [row] = await this.conn.query(
         `UPDATE user_transactions SET status = ? WHERE transactionId = ? AND userId = ?`,
         [status, trxId, userId],
       );
+      console.log(row);
     } catch (error) {
       this.logger.error(error);
     }

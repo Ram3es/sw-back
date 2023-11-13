@@ -39,7 +39,7 @@ export class PaymentsController {
     if (!istrustworthyWebhook) {
       throw new ForbiddenException('access denied');
     }
-    this.transactionsService.payInUserTransaction(body);
+    return this.transactionsService.payInUserTransaction(body);
   }
 
   @Post('couponValidation')

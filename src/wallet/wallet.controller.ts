@@ -15,7 +15,7 @@ export class WalletController {
 
   @Post('payin')
   makePayin(@Req() req: any, @Body() body: PayoutDTO) {
-    const steamId = '76561199474829583' || String(req?.user?._json?.steamid);
+    const steamId = String(req?.user?._json?.steamid);
     return this.walletService.makePayIn(steamId, body);
   }
 }
