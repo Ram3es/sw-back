@@ -164,6 +164,7 @@ export class TransactionsService {
       ]);
       await connection.query('COMMIT');
       connection.release();
+      return { message: 'Ok', status: 200 };
     } catch (error) {
       this.logger.error(error);
       await connection.query('ROLLBACK');
@@ -182,7 +183,7 @@ export class TransactionsService {
         `UPDATE user_transactions SET status = ? WHERE transactionId = ? AND userId = ?`,
         [status, trxId, userId],
       );
-      console.log(row);
+      return { message: 'Ok', status: 200 };
     } catch (error) {
       this.logger.error(error);
     }
