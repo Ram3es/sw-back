@@ -15,10 +15,14 @@ import { Request } from 'express';
 import coupones from './mocks/coupones.js';
 import { Public } from 'src/auth/public.decorator';
 import { PayInWebhookDTO } from './dto/payin-webhook.dto';
+import { TransactionsService } from 'src/transactions/transactions.service';
 
 @Controller('payments')
 export class PaymentsController {
-  constructor(private readonly paymentsService: PaymentsService) {}
+  constructor(
+    private readonly paymentsService: PaymentsService,
+    private readonly transactionsService: TransactionsService,
+  ) {}
 
   @Get('payment-methods')
   getPaymentMethods() {
@@ -35,7 +39,7 @@ export class PaymentsController {
     if (!istrustworthyWebhook) {
       throw new ForbiddenException('access denied');
     }
-    this.paymentsService.udatePayInTransaction(body);
+    return this.transactionsService.payInUserTransaction(body);
   }
 
   @Post('couponValidation')

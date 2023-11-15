@@ -26,10 +26,15 @@ ENDPOINTS.set('payout', {
   url: '/api/payments/payout',
   method: 'POST',
 });
+ENDPOINTS.set('payin', {
+  url: '/api/payments/payin',
+  method: 'POST',
+});
 ENDPOINTS.set('redeem-giftcard', {
   url: '/api/giftcard/redeem',
   method: 'POST',
 });
+
 
 @Injectable()
 export class PaymentsService {
@@ -70,7 +75,7 @@ export class PaymentsService {
       return data;
     } catch (error) {
       this.logger.error(error);
-      throw new BadRequestException('invalid redeem card');
+      return error
     }
   }
 
@@ -95,14 +100,7 @@ export class PaymentsService {
     return Dinero({ amount: limitForToday }).getAmount();
   }
 
-  async udatePayInTransaction(body: PayInWebhookDTO) {
-    switch (body.status) {
-      case EPaymentStatus.Complete:
-      // TODO
-    }
-  }
-
-  private async paymentsAPIrequest(endpoint: string, payload?: object) {
+  async paymentsAPIrequest(endpoint: string, payload?: object) {
     const baseURL = this.configService.get('PAYMENTS_API_HOST');
     const { url, method } = ENDPOINTS.get(endpoint);
 
