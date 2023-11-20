@@ -54,7 +54,7 @@ export class WalletService {
         externalUserId,
       } = data;
 
-      if (Number(externalUserId) == userId) {
+      if (Number(externalUserId) !== userId) {
         throw new BadRequestException('Bad request');
       }
 
@@ -70,7 +70,7 @@ export class WalletService {
           method,
         ],
       );
-
+      
       return data;
     } catch (error) {
       this.logger.error(error);
