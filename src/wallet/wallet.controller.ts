@@ -1,8 +1,8 @@
-import { Body, Controller, Post, Req } from '@nestjs/common';
+import { Body, Controller, Post, Req, Res } from '@nestjs/common';
 import { RedeemDTO } from './dto/redeem.dto';
 import { WalletService } from './wallet.service';
 import { PayoutDTO } from './dto/payin.dto';
-import { Public } from 'src/auth/public.decorator';
+import { Request } from 'express'
 
 @Controller('wallet')
 export class WalletController {
@@ -14,7 +14,7 @@ export class WalletController {
   }
 
   @Post('payin')
-  makePayin(@Req() req: any, @Body() body: PayoutDTO) {
+  async makePayin(@Req() req: Request, @Body() body: PayoutDTO) {
     const steamId = String(req?.user?._json?.steamid);
     return this.walletService.makePayIn(steamId, body);
   }

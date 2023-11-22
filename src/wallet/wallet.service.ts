@@ -30,14 +30,15 @@ export class WalletService {
       [steamId],
     );
     const { id: userId } = row[0];
+    const CLIENT = process.env.FRONTEND_URL
     const payinBodyApi = {
       ...body,
       externalUserId: String(userId),
       checkout: {
-        productName: 'Example Coinbase Payin',
-        productDescription: '$10.00 Example Coinbase Payin',
-        successUrl: 'http://example.com/success',
-        cancelUrl: 'http://example.com/cancel',
+        productName: 'Skinwallet Site Balance',
+        productDescription: 'Skinwallet Site Balance',
+        successUrl: `${CLIENT}/market`,
+        cancelUrl: `${CLIENT}/wallet`,
       },
     };
     try {
@@ -70,7 +71,6 @@ export class WalletService {
           method,
         ],
       );
-      
       return data;
     } catch (error) {
       this.logger.error(error);
