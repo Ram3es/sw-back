@@ -10,4 +10,11 @@ export class PayoutDTO {
   @IsNotEmpty()
   @IsPositive()
   amount: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @IsPositive()
+  balanceAmount: number
+
 }
+

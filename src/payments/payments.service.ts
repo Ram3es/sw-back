@@ -79,8 +79,12 @@ export class PaymentsService {
     }
   }
 
-  getTransactions() {
-    return transactions;
+  async getTransactions(steamId: string) {
+    const [data] = await this.conn.query(
+      `SELECT * FROM user_transactions WHERE userId IN (SELECT id as userId FROM users WHERE steamId = ?)`,
+      [steamId]
+    )
+    return data;
   }
 
   async getDailyLimitsByUser(steamId: string) {

@@ -30,9 +30,10 @@ export class WalletService {
       [steamId],
     );
     const { id: userId } = row[0];
-    const CLIENT = process.env.FRONTEND_URL
+    const CLIENT = process.env.FRONTEND_URL;
+    const { balanceAmount, ...bodyMs } = body;
     const payinBodyApi = {
-      ...body,
+      ...bodyMs,
       externalUserId: String(userId),
       checkout: {
         productName: 'Skinwallet Site Balance',
@@ -43,7 +44,7 @@ export class WalletService {
     };
     try {
       const { data } = await this.paymentsService.paymentsAPIrequest(
-        'payin',
+        EPaymentOperation.PAYIN,
         payinBodyApi,
       );
 
@@ -60,13 +61,14 @@ export class WalletService {
       }
 
       await this.conn.query(
-        `INSERT INTO user_transactions (userId, transactionId, type, amount, status, method)
-         VALUES(?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO user_transactions (userId, transactionId, type, amountTransaction, amountBalance , status, method)
+         VALUES(?, ?, ?, ?, ?, ?, ?)`,
         [
           userId,
           transactionId,
           EPaymentOperation.PAYIN,
           amount,
+          balanceAmount,
           status,
           method,
         ],
@@ -125,12 +127,13 @@ export class WalletService {
           userId,
         ]);
         await connection.query(
-          `INSERT INTO user_transactions (userId, transactionId, type, amount, status, method)
-           VALUES (?, ?, ?, ?, ?, ?)`,
+          `INSERT INTO user_transactions (userId, transactionId, type, amountTransaction, amountBalance, status, method)
+           VALUES (?, ?, ?, ?, ?, ?, ?)`,
           [
             userId,
             card.code,
             EPaymentOperation.PAYIN,
+            card.value,
             card.value,
             EPaymentStatus.Complete,
             EPaymentMethod.Redeem,
@@ -143,6 +146,7 @@ export class WalletService {
         this.logger.error(error);
         await connection.query('ROLLBACK');
         connection.release();
+        throw new HttpException(error.message, error.status)
       }
     }
   }

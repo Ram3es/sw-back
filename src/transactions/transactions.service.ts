@@ -119,7 +119,7 @@ export class TransactionsService {
   }
 
   private async successPayin(body: PayInWebhookDTO) {
-    const { exteralUserId, id: trxId, status, amount } = body;
+    const { exteralUserId, id: trxId, status: statusMs, amount } = body;
     const connection = await this.conn.getConnection();
     try {
       await connection.query('START TRANSACTION');
@@ -138,8 +138,18 @@ export class TransactionsService {
         throw new HttpException('different amount of balance', 419);
       }
 
+      const [trxRow] = await connection.query(
+        `SELECT * FROM user_transaction WHERE transactionId = ? AND`,
+        [trxId],
+      );
+      const { amountTransaction, amountBalance, status } = trxRow[0];
+
+      if (amountTransaction !== amount || status === statusMs) {
+        throw new HttpException('Something went wrong', 400);
+      }
+
       const currentBalance = Dinero({ amount: balance });
-      const debit = Dinero({ amount });
+      const debit = Dinero({ amount: amountBalance });
       const newBalance = currentBalance.add(debit);
 
       await connection.query(

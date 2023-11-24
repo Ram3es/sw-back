@@ -62,8 +62,9 @@ export class PaymentsController {
   }
 
   @Get('transactions')
-  getPaymentsTransactions() {
-    return this.paymentsService.getTransactions();
+  getPaymentsTransactions(@Req() req: Request) {
+    const steamId = req?.user?._json?.steamid;
+    return this.paymentsService.getTransactions(steamId);
   }
 
   @Get('limits')
