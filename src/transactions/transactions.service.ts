@@ -97,12 +97,13 @@ export class TransactionsService {
         `SELECT * FROM user_transactions WHERE transactionId = ? AND userId = ?`,
         [trxId, userId],
       );
-      if (Array.isArray(trxRow) && !trxRow.length) {
-        throw new BadRequestException('Unexpected transaction');
-      }
+      // if (Array.isArray(trxRow) && !trxRow.length) {
+      //   throw new BadRequestException('Unexpected transaction');
+      // }
       if (status === trxRow[0].status) {
-        throw new BadRequestException(
+        throw new HttpException(
           `Transaction already has status: ${status}`,
+          414,
         );
       }
     } catch (error) {
@@ -110,7 +111,7 @@ export class TransactionsService {
       throw new HttpException(error.message, error.status);
     }
 
-    switch (body.status) {
+    switch (status) {
       case EPaymentStatus.Complete:
         return this.successPayin(body);
       case EPaymentStatus.Denied:
@@ -151,7 +152,7 @@ export class TransactionsService {
       if (amountTransaction !== amount || status === statusMs) {
         throw new HttpException(
           'no matched amound or status already applied',
-          400,
+          417,
         );
       }
 
@@ -186,7 +187,7 @@ export class TransactionsService {
       this.logger.error(error);
       await connection.query('ROLLBACK');
       connection.release();
-      throw new BadRequestException(error.message, error.status);
+      throw new HttpException(error.message, error.status);
     }
   }
 
