@@ -23,6 +23,10 @@ export enum EPaymentStatus {
   Pending = 'pending',
   Processing = 'processing',
   Complete = 'complete',
+  Failed = 'failed',
+  Refunded = 'refunded',
+  Expired = 'expired',
+  Denied = 'denied',
 }
 
 export enum EPaymentMethod {

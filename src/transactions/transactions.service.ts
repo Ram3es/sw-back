@@ -107,12 +107,16 @@ export class TransactionsService {
       }
     } catch (error) {
       this.logger.error(error);
-      throw new BadRequestException(error.message, error.status);
+      throw new HttpException(error.message, error.status);
     }
 
     switch (body.status) {
       case EPaymentStatus.Complete:
         return this.successPayin(body);
+      case EPaymentStatus.Denied:
+      case EPaymentStatus.Expired:
+      case EPaymentStatus.Failed:
+      case EPaymentStatus.Refunded:
       case EPaymentStatus.Processing:
         return this.updatePayinTransactionStatus(userId, trxId, status);
     }
@@ -139,13 +143,16 @@ export class TransactionsService {
       }
 
       const [trxRow] = await connection.query(
-        `SELECT * FROM user_transaction WHERE transactionId = ? AND`,
-        [trxId],
+        `SELECT * FROM user_transactions WHERE transactionId = ? AND userId = ?`,
+        [trxId, userId],
       );
       const { amountTransaction, amountBalance, status } = trxRow[0];
 
       if (amountTransaction !== amount || status === statusMs) {
-        throw new HttpException('Something went wrong', 400);
+        throw new HttpException(
+          'no matched amound or status already applied',
+          400,
+        );
       }
 
       const currentBalance = Dinero({ amount: balance });
