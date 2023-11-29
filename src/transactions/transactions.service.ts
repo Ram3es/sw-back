@@ -91,16 +91,16 @@ export class TransactionsService {
   }
 
   async payInUserTransaction(body: PayInWebhookDTO) {
-    const { id: trxId, exteralUserId: userId, status } = body;
+    const { id: trxId, externalUserId: userId, status } = body;
     try {
       const [trxRow] = await this.conn.query(
         `SELECT * FROM user_transactions WHERE transactionId = ? AND userId = ?`,
         [trxId, userId],
       );
-      // if (Array.isArray(trxRow) && !trxRow.length) {
-      //   throw new BadRequestException('Unexpected transaction');
-      // }
-      if (status === trxRow[0].status) {
+      if (Array.isArray(trxRow) && !trxRow.length) {
+        throw new BadRequestException('Unexpected transaction');
+      }
+      if (status === trxRow[0]?.status) {
         throw new HttpException(
           `Transaction already has status: ${status}`,
           414,
@@ -124,13 +124,13 @@ export class TransactionsService {
   }
 
   private async successPayin(body: PayInWebhookDTO) {
-    const { exteralUserId, id: trxId, status: statusMs, amount } = body;
+    const { externalUserId, id: trxId, status: statusMs, amount } = body;
     const connection = await this.conn.getConnection();
     try {
       await connection.query('START TRANSACTION');
       const [userRow] = await connection.query(
         `SELECT balance, transactionsTotal, id as userId FROM users WHERE id = ?`,
-        [Number(exteralUserId)],
+        [Number(externalUserId)],
       );
       const { balance, userId } = userRow[0];
 

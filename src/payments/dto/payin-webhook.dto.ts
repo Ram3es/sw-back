@@ -22,7 +22,7 @@ export class PayInWebhookDTO {
 
   @IsString()
   @IsNotEmpty()
-  exteralUserId: string;
+  externalUserId: string;
 
   @IsNumber()
   @IsPositive()
@@ -35,5 +35,8 @@ export class PayInWebhookDTO {
   status: EPaymentStatus;
 
   @IsOptional()
-  timestamp?: string
+  timestamp?: string | Date;
+
+  @IsOptional()
+  type?: string;
 }
