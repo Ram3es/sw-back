@@ -98,12 +98,12 @@ export class TransactionsService {
         [trxId, userId],
       );
       if (Array.isArray(trxRow) && !trxRow.length) {
-        throw new BadRequestException('Unexpected transaction');
+        throw new HttpException('not found transaction', 404);
       }
       if (status === trxRow[0]?.status) {
         throw new HttpException(
           `Transaction already has status: ${status}`,
-          414,
+          409,
         );
       }
     } catch (error) {
@@ -162,7 +162,7 @@ export class TransactionsService {
 
       await connection.query(
         `UPDATE user_transactions SET status = ? WHERE transactionId = ? AND userId = ?`,
-        [status, trxId, userId],
+        [statusMs, trxId, userId],
       );
 
       await connection.query(
