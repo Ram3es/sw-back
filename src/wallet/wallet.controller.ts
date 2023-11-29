@@ -3,7 +3,6 @@ import { RedeemDTO } from './dto/redeem.dto';
 import { WalletService } from './wallet.service';
 import { PayoutDTO } from './dto/payin.dto';
 import { Request } from 'express'
-import { Public } from 'src/auth/public.decorator';
 
 @Controller('wallet')
 export class WalletController {
@@ -14,7 +13,6 @@ export class WalletController {
     return this.walletService.reedeemCardTransaction(steamId, body);
   }
 
-  @Public()
   @Post('payin')
   async makePayin(@Req() req: Request, @Body() body: PayoutDTO) {
     const steamId = String(req?.user?._json?.steamid);
