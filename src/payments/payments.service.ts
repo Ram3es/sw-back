@@ -1,21 +1,13 @@
 import { HttpService } from '@nestjs/axios';
-import {
-  BadRequestException,
-  ForbiddenException,
-  HttpException,
-  Inject,
-  Injectable,
-} from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PinoLogger } from 'nestjs-pino';
 import { TransactionsService } from 'src/transactions/transactions.service';
-import transactions from './mocks/transactions.json';
 import { Pool } from 'mysql2/promise';
-import { EPaymentStatus, PAYOUT_LIMITS } from 'src/constants';
+import { PAYOUT_LIMITS } from 'src/constants';
 import Dinero from 'dinero.js';
 import { RedeemCardDTO } from './dto/redeem-card.dto';
 import crypto from 'crypto';
-import { PayInWebhookDTO } from './dto/payin-webhook.dto';
 
 const ENDPOINTS = new Map();
 ENDPOINTS.set('methods', {
@@ -35,7 +27,6 @@ ENDPOINTS.set('redeem-giftcard', {
   method: 'POST',
 });
 
-
 @Injectable()
 export class PaymentsService {
   constructor(
@@ -54,20 +45,20 @@ export class PaymentsService {
     }
   }
 
-  async makePayout(payload: { steamId: string; amount: number }) {
-    const { steamId, amount } = payload;
-    const payout = await this.transactions.payoutUserTransaction(
-      steamId,
-      amount,
-    );
-    return payout;
-    // try {
-    //   const res = await this.paymentsAPIrequest('payout', payload);
-    //   return res;
-    // } catch (error) {
-    //   this.logger.info(error);
-    // }
-  }
+  // async makePayout(payload: { steamId: string; amount: number }) {
+  //   const { steamId, amount } = payload;
+  //   const payout = await this.transactions.payoutUserTransaction(
+  //     steamId,
+  //     amount,
+  //   );
+  //   return payout;
+  //   try {
+  //     const res = await this.paymentsAPIrequest('payout', payload);
+  //     return res;
+  //   } catch (error) {
+  //     this.logger.info(error);
+  //   }
+  // }
 
   async redeemGiftCard(body: RedeemCardDTO) {
     try {
@@ -75,15 +66,15 @@ export class PaymentsService {
       return data;
     } catch (error) {
       this.logger.error(error);
-      return error
+      return error;
     }
   }
 
   async getTransactions(steamId: string) {
     const [data] = await this.conn.query(
       `SELECT * FROM user_transactions WHERE userId IN (SELECT id as userId FROM users WHERE steamId = ?)`,
-      [steamId]
-    )
+      [steamId],
+    );
     return data;
   }
 
@@ -108,17 +99,21 @@ export class PaymentsService {
     const baseURL = this.configService.get('PAYMENTS_API_HOST');
     const { url, method } = ENDPOINTS.get(endpoint);
 
-    const { data } = await this.httpService.axiosRef({
-      baseURL,
-      url,
-      method,
-      headers: {
-        'x-api-key': this.configService.get('PAYMENTS_API_KEY'),
-      },
-      data: payload,
-    });
+    try {
+      const { data } = await this.httpService.axiosRef({
+        baseURL,
+        url,
+        method,
+        headers: {
+          'x-api-key': this.configService.get('PAYMENTS_API_KEY'),
+        },
+        data: payload,
+      });
 
-    return data;
+      return data;
+    } catch (error) {
+      throw new HttpException(error.message, error.status);
+    }
   }
 
   public checkWebhookHash(hash: string) {

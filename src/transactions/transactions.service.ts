@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   HttpException,
+  HttpStatus,
   Inject,
   Injectable,
 } from '@nestjs/common';
@@ -13,6 +14,7 @@ import {
   PAYOUT_LIMITS,
 } from 'src/constants';
 import { PayInWebhookDTO } from 'src/payments/dto/payin-webhook.dto';
+import { ICreatePayoutTrx } from 'src/user/types/transactions';
 
 @Injectable()
 export class TransactionsService {
@@ -89,9 +91,98 @@ export class TransactionsService {
       throw new BadRequestException(error.message, error);
     }
   }
+  async payOutUserTransaction(
+    trxData: ICreatePayoutTrx,
+    chargedAmount: number,
+    currentBalance: number,
+  ) {
+    const {
+      id: transactionId,
+      externalUserId,
+      amount,
+      status,
+      method,
+    } = trxData;
+
+    const connection = await this.conn.getConnection();
+
+    try {
+      await connection.query('START TRANSACTION');
+      const [lastBalance] = await connection.query(
+        `SELECT newBalance FROM balance_history WHERE userId = ? ORDER BY id DESC LIMIT 1`,
+        [externalUserId],
+      );
+
+      const historyBalance = lastBalance[0]?.newBalance ?? 0;
+
+      if (historyBalance !== currentBalance) {
+        throw new HttpException('isn`t matched balance', HttpStatus.CONFLICT);
+      }
+
+      const currentUserBalance = Dinero({ amount: currentBalance });
+      const holdTransaction = Dinero({ amount: chargedAmount });
+      const newUserBalance = currentUserBalance.subtract(holdTransaction);
+
+      await connection.query(
+        `
+      INSERT INTO balance_history (userId, prevBalance, newBalance, operation, extra )
+      VALUES (?, ?, ?, ?, ?)
+      `,
+        [
+          externalUserId,
+          currentUserBalance.getAmount(),
+          newUserBalance.getAmount(),
+          EPaymentOperation.PAYOUT,
+          transactionId,
+        ],
+      );
+
+      await connection.query(
+        `
+      UPDATE users SET balance = ?
+      WHERE id = ?
+      `,
+        [newUserBalance.getAmount(), externalUserId],
+      );
+      const [updatedBalance] = await connection.query(
+        `SELECT balance FROM users WHERE id = ?
+      `,
+        [externalUserId],
+      );
+
+      await connection.query(
+        `INSERT INTO user_transactions (userId, transactionId, type, amountTransaction, amountBalance , status, method)
+         VALUES(?, ?, ?, ?, ?, ?, ?)`,
+        [
+          externalUserId,
+          transactionId,
+          EPaymentOperation.PAYOUT,
+          amount,
+          holdTransaction.getAmount(),
+          status,
+          method,
+        ],
+      );
+
+      await connection.query('COMMIT');
+      connection.release();
+      return updatedBalance[0]?.balance;
+    } catch (error) {
+      this.logger.error(error);
+      await connection.query('ROLLBACK');
+      connection.release();
+      throw new HttpException(error.message, error.status);
+    }
+  }
 
   async payInUserTransaction(body: PayInWebhookDTO) {
-    const { id: trxId, externalUserId: userId, status } = body;
+    const {
+      id: trxId,
+      externalUserId: userId,
+      status,
+      type,
+      txid: cryptoTrx,
+    } = body;
     try {
       const [trxRow] = await this.conn.query(
         `SELECT * FROM user_transactions WHERE transactionId = ? AND userId = ?`,
@@ -113,7 +204,9 @@ export class TransactionsService {
 
     switch (status) {
       case EPaymentStatus.Complete:
-        return this.successPayin(body);
+        if (type === EPaymentOperation.PAYIN) {
+          return this.successPayin(body);
+        }
       case EPaymentStatus.Denied:
       case EPaymentStatus.Expired:
       case EPaymentStatus.Failed:
@@ -151,7 +244,7 @@ export class TransactionsService {
 
       if (amountTransaction !== amount || status === statusMs) {
         throw new HttpException(
-          'no matched amound or status already applied',
+          'no matched amount or status already applied',
           417,
         );
       }
@@ -182,7 +275,7 @@ export class TransactionsService {
       ]);
       await connection.query('COMMIT');
       connection.release();
-      return { message: 'Ok', status: 200 };
+      return { message: 'Ok', status: 201 };
     } catch (error) {
       this.logger.error(error);
       await connection.query('ROLLBACK');

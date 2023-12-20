@@ -3,6 +3,7 @@ import {
   Inject,
   Injectable,
   BadRequestException,
+  HttpStatus,
 } from '@nestjs/common';
 import { PaymentsService } from 'src/payments/payments.service';
 import { RedeemDTO } from './dto/redeem.dto';
@@ -14,23 +15,28 @@ import {
   EPaymentStatus,
 } from 'src/constants';
 import { PinoLogger } from 'nestjs-pino';
-import { PayoutDTO } from './dto/payin.dto';
+import { PayinDTO } from './dto/payin.dto';
+import { PayoutDTO } from './dto/payout.dto';
+import { ConfigService } from '@nestjs/config';
+import { TransactionsService } from 'src/transactions/transactions.service';
 
 @Injectable()
 export class WalletService {
   constructor(
     private readonly paymentsService: PaymentsService,
+    private readonly transactionService: TransactionsService,
     private readonly logger: PinoLogger,
+    private readonly configService: ConfigService,
     @Inject('DB_CONNECTION') private conn: Pool,
   ) {}
 
-  async makePayIn(steamId: string, body: PayoutDTO) {
+  async makePayIn(steamId: string, body: PayinDTO) {
     const [row] = await this.conn.query(
       `SELECT id, balance FROM users WHERE steamId = ?`,
       [steamId],
     );
     const { id: userId } = row[0];
-    const CLIENT = process.env.FRONTEND_URL;
+    const CLIENT = this.configService.get('FRONTEND_URL');
     const { balanceAmount, ...bodyMs } = body;
     const payinBodyApi = {
       ...bodyMs,
@@ -77,6 +83,58 @@ export class WalletService {
     } catch (error) {
       this.logger.error(error);
       throw new HttpException(error.message, error.status);
+    }
+  }
+
+  async makePayOut(steamId: string, body: PayoutDTO) {
+    const [row] = await this.conn.query(
+      `SELECT id, balance FROM users WHERE steamId = ?`,
+      [steamId],
+    );
+    const { id: userId, balance: currentUserBalance } = row[0];
+
+    if (currentUserBalance < body.balanceAmount) {
+      throw new BadRequestException('Not enougth balance');
+    }
+
+    let payoutBodyApi: Record<string, any> = {
+      method: body.method,
+      amount: body.amount,
+      address: body.walletAddress,
+      externalUserId: userId.toString(),
+    };
+
+    //added metadata for paypal venmo method required
+    if (['paypal', 'venmo'].includes(body.method)) {
+      payoutBodyApi = {
+        ...payoutBodyApi,
+        metadata: {
+          subject: 'Payout from SkinSwap',
+          message: 'Thanks for using Skinswap! Enjoy your payout!',
+          note: 'Thanks for using Skinswap! Enjoy your payout!',
+        },
+      };
+    }
+
+    try {
+      const { data } = await this.paymentsService.paymentsAPIrequest(
+        EPaymentOperation.PAYOUT,
+        payoutBodyApi,
+      );
+      const newUserBalance =
+        await this.transactionService.payOutUserTransaction(
+          data,
+          body.balanceAmount,
+          currentUserBalance,
+        );
+
+      return {
+        ...data,
+        balance: newUserBalance,
+      };
+    } catch (error) {
+      this.logger.error(error);
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -146,8 +204,15 @@ export class WalletService {
         this.logger.error(error);
         await connection.query('ROLLBACK');
         connection.release();
-        throw new HttpException(error.message, error.status)
+        throw new HttpException(error.message, error.status);
       }
     }
+  }
+  async getUserWalletsById(steamId: string) {
+    const [wallets] = await this.conn.query(
+      `SELECT id, wallet AS walletAddress, currency AS method FROM user_crypto_wallets WHERE (SELECT id FROM users WHERE steamId = ?)`,
+      [steamId],
+    );
+    return wallets;
   }
 }
