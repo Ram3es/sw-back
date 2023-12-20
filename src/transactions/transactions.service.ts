@@ -113,9 +113,9 @@ export class TransactionsService {
         [externalUserId],
       );
 
-      const historyBalance = lastBalance[0]?.newBalance ?? 0;
+      const historyBalance = lastBalance[0]?.newBalance;
 
-      if (historyBalance !== currentBalance) {
+      if (historyBalance && historyBalance !== currentBalance) {
         throw new HttpException('isn`t matched balance', HttpStatus.CONFLICT);
       }
 
