@@ -1,7 +1,7 @@
 import { IsEnum, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
 import { EPaymentMethod } from 'src/constants';
 
-export class PayoutDTO {
+export class PayinDTO {
   @IsNotEmpty()
   @IsEnum(EPaymentMethod)
   method: EPaymentMethod;

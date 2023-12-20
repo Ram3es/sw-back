@@ -27,6 +27,7 @@ export enum EPaymentStatus {
   Refunded = 'refunded',
   Expired = 'expired',
   Denied = 'denied',
+  Sent = 'sent',
 }
 
 export enum EPaymentMethod {
@@ -34,4 +35,7 @@ export enum EPaymentMethod {
   Coinbase = 'coinbase',
   Cashapp = 'cashapp',
   Redeem = 'redeem',
+  PayPal = 'paypal',
+  Venmo = 'venmo',
+  Ethereum = 'ethereum', 
 }

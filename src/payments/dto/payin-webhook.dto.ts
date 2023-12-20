@@ -7,7 +7,11 @@ import {
   IsString,
   IsUUID,
 } from 'class-validator';
-import { EPaymentMethod, EPaymentStatus } from 'src/constants';
+import {
+  EPaymentMethod,
+  EPaymentOperation,
+  EPaymentStatus,
+} from 'src/constants';
 
 export class PayInWebhookDTO {
   @IsString()
@@ -38,5 +42,10 @@ export class PayInWebhookDTO {
   timestamp?: string | Date;
 
   @IsOptional()
-  type?: string;
+  @IsNotEmpty()
+  @IsEnum(EPaymentOperation)
+  type: EPaymentOperation;
+
+  @IsOptional()
+  txid?: string;
 }

@@ -10,7 +10,6 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
-import { PayoutDTO } from './dto/payments.dto';
 import { Request } from 'express';
 import coupones from './mocks/coupones.js';
 import { Public } from 'src/auth/public.decorator';
@@ -53,13 +52,13 @@ export class PaymentsController {
     return { message: 'Coupone valid' };
   }
 
-  @Post('payout')
-  makePayout(@Req() req: Request, @Body() body: PayoutDTO) {
-    const user = req?.user;
-    const { amount } = body;
-    if (!user) throw new UnauthorizedException();
-    return this.paymentsService.makePayout({ steamId: user.id, amount });
-  }
+  // @Post('payout')
+  // makePayout(@Req() req: Request, @Body() body: PayoutDTO) {
+  //   const user = req?.user;
+  //   const { amount } = body;
+  //   if (!user) throw new UnauthorizedException();
+  //   return this.paymentsService.makePayout({ steamId: user.id, amount });
+  // }
 
   @Get('transactions')
   getPaymentsTransactions(@Req() req: Request) {
