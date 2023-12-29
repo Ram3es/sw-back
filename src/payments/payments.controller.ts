@@ -8,6 +8,7 @@ import {
   Headers,
   UnauthorizedException,
   ForbiddenException,
+  Query,
 } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { Request } from 'express';
@@ -61,9 +62,10 @@ export class PaymentsController {
   // }
 
   @Get('transactions')
-  getPaymentsTransactions(@Req() req: Request) {
+  getPaymentsTransactions(@Req() req: Request, @Query() query) {
     const steamId = req?.user?._json?.steamid;
-    return this.paymentsService.getTransactions(steamId);
+    const { type } = query;
+    return this.paymentsService.getTransactions(steamId, type);
   }
 
   @Get('limits')

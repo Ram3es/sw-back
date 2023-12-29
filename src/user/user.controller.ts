@@ -19,6 +19,12 @@ export class UserController {
     return user;
   }
 
+  @Get('balance')
+  async getUserBalance(@Req() req: Request){
+    const steamId = String(req?.user?._json?.steamid);
+    return this.userService.getBalanceById(steamId)
+  }
+
   @Get('')
   async getUserDataWithIncludes(@Req() req: Request) {
     const steamId = String(req?.user?._json?.steamid);

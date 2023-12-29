@@ -8,6 +8,7 @@ import { PAYOUT_LIMITS } from 'src/constants';
 import Dinero from 'dinero.js';
 import { RedeemCardDTO } from './dto/redeem-card.dto';
 import crypto from 'crypto';
+import { TRANSACTION_FILTERS } from './constants/transaction-filters';
 
 const ENDPOINTS = new Map();
 ENDPOINTS.set('methods', {
@@ -70,12 +71,65 @@ export class PaymentsService {
     }
   }
 
-  async getTransactions(steamId: string) {
-    const [data] = await this.conn.query(
-      `SELECT * FROM user_transactions WHERE userId IN (SELECT id as userId FROM users WHERE steamId = ?)`,
+  async getTransactions(steamId: string, filter?: string) {
+    const [groupedTrx]: any = await this.conn.query(
+      `
+    SELECT type, COUNT(*) as total FROM user_transactions 
+    WHERE userId = (SELECT id FROM users WHERE steamId = ?)
+    GROUP BY type
+    `,
       [steamId],
     );
-    return data;
+
+    const [totalAmount]: any = await this.conn.query(
+      `
+    SELECT COUNT(*) as total FROM user_transactions 
+    WHERE userId = (SELECT id FROM users WHERE steamId = ?)
+    `,
+      [steamId],
+    );
+
+    let transactions: any;
+
+    if (filter) {
+      const [data] = await this.conn.query(
+        `SELECT * FROM user_transactions 
+         WHERE type IN (?)
+         AND userId IN (SELECT id as userId FROM users WHERE steamId = ?)
+        `,
+        [filter.split(','), steamId],
+      );
+      transactions = data
+    } else {
+      const [data] = await this.conn.query(
+        `SELECT * FROM user_transactions WHERE userId IN (SELECT id as userId FROM users WHERE steamId = ?)`,
+        [steamId],
+      );
+      transactions = data
+    }
+
+    const defaultFilters = !groupedTrx.length
+      ? TRANSACTION_FILTERS
+      : TRANSACTION_FILTERS.map((ftr) => {
+          if (ftr.name === 'type') {
+            return {
+              ...ftr,
+              options: ftr.options.map((option) => ({
+                ...option,
+                count:
+                  groupedTrx.find((val) => val.type === option.value)?.total ??
+                  0,
+              })),
+            };
+          }
+          return ftr;
+        });
+
+    return {
+      data: transactions,
+      defaultFilters,
+      total: totalAmount[0]?.total ?? 0
+    };
   }
 
   async getDailyLimitsByUser(steamId: string) {
