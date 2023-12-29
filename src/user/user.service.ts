@@ -1,4 +1,10 @@
-import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  HttpException,
+  HttpStatus,
+  BadRequestException,
+} from '@nestjs/common';
 import {
   CreateUser,
   User,
@@ -118,7 +124,7 @@ export class UserService {
           province: row.billingProvince,
           zip: row.billingZip,
           country: row.billingCountry,
-          birthDate: row.billingBirthDate
+          birthDate: row.billingBirthDate,
         },
       };
     })[0];
@@ -295,7 +301,7 @@ export class UserService {
       province,
       zip,
       country,
-      birthDate
+      birthDate,
     } = body;
     try {
       const data = await this.conn.query(
@@ -376,6 +382,33 @@ export class UserService {
       return billingAddressData[0];
     } catch (error) {
       throw new HttpException(error, 500);
+    }
+  }
+
+  async getBalanceById(steamId: string) {
+    try {
+      const [usersBalance] = await this.conn.query(
+        `
+      SELECT id, balance FROM users WHERE steamId = ?
+      `,
+        [steamId],
+      );
+      const { balance, id: userId } = usersBalance[0];
+      const [balanceHistory] = await this.conn.query(
+        `
+      SELECT newBalance FROM balance_history WHERE userId = ? ORDER BY date DESC LIMIT 1;
+      `,
+        [userId],
+      );
+
+      if (balanceHistory?.length && balanceHistory[0].newBalance !== balance) {
+        throw new BadRequestException('No matched state of balance');
+      }
+      return {
+        balance,
+      };
+    } catch (error) {
+      throw new HttpException(error.message, 409);
     }
   }
 }
