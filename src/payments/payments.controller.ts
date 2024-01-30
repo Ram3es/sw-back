@@ -53,14 +53,6 @@ export class PaymentsController {
     return { message: 'Coupone valid' };
   }
 
-  // @Post('payout')
-  // makePayout(@Req() req: Request, @Body() body: PayoutDTO) {
-  //   const user = req?.user;
-  //   const { amount } = body;
-  //   if (!user) throw new UnauthorizedException();
-  //   return this.paymentsService.makePayout({ steamId: user.id, amount });
-  // }
-
   @Get('transactions')
   getPaymentsTransactions(@Req() req: Request, @Query() query) {
     const steamId = req?.user?._json?.steamid;
