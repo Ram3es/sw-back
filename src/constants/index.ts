@@ -17,6 +17,7 @@ export const PAGE_LIMIT = 24;
 export enum EPaymentOperation {
   PAYIN = 'payin',
   PAYOUT = 'payout',
+  REDEEM = 'redeem',
 }
 
 export enum EPaymentStatus {
@@ -37,5 +38,5 @@ export enum EPaymentMethod {
   Redeem = 'redeem',
   PayPal = 'paypal',
   Venmo = 'venmo',
-  Ethereum = 'ethereum', 
+  Ethereum = 'ethereum',
 }

@@ -31,5 +31,4 @@ export class WalletController {
     const steamId = String(req?.user?._json?.steamid);
     return this.walletService.getUserWalletsById(steamId);
   }
-  
 }

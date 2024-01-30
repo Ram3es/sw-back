@@ -19,6 +19,7 @@ import { PayinDTO } from './dto/payin.dto';
 import { PayoutDTO } from './dto/payout.dto';
 import { ConfigService } from '@nestjs/config';
 import { TransactionsService } from 'src/transactions/transactions.service';
+import { PAYMENT_ERRORS } from 'src/constants/error-payment-service';
 
 @Injectable()
 export class WalletService {
@@ -82,7 +83,10 @@ export class WalletService {
       return data;
     } catch (error) {
       this.logger.error(error);
-      throw new HttpException(error.message, error.status);
+      const statusMsg = error?.response?.data?.message;
+      throw new BadRequestException(
+        PAYMENT_ERRORS.payin[statusMsg] || 'Something went wrong',
+      );
     }
   }
 
@@ -134,7 +138,10 @@ export class WalletService {
       };
     } catch (error) {
       this.logger.error(error);
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+      const statusMsg = error?.response?.data?.message;
+      throw new BadRequestException(
+        PAYMENT_ERRORS.payin[statusMsg] || 'Something went wrong',
+      );
     }
   }
 
@@ -146,10 +153,6 @@ export class WalletService {
     const { id: userId, balance } = row[0];
     const redeemData = { ...body, externalUserId: String(userId || 1) };
     const card = await this.paymentsService.redeemGiftCard(redeemData);
-
-    if (card instanceof Error) {
-      throw new BadRequestException('invalid redeem card');
-    }
 
     if (userId && card) {
       const connection = await this.conn.getConnection();

@@ -1,14 +1,14 @@
 import { HttpService } from '@nestjs/axios';
-import { HttpException, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PinoLogger } from 'nestjs-pino';
-import { TransactionsService } from 'src/transactions/transactions.service';
 import { Pool } from 'mysql2/promise';
 import { PAYOUT_LIMITS } from 'src/constants';
 import Dinero from 'dinero.js';
 import { RedeemCardDTO } from './dto/redeem-card.dto';
 import crypto from 'crypto';
 import { TRANSACTION_FILTERS } from './constants/transaction-filters';
+import { PAYMENT_ERRORS } from 'src/constants/error-payment-service';
 
 const ENDPOINTS = new Map();
 ENDPOINTS.set('methods', {
@@ -34,7 +34,6 @@ export class PaymentsService {
     private readonly logger: PinoLogger,
     private readonly httpService: HttpService,
     private configService: ConfigService,
-    private readonly transactions: TransactionsService,
     @Inject('DB_CONNECTION') private conn: Pool,
   ) {}
   async getPaymentMethods() {
@@ -46,28 +45,16 @@ export class PaymentsService {
     }
   }
 
-  // async makePayout(payload: { steamId: string; amount: number }) {
-  //   const { steamId, amount } = payload;
-  //   const payout = await this.transactions.payoutUserTransaction(
-  //     steamId,
-  //     amount,
-  //   );
-  //   return payout;
-  //   try {
-  //     const res = await this.paymentsAPIrequest('payout', payload);
-  //     return res;
-  //   } catch (error) {
-  //     this.logger.info(error);
-  //   }
-  // }
-
   async redeemGiftCard(body: RedeemCardDTO) {
     try {
       const { data } = await this.paymentsAPIrequest('redeem-giftcard', body);
       return data;
     } catch (error) {
-      this.logger.error(error);
-      return error;
+      const statusMsg = error?.response?.data?.message;
+      this.logger.error(error, statusMsg);
+      throw new BadRequestException(
+        PAYMENT_ERRORS.redeem[statusMsg] || 'Something went wrong',
+      );
     }
   }
 
@@ -99,13 +86,13 @@ export class PaymentsService {
         `,
         [filter.split(','), steamId],
       );
-      transactions = data
+      transactions = data;
     } else {
       const [data] = await this.conn.query(
         `SELECT * FROM user_transactions WHERE userId IN (SELECT id as userId FROM users WHERE steamId = ?)`,
         [steamId],
       );
-      transactions = data
+      transactions = data;
     }
 
     const defaultFilters = !groupedTrx.length
@@ -128,7 +115,7 @@ export class PaymentsService {
     return {
       data: transactions,
       defaultFilters,
-      total: totalAmount[0]?.total ?? 0
+      total: totalAmount[0]?.total ?? 0,
     };
   }
 
@@ -153,21 +140,17 @@ export class PaymentsService {
     const baseURL = this.configService.get('PAYMENTS_API_HOST');
     const { url, method } = ENDPOINTS.get(endpoint);
 
-    try {
-      const { data } = await this.httpService.axiosRef({
-        baseURL,
-        url,
-        method,
-        headers: {
-          'x-api-key': this.configService.get('PAYMENTS_API_KEY'),
-        },
-        data: payload,
-      });
+    const { data } = await this.httpService.axiosRef({
+      baseURL,
+      url,
+      method,
+      headers: {
+        'x-api-key': this.configService.get('PAYMENTS_API_KEY'),
+      },
+      data: payload,
+    });
 
-      return data;
-    } catch (error) {
-      throw new HttpException(error.message, error.status);
-    }
+    return data;
   }
 
   public checkWebhookHash(hash: string) {
