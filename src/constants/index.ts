@@ -40,3 +40,4 @@ export enum EPaymentMethod {
   Venmo = 'venmo',
   Ethereum = 'ethereum',
 }
+

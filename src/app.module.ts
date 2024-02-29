@@ -19,6 +19,7 @@ import { originalUrl } from './middlewares/originalurl.middleware';
 import { AuthController } from './auth/auth.controller';
 import { MarketModule } from './market/market.module';
 import { WalletModule } from './wallet/wallet.module';
+import { SteamModule } from './steam/steam.module';
 
 const LOGDIR = './logs';
 
@@ -62,7 +63,7 @@ const multi = [
     InventoryModule,
     MarketModule,
     WalletModule,
-
+    SteamModule,
   ],
   controllers: [AppController],
   providers: [

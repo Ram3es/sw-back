@@ -52,11 +52,11 @@ export class MarketController {
     return this.marketService.addItemsToInventory(user._json.steamid, assetIds);
   }
 
-  @Post('withdraw')
-  withdrawItems(@Req() req: Request, @Body() { assetIds }: WithdrawDTO) {
-    const user = req?.user;
-    return this.marketService.withdrawItems(user._json.steamid, assetIds);
-  }
+  // @Post('withdraw')
+  // withdrawItems(@Req() req: Request, @Body() { assetIds }: WithdrawDTO) {
+  //   const user = req?.user;
+  //   return this.marketService.withdrawItems(user._json.steamid, assetIds);
+  // }
 
   @Public()
   @Get('/offers')
