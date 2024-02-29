@@ -9,15 +9,18 @@ import {
   mockOffersHistory,
   mockFilters,
   findOfferById,
+  getLastElemAsPlaceholder,
 } from './mocks/offers.mock';
 import { ESteamAppId, PAGE_LIMIT } from 'src/constants';
-import { randomUUID, generateKeySync } from 'node:crypto';
+import { generateKeySync } from 'node:crypto';
+import { SteamService } from 'src/steam/steam.service';
 
 @Injectable()
 export class MarketService {
   constructor(
     @Inject('DB_CONNECTION') private conn: Pool,
     private readonly logger: PinoLogger,
+    private readonly steamService: SteamService,
   ) {}
 
   async getOnSiteInventory(steamId: string, appid?: string) {
@@ -36,7 +39,15 @@ export class MarketService {
           const item = mockGetAllOffers(ESteamAppId.CSGO).find(
             (item) => item.inventoryItemId === entity.assetId,
           );
-          if (!item) return;
+          if (!item)
+            return {
+              ...entity,
+              ...getLastElemAsPlaceholder(ESteamAppId.CSGO),
+              name: `REAL ASSET_ID - ${entity.assetId}`,
+              price: {},
+              steamPrice: {},
+              wearFloat: 0,
+            };
           return { ...item, ...entity };
         })
         .filter((item) => item);
@@ -48,16 +59,16 @@ export class MarketService {
   }
 
   async addItemsToInventory(steamId: string, items: string[]) {
-    for await (const assetId of items) {
-      const item = mockGetAllOffers(ESteamAppId.CSGO).find(
-        (item) => item.inventoryItemId === assetId,
-      );
-      if (!item) {
-        throw new BadRequestException([
-          `there is no item with assetId: ${assetId}`,
-        ]);
-      }
-    }
+    // for await (const assetId of items) {
+    //   const item = mockGetAllOffers(ESteamAppId.CSGO).find(
+    //     (item) => item.inventoryItemId === assetId,
+    //   );
+    //   if (!item) {
+    //     throw new BadRequestException([
+    //       `there is no item with assetId: ${assetId}`,
+    //     ]);
+    //   }
+    // }
 
     const values = items.map((item) => `(${steamId}, '${item}')`);
 
@@ -78,23 +89,23 @@ export class MarketService {
     }
   }
 
-  async withdrawItems(steamId: string, items) {
-    try {
-      const transactionId = randomUUID();
-      for await (const item of items) {
-        await this.conn.query(
-          `
-          UPDATE user_items
-          SET withdrawn = 1, transactionId = ?
-          WHERE userId = ? AND assetId = ?
-        `,
-          [transactionId, steamId, item],
-        );
-      }
-    } catch (error) {
-      this.logger.error(error);
-    }
-  }
+  // async withdrawItems(steamId: string, items) {
+  //   try {
+  //     const transactionId = randomUUID();
+  //     for await (const item of items) {
+  //       await this.conn.query(
+  //         `
+  //         UPDATE user_items
+  //         SET withdrawn = 1, transactionId = ?
+  //         WHERE userId = ? AND assetId = ?
+  //       `,
+  //         [transactionId, steamId, item],
+  //       );
+  //     }
+  //   } catch (error) {
+  //     this.logger.error(error);
+  //   }
+  // }
 
   async getOffers(
     appid: string,
@@ -110,6 +121,14 @@ export class MarketService {
     defaultFilters: any[];
     limit: number;
   }> {
+    // offers from microservice
+    let offerFromService;
+    try {
+      offerFromService = await this.steamService.fetchInventory();
+    } catch (error) {
+      console.log(error);
+    }
+
     const TOTAL_PLACEHOLDER = 1248;
     const offers = mockOffers(appid);
     const searchString = search?.toLowerCase().trim();
@@ -167,7 +186,7 @@ export class MarketService {
       total: TOTAL_PLACEHOLDER,
       sortByOptions: mockSortBy(appid),
       sortBy: sortBy || 'HotDeals',
-      offers: paginatedOffers,
+      offers: offerFromService?.data ?? paginatedOffers,
       defaultFilters: filtersData,
       limit: PAGE_LIMIT,
     };

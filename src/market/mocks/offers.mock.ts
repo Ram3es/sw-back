@@ -33,3 +33,9 @@ export const mockOffersHistory = () => [...offersHistory];
 export const mockFilters = (appid: string) => {
   return appid === ESteamAppId.RUST ? [...rustFilters] : [...filters];
 };
+
+export const getLastElemAsPlaceholder = (appid: string) => {
+  return appid === ESteamAppId.RUST
+    ? [...rustOffers][rustOffers.length - 1]
+    : [...offers][offers.length - 1];
+};
