@@ -38,7 +38,7 @@ export class SteamController {
   @Post('make-offer')
   async makeOffer(@Req() req: Request, @Body() body: MakeTradeOfferDTO) {
     const steamId = String(req?.user?._json?.steamid);
-    return this.steamService.makeTradeOffer(steamId, body)
+    return this.steamService.makeTradeOffer(steamId, body);
   }
 
   @Get('create-trade/:id')
@@ -52,5 +52,4 @@ export class SteamController {
     const steamId = '76561199474829583' || String(req?.user?._json?.steamid);
     return this.steamService.getTradeHoldDuration(steamId);
   }
-
 }

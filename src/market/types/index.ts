@@ -1,6 +1,3 @@
-import { boolean } from 'joi';
-import { ESteamAppId } from 'src/constants';
-
 export interface MarketOffer {
   appid: number;
   imageUrl: string;

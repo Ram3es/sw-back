@@ -9,7 +9,7 @@ export interface UserBillingAddress {
   province?: string | null;
   zip: string;
   country: string;
-  birthDate: string
+  birthDate: string;
 }
 
 export interface UserCryptoWallet {

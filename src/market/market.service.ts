@@ -15,7 +15,7 @@ import { ESteamAppId, PAGE_LIMIT } from 'src/constants';
 import { generateKeySync } from 'node:crypto';
 import { SteamService } from 'src/steam/steam.service';
 import qs from 'qs';
-import MOCK_NEW_OFFERS from './mocks/csgo/new-offers.json'
+import MOCK_NEW_OFFERS from './mocks/csgo/new-offers.json';
 
 @Injectable()
 export class MarketService {
@@ -26,8 +26,7 @@ export class MarketService {
   ) {}
 
   async getOnSiteInventory(steamId: string, appid?: string) {
-
-    return MOCK_NEW_OFFERS
+    return MOCK_NEW_OFFERS;
     try {
       const [inventory] = await this.conn.query(
         `

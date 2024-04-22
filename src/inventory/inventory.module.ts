@@ -8,6 +8,6 @@ import { SteamModule } from 'src/steam/steam.module';
   imports: [DbModule, SteamModule],
   providers: [InventoryService],
   controllers: [InventoryController],
-  exports: [InventoryService]
+  exports: [InventoryService],
 })
 export class InventoryModule {}

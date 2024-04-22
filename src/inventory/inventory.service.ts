@@ -54,5 +54,4 @@ export class InventoryService {
       console.log(error);
     }
   }
-
 }

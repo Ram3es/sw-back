@@ -5,5 +5,5 @@ export interface ICreatePayoutTrx {
   address: string;
   externalUserId: string;
   status: string;
-  txid?: string
+  txid?: string;
 }
