@@ -1,0 +1,192 @@
+[
+    {
+      "steamid": "76561198392185014",
+      "appid": 730,
+      "assetid": "32639865368",
+      "classid": "4910614706",
+      "instanceid": "902658099",
+      "amount": 1,
+      "tradable": true,
+      "tradehold_days": 0,
+      "tradehold_expires": null,
+      "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198392185014A32639865368D172405778517476520",
+      "reserved": false,
+      "name": "StatTrak™ R8 Revolver | Crazy 8 (Field-Tested)",
+      "stackId": "d1efd4b5a584bd277b20488f66ff640f",
+      "icon_url": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpopL-zJAt21uH3di59_tmgm4ydkuXLI67DhmdU18B9g_3EyoHwjF2hpl1uMWqhctWccAc7aF_YqADrle7u0J_u7ZWbwXFi6SZw7HfdlxO3ghwZcKUx0sHXvhBH",
+      "qualities": {
+        "commodity": false,
+        "exterior": "field-tested",
+        "rarity": "restricted",
+        "weapon": "r8 revolver",
+        "type": "pistol",
+        "stattrak": true,
+        "souvenir": false,
+        "category": null,
+        "collection": "the recoil collection",
+        "name_color": "CF6A32",
+        "doppler_phase": null
+      },
+      "price": {
+        "sell": 101,
+        "trade": 101,
+        "buy": 95
+      },
+      "overstock": {
+        "limit": 0,
+        "count": 0
+      }
+    },
+    {
+      "steamid": "76561198392185014",
+      "appid": 730,
+      "assetid": "32639862757",
+      "classid": "1626194251",
+      "instanceid": "188530139",
+      "amount": 1,
+      "tradable": true,
+      "tradehold_days": 0,
+      "tradehold_expires": null,
+      "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198392185014A32639862757D922221866898903725",
+      "reserved": false,
+      "name": "Sticker | cajunb | MLG Columbus 2016",
+      "stackId": "ef16269d5dce4edf5a80bf21ca096aca",
+      "icon_url": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXQ9QVcJY8gulReQ0DFSua4xJ2DAgs7Ng1QibmkIRJu0b3LIWoS7Y7nxdLckaKsN-zXwj4BvJZzj77Eotij3gW2-UtpZm37d9WSbEZgNvtURYij",
+      "qualities": {
+        "commodity": true,
+        "exterior": "other",
+        "rarity": "high grade",
+        "weapon": null,
+        "type": "sticker",
+        "stattrak": false,
+        "souvenir": false,
+        "category": null,
+        "collection": null,
+        "name_color": "D2D2D2",
+        "doppler_phase": null
+      },
+      "price": {
+        "sell": 99,
+        "trade": 99,
+        "buy": 88
+      },
+      "overstock": {
+        "limit": 0,
+        "count": 0
+      }
+    },
+    {
+      "steamid": "76561198392185014",
+      "appid": 730,
+      "assetid": "32639867919",
+      "classid": "4726072852",
+      "instanceid": "188530139",
+      "amount": 1,
+      "tradable": true,
+      "tradehold_days": 0,
+      "tradehold_expires": null,
+      "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198392185014A32639867919D12009629765834463471",
+      "reserved": false,
+      "name": "XM1014 | Zombie Offensive (Factory New)",
+      "stackId": "5d6faaca595222f104d66b42eae258ab",
+      "icon_url": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgporrf0e1Y07PLFTiVP08a5mYKCksj7Nb3UmHhY_sBOhuDG_Zi72wPjqBU_YDj7coeWdQNsNwrWrwe2k7u9g5Xq6cvPyyAy7iQr7XnZnQv330_mgyKS0g",
+      "qualities": {
+        "commodity": false,
+        "exterior": "factory new",
+        "rarity": "restricted",
+        "weapon": "xm1014",
+        "type": "shotgun",
+        "stattrak": false,
+        "souvenir": false,
+        "category": null,
+        "collection": "the dreams & nightmares collection",
+        "name_color": "D2D2D2",
+        "doppler_phase": null
+      },
+      "price": {
+        "sell": 98,
+        "trade": 98,
+        "buy": 91
+      },
+      "overstock": {
+        "limit": 0,
+        "count": 0
+      }
+    },
+    {
+      "steamid": "76561198392185014",
+      "appid": 730,
+      "assetid": "32639862761",
+      "classid": "3574242344",
+      "instanceid": "188530170",
+      "amount": 1,
+      "tradable": true,
+      "tradehold_days": 0,
+      "tradehold_expires": null,
+      "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198392185014A32639862761D624562471243935618",
+      "reserved": false,
+      "name": "StatTrak™ Glock-18 | Sacrifice (Minimal Wear)",
+      "stackId": "0ad8abb86629f58db4ec20951e93460a",
+      "icon_url": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposbaqKAxf0Ob3djFN79eJnIWZmMj4OrzZgiUJuZV13--So93w3w3gr0s5Zjz0d9SVIQVtM1nW_AW2x-7s15Duu8nJ1zI97RAs6sm-",
+      "qualities": {
+        "commodity": false,
+        "exterior": "minimal wear",
+        "rarity": "mil-spec grade",
+        "weapon": "glock-18",
+        "type": "pistol",
+        "stattrak": true,
+        "souvenir": false,
+        "category": null,
+        "collection": "the cs20 collection",
+        "name_color": "CF6A32",
+        "doppler_phase": null
+      },
+      "price": {
+        "sell": 93,
+        "trade": 93,
+        "buy": 87
+      },
+      "overstock": {
+        "limit": 0,
+        "count": 0
+      }
+    },
+    {
+      "steamid": "76561198392185014",
+      "appid": 730,
+      "assetid": "32639866882",
+      "classid": "2416963789",
+      "instanceid": "188530139",
+      "amount": 1,
+      "tradable": true,
+      "tradehold_days": 0,
+      "tradehold_expires": null,
+      "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198392185014A32639866882D5479906356754366055",
+      "reserved": false,
+      "name": "Sticker | nex | Krakow 2017",
+      "stackId": "e127ce97f5aa959bfaec9f0607913321",
+      "icon_url": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXQ9QVcJY8gulRWXk3bSPP_h56EHE59IjtZs6LrKFY5gaubdGtAutrhkoKIzqH1MLqBkz1T7ZQh2LuVo9vw3lLmqkA_Y3ezetHeIK-76g",
+      "qualities": {
+        "commodity": true,
+        "exterior": "other",
+        "rarity": "high grade",
+        "weapon": null,
+        "type": "sticker",
+        "stattrak": false,
+        "souvenir": false,
+        "category": null,
+        "collection": null,
+        "name_color": "D2D2D2",
+        "doppler_phase": null
+      },
+      "price": {
+        "sell": 87,
+        "trade": 87,
+        "buy": 77
+      },
+      "overstock": {
+        "limit": 0,
+        "count": 0
+      }
+    }
+]

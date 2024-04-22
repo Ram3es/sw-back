@@ -59,12 +59,12 @@ export class MarketController {
   // }
 
   @Public()
-  @Get('/offers')
+  @Get('offers')
   async getOffers(@Query() query) {
     const {
-      appId,
+      appid,
       sortBy,
-      page,
+      offset,
       pattern,
       priceFrom,
       priceTo,
@@ -88,11 +88,12 @@ export class MarketController {
       variant,
     };
     return await this.marketService.getOffers(
-      appId || ESteamAppId.CSGO,
+      appid || ESteamAppId.CSGO,
       sortBy,
-      page || 1,
+      offset || 1,
       filters,
       search,
+      query
     );
   }
 

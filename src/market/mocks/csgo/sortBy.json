@@ -1,26 +1,18 @@
 [
   {
-    "name": "Cheapest",
+    "name": "price-asc",
     "label": "Price: Low to High"
   },
   {
-    "name": "Expensive",
+    "name": "price-desc",
     "label": "Price: High to Low"
   },
   {
-    "name": "LowestWear",
+    "name": "float-desc",
     "label": "Float: High to Low "
   },
   {
-    "name": "HighestWear",
+    "name": "float-asc",
     "label": "Float: Low to High"
-  },
-  {
-    "name": "Newest",
-    "label": "Newly Listed"
-  },
-  {
-    "name": "HotDeals",
-    "label": "Hot Offers"
   }
 ]

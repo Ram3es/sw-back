@@ -14,6 +14,8 @@ import {
 import { ESteamAppId, PAGE_LIMIT } from 'src/constants';
 import { generateKeySync } from 'node:crypto';
 import { SteamService } from 'src/steam/steam.service';
+import qs from 'qs';
+import MOCK_NEW_OFFERS from './mocks/csgo/new-offers.json'
 
 @Injectable()
 export class MarketService {
@@ -24,6 +26,8 @@ export class MarketService {
   ) {}
 
   async getOnSiteInventory(steamId: string, appid?: string) {
+
+    return MOCK_NEW_OFFERS
     try {
       const [inventory] = await this.conn.query(
         `
@@ -113,6 +117,7 @@ export class MarketService {
     page: number,
     filters: OfferFilters,
     search: string,
+    query: Record<string, any>,
   ): Promise<{
     total: number;
     offers: MarketOffer[];
@@ -124,7 +129,12 @@ export class MarketService {
     // offers from microservice
     let offerFromService;
     try {
-      offerFromService = await this.steamService.fetchInventory();
+      const params = { ...query, limit: PAGE_LIMIT };
+
+      offerFromService = await this.steamService.fetchInventory(
+        qs.stringify(params, { addQueryPrefix: true }),
+      );
+      console.log(offerFromService.data.length);
     } catch (error) {
       console.log(error);
     }
@@ -185,7 +195,7 @@ export class MarketService {
     return {
       total: TOTAL_PLACEHOLDER,
       sortByOptions: mockSortBy(appid),
-      sortBy: sortBy || 'HotDeals',
+      sortBy: query?.sort || 'price-desc',
       offers: offerFromService?.data ?? paginatedOffers,
       defaultFilters: filtersData,
       limit: PAGE_LIMIT,

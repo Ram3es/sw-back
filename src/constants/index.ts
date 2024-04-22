@@ -12,7 +12,7 @@ export enum PAYOUT_LIMITS {
 
 export const DEFAULT_LOGIN_REDIRECT = '/success-auth';
 
-export const PAGE_LIMIT = 24;
+export const PAGE_LIMIT = 60;
 
 export enum EPaymentOperation {
   PAYIN = 'payin',
