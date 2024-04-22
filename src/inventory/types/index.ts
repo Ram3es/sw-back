@@ -9,8 +9,8 @@ export interface SteamItem {
 }
 
 export interface ItemToValidate {
-  appid: number
-  assetid: string
-  amount: number
-  name: string
+  appid: number;
+  assetid: string;
+  amount: number;
+  name: string;
 }

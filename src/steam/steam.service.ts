@@ -119,7 +119,10 @@ export class SteamService {
           data: { trades, backpack },
         } = await this.fetchSteamMicroservice(url, method, transportData);
 
-        console.log(trades, '=====================>>>>>>>>>>>>>>>>>>>>>');
+        console.log(
+          trades,
+          '[CREATED TRADE]=====================>>>>>>>>>>>>>>>>>>>>>',
+        );
 
         for await (const trade of trades) {
           const [rows] = await this.conn.query(

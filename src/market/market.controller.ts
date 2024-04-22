@@ -93,7 +93,7 @@ export class MarketController {
       offset || 1,
       filters,
       search,
-      query
+      query,
     );
   }
 

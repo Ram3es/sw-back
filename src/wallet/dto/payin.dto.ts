@@ -14,7 +14,5 @@ export class PayinDTO {
   @IsNumber()
   @IsNotEmpty()
   @IsPositive()
-  balanceAmount: number
-
+  balanceAmount: number;
 }
-
