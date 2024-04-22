@@ -7,3 +7,10 @@ export interface SteamItem {
   appid: string;
   price: number;
 }
+
+export interface ItemToValidate {
+  appid: number
+  assetid: string
+  amount: number
+  name: string
+}

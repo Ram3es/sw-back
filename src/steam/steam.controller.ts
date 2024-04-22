@@ -7,11 +7,13 @@ import {
   Req,
   Headers,
   ForbiddenException,
+  Param,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { SteamService } from './steam.service';
 import { Public } from 'src/auth/public.decorator';
 import { CreateTradeDto } from './dto/create-trade.dto';
+import { MakeTradeOfferDTO } from './dto/make-trade.dto';
 
 @Controller('steam')
 export class SteamController {
@@ -33,10 +35,16 @@ export class SteamController {
     return this.steamService.manageTrade(body);
   }
 
-  @Post('create-trade')
-  async createTrade(@Req() req: Request, @Body() body: CreateTradeDto) {
+  @Post('make-offer')
+  async makeOffer(@Req() req: Request, @Body() body: MakeTradeOfferDTO) {
     const steamId = String(req?.user?._json?.steamid);
-    return this.steamService.createTradeOffer(steamId, body);
+    return this.steamService.makeTradeOffer(steamId, body)
+  }
+
+  @Get('create-trade/:id')
+  async createTrade(@Req() req: Request, @Param('id') tradeId: string) {
+    const steamId = String(req?.user?._json?.steamid);
+    return this.steamService.createTradeOffer(steamId, tradeId);
   }
 
   @Get('tradehold')
@@ -44,4 +52,5 @@ export class SteamController {
     const steamId = '76561199474829583' || String(req?.user?._json?.steamid);
     return this.steamService.getTradeHoldDuration(steamId);
   }
+
 }

@@ -1,11 +1,17 @@
+import { InventoryService } from './../inventory/inventory.service';
 import { ConfigService } from '@nestjs/config';
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  forwardRef,
+} from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { ENDPOINTS } from './constants/endpoints';
 import { PinoLogger } from 'nestjs-pino';
 import qs from 'qs';
 import { Pool } from 'mysql2/promise';
-import { CreateTradeDto } from './dto/create-trade.dto';
+import { MakeTradeOfferDTO } from './dto/make-trade.dto';
 
 @Injectable()
 export class SteamService {
@@ -14,57 +20,152 @@ export class SteamService {
     private readonly httpService: HttpService,
     private readonly logger: PinoLogger,
     @Inject('DB_CONNECTION') private conn: Pool,
+    @Inject(forwardRef(() => InventoryService))
+    private readonly inventoryService: InventoryService,
   ) {}
 
-  async createTradeOffer(steamId: string, body: CreateTradeDto) {
+  async createTradeOffer(steamId: string, tradeId: string) {
     const [row] = await this.conn.query(
-      `SELECT tradeUrl FROM users WHERE steamId = ?
+      `
+    SELECT tradeUrl FROM users WHERE steamId = ?
     `,
       [steamId],
     );
-    const { tradeUrl } = row[0];
-    const tradePayload = {
-      steamId: '765611988737959', //user steamId
+
+    const [dataBotId] = await this.conn.query(
+      `
+    SELECT ba.botSteamId as botId
+    FROM user_trade_offers as uto
+    LEFT JOIN bot_accounts as ba ON ba.id = uto.botId
+    WHERE tradeId = ?
+    `,
+      [tradeId],
+    );
+
+    //temporary getting items from tradeOffer
+    const [itemsInTrade]: any = await this.conn.query(
+      `
+    SELECT appId as appid, assetId as assetid, amount
+    FROM trade_items
+    WHERE tradeId = ?
+    `,
+      [tradeId],
+    );
+    // ---- end getting items -----
+
+    const botId = dataBotId[0]?.botId;
+    const tradeUrl = row[0]?.tradeUrl;
+
+    const transportData = {
+      steamId: '76561199012549911',
       tradeUrl:
-        'https://steamcommunity.com/tradeoffer/new/?partner=893472231&token=WsJBhgDB', //trade Url
+        'https://steamcommunity.com/tradeoffer/new/?partner=1052284183&token=Axun9Thu',
       theirItems: [],
-      ourItems: body.tradeItems,
+      ourItems: itemsInTrade,
       message: 'Thanks for trading with SkinSwap!',
     };
+
     const { url, method } = ENDPOINTS.get('create-trade');
-    const query = url.replace(':steamId', '76561198392185014'); // bot steamId
+    const query = url.replace(':steamId', botId);
 
     try {
-      const { data: trade } = await this.fetchSteamMicroservice(
+      const { data } = await this.fetchSteamMicroservice(
         query,
         method,
-        tradePayload,
+        transportData,
       );
+
+      const { tradeofferid, state, id } = data;
       await this.conn.query(
         `
-      INSERT INTO user_trade_offers (steamId, tradeId, tradeOfferId, state)
-      VALUES (?, ?, ?, ?)
-      `,
-        [steamId, trade.id, trade.tradeofferid, trade.state],
-      );
-
-      for await (const item of body.tradeItems) {
-        await this.conn.query(
-          `
-          UPDATE user_items
-          SET withdrawn = 1, transactionId = ?
-          WHERE userId = ? AND assetId = ?
+        UPDATE user_trade_offers
+        SET tradeOfferId = ?, state = ?
+        WHERE tradeId = ?
         `,
-          [trade.id, steamId, item.assetid],
-        );
-      }
-
-      console.log(trade);
-      return trade;
+        [tradeofferid, state, id],
+      );
+      const userTradeOffers = await this.inventoryService.allActiveTrades(
+        steamId,
+      );
+      return userTradeOffers;
     } catch (error) {
       this.logger.error(error);
-      throw new BadRequestException(error.message);
+      throw new BadRequestException(error);
     }
+  }
+
+  async makeTradeOffer(steamId: string, { tradeItems }: MakeTradeOfferDTO) {
+    try {
+      const [data] = await this.conn.query(
+        `
+        SELECT tradeUrl 
+        FROM users
+        WHERE steamId = ? 
+      `,
+        [steamId],
+      );
+      const tradeUrl = data[0]?.tradeUrl;
+      const transportData = {
+        message: 'Thanks for trading with SkinSwap!',
+        steamId,
+        tradeUrl,
+        theirItems: [],
+        ourItems: tradeItems,
+      };
+
+      const { url, method } = ENDPOINTS.get('make-trade');
+      try {
+        const {
+          data: { trades, backpack },
+        } = await this.fetchSteamMicroservice(url, method, transportData);
+
+        console.log(trades, '=====================>>>>>>>>>>>>>>>>>>>>>');
+
+        for await (const trade of trades) {
+          const [rows] = await this.conn.query(
+            `
+          SELECT id FROM bot_accounts
+          WHERE botSteamId = ?
+          `,
+            [trade.account.steamid],
+          );
+
+          let botExistId = rows[0]?.id;
+
+          if (!botExistId) {
+            const { steamid, name, avatarHash, memberSince, level } =
+              trade?.account;
+            const [{ insertId }]: any = await this.conn.query(
+              `
+            INSERT INTO bot_accounts (botSteamId, name, avatarHash, memberSince, level)
+            VALUES (?, ?, ?, STR_TO_DATE(?, '%Y-%m-%dT%H:%i:%s.%fZ'), ?)
+            `,
+              [steamid, name, avatarHash, memberSince, level],
+            );
+
+            botExistId = insertId;
+          }
+          await this.conn.query(
+            `
+          INSERT INTO user_trade_offers (steamId, tradeId, botId, state)
+          VALUES (?, ?, ?, ?)`,
+            [steamId, trade.id, botExistId, trade.state],
+          );
+
+          for await (const item of trade.ourItems) {
+            const { appid, assetid, amount, icon_url, name } = item;
+            await this.conn.query(
+              `
+              INSERT INTO trade_items (tradeId, appId, assetId, amount, name, iconUrl)
+              VALUES (?, ?, ?, ?, ?, ?)`,
+              [trade.id, appid, assetid, amount, name, icon_url],
+            );
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } catch (error) {}
   }
 
   async getTradeHoldDuration(steamId: string) {
@@ -91,8 +192,20 @@ export class SteamService {
     return this.fetchSteamMicroservice(url.concat(params ?? ''), method);
   }
 
+  async getBotAccountBySteamId(botSteamId: string) {
+    const { url, method } = ENDPOINTS.get('get-bot-account');
+    return this.fetchSteamMicroservice(url.concat(`/${botSteamId}`), method);
+  }
+
+  async validateItems(payload) {
+    const { url, method } = ENDPOINTS.get('validate-inventory');
+
+    const transportObj = { ...payload, type: 'trade' };
+    return this.fetchSteamMicroservice(url, method, transportObj);
+  }
+
   async manageTrade(body: any) {
-    console.log(body)
+    console.log(body);
     return { status: 201, message: 'Ok' };
   }
 
