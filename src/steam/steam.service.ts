@@ -2,6 +2,7 @@ import { InventoryService } from './../inventory/inventory.service';
 import { ConfigService } from '@nestjs/config';
 import {
   BadRequestException,
+  HttpException,
   Inject,
   Injectable,
   forwardRef,
@@ -57,9 +58,8 @@ export class SteamService {
     const tradeUrl = row[0]?.tradeUrl;
 
     const transportData = {
-      steamId: '76561199012549911',
-      tradeUrl:
-        'https://steamcommunity.com/tradeoffer/new/?partner=1052284183&token=Axun9Thu',
+      steamId,
+      tradeUrl,
       theirItems: [],
       ourItems: itemsInTrade,
       message: 'Thanks for trading with SkinSwap!',
@@ -73,6 +73,11 @@ export class SteamService {
         query,
         method,
         transportData,
+      );
+
+      console.log(
+        data,
+        '[CREATED TRADE]=====================>>>>>>>>>>>>>>>>>>>>>',
       );
 
       const { tradeofferid, state, id } = data;
@@ -114,61 +119,57 @@ export class SteamService {
       };
 
       const { url, method } = ENDPOINTS.get('make-trade');
-      try {
-        const {
-          data: { trades, backpack },
-        } = await this.fetchSteamMicroservice(url, method, transportData);
 
-        console.log(
-          trades,
-          '[CREATED TRADE]=====================>>>>>>>>>>>>>>>>>>>>>',
-        );
+      const {
+        data: { trades, backpack },
+      } = await this.fetchSteamMicroservice(url, method, transportData);
 
-        for await (const trade of trades) {
-          const [rows] = await this.conn.query(
-            `
+      for await (const trade of trades) {
+        const [rows] = await this.conn.query(
+          `
           SELECT id FROM bot_accounts
           WHERE botSteamId = ?
           `,
-            [trade.account.steamid],
-          );
+          [trade.account.steamid],
+        );
 
-          let botExistId = rows[0]?.id;
+        let botExistId = rows[0]?.id;
 
-          if (!botExistId) {
-            const { steamid, name, avatarHash, memberSince, level } =
-              trade?.account;
-            const [{ insertId }]: any = await this.conn.query(
-              `
+        if (!botExistId) {
+          const { steamid, name, avatarHash, memberSince, level } =
+            trade?.account;
+          const [{ insertId }]: any = await this.conn.query(
+            `
             INSERT INTO bot_accounts (botSteamId, name, avatarHash, memberSince, level)
             VALUES (?, ?, ?, STR_TO_DATE(?, '%Y-%m-%dT%H:%i:%s.%fZ'), ?)
             `,
-              [steamid, name, avatarHash, memberSince, level],
-            );
-
-            botExistId = insertId;
-          }
-          await this.conn.query(
-            `
-          INSERT INTO user_trade_offers (steamId, tradeId, botId, state)
-          VALUES (?, ?, ?, ?)`,
-            [steamId, trade.id, botExistId, trade.state],
+            [steamid, name, avatarHash, memberSince, level],
           );
 
-          for await (const item of trade.ourItems) {
-            const { appid, assetid, amount, icon_url, name } = item;
-            await this.conn.query(
-              `
+          botExistId = insertId;
+        }
+        await this.conn.query(
+          `
+          INSERT INTO user_trade_offers (steamId, tradeId, botId, state)
+          VALUES (?, ?, ?, ?)`,
+          [steamId, trade.id, botExistId, trade.state],
+        );
+
+        for await (const item of trade.ourItems) {
+          const { appid, assetid, amount, icon_url, name } = item;
+          await this.conn.query(
+            `
               INSERT INTO trade_items (tradeId, appId, assetId, amount, name, iconUrl)
               VALUES (?, ?, ?, ?, ?, ?)`,
-              [trade.id, appid, assetid, amount, name, icon_url],
-            );
-          }
+            [trade.id, appid, assetid, amount, name, icon_url],
+          );
         }
-      } catch (error) {
-        console.log(error);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      this.logger.error(error);
+      throw new HttpException(error.message, error.status);
+    }
   }
 
   async getTradeHoldDuration(steamId: string) {
@@ -177,17 +178,27 @@ export class SteamService {
     `,
       [steamId],
     );
-    const query = {
-      steamId,
-      tradeUrl: row[0]?.tradeUrl,
+    const tradeUrl = row[0]?.tradeUrl;
+
+    if (!tradeUrl) {
+      return { satatus: 'tradeurl-not-provided' };
+    }
+
+    const { data } = await this.validateTradeholdAndUrl({ steamId, tradeUrl });
+
+    if (data.tradelinkInvalid) {
+      return { satatus: 'tradeurl-not-provided' };
+    }
+    return {
+      ...data,
+      status: 'success',
     };
+  }
+
+  async validateTradeholdAndUrl(query: Record<string, string>) {
     const { url, method } = ENDPOINTS.get('get-tradehold');
     const params = qs.stringify(query, { addQueryPrefix: true });
-    try {
-      await this.fetchSteamMicroservice(url.concat(params), method);
-    } catch (error) {
-      this.logger.error(error);
-    }
+    return this.fetchSteamMicroservice(url.concat(params), method);
   }
 
   async fetchInventory(params?: string) {
@@ -202,7 +213,6 @@ export class SteamService {
 
   async validateItems(payload) {
     const { url, method } = ENDPOINTS.get('validate-inventory');
-
     const transportObj = { ...payload, type: 'trade' };
     return this.fetchSteamMicroservice(url, method, transportObj);
   }
