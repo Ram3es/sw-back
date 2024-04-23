@@ -173,26 +173,34 @@ export class SteamService {
   }
 
   async getTradeHoldDuration(steamId: string) {
-    const [row] = await this.conn.query(
-      `SELECT tradeUrl FROM users WHERE steamId = ?
+    try {
+      const [row] = await this.conn.query(
+        `SELECT tradeUrl FROM users WHERE steamId = ?
     `,
-      [steamId],
-    );
-    const tradeUrl = row[0]?.tradeUrl;
+        [steamId],
+      );
+      const tradeUrl = row[0]?.tradeUrl;
 
-    if (!tradeUrl) {
+      if (!tradeUrl) {
+        return { satatus: 'tradeurl-not-provided' };
+      }
+
+      const { data } = await this.validateTradeholdAndUrl({
+        steamId,
+        tradeUrl,
+      });
+
+      if (data.tradelinkInvalid) {
+        return { satatus: 'tradeurl-not-provided' };
+      }
+      return {
+        ...data,
+        status: 'success',
+      };
+    } catch (error) {
+      //need statuses from ms to handle errors
       return { satatus: 'tradeurl-not-provided' };
     }
-
-    const { data } = await this.validateTradeholdAndUrl({ steamId, tradeUrl });
-
-    if (data.tradelinkInvalid) {
-      return { satatus: 'tradeurl-not-provided' };
-    }
-    return {
-      ...data,
-      status: 'success',
-    };
   }
 
   async validateTradeholdAndUrl(query: Record<string, string>) {
